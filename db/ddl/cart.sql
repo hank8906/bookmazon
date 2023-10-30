@@ -1,11 +1,13 @@
+-- 移除 "cart" 表格
+CREATE TABLE bookmazon.cart;
 -- 創建 "cart" 表格
 CREATE TABLE bookmazon.cart (
-    cart_id serial,                 -- Cart_ID
-    user_account varchar(20),       -- 帳號 (外部鍵)
-    book_id varchar(13),            -- Book_ID (外部鍵)
-    quantity integer,               -- 商品數量
-    update_datetime timestamp,      -- 更新時間
-    create_datetime timestamp,      -- 建立時間
+    cart_id serial NOT NULL,            -- Cart_ID
+    user_account varchar(20) NOT NULL,  -- 帳號 (外部鍵)
+    book_id varchar(13) NOT NULL,       -- Book_ID (外部鍵)
+    quantity integer NOT NULL,          -- 商品數量
+    update_datetime timestamp,          -- 更新時間
+    create_datetime timestamp,          -- 建立時間
     CONSTRAINT pk_cart PRIMARY KEY (cart_id)
 );
 
