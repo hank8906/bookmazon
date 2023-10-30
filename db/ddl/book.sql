@@ -1,14 +1,16 @@
+-- 移除 "book" 表格
+DROP TABLE bookmazon.book;
 -- 創建 "book" 表格
 CREATE TABLE bookmazon.book (
-    book_id varchar(13),
-    book_name varchar(255),
-    book_author varchar(255),
-    book_publisher varchar(255),
-    book_price numeric(10, 2),
-    book_category varchar(50),
-    book_image_path varchar(255),
-    update_datetime timestamp,
-    create_datetime timestamp,
+    book_id varchar(13) NOT NULL,       --書籍ID
+    book_name varchar(255) NOT NULL,    --書名
+    book_author varchar(255),           --作者
+    book_publisher varchar(255),        --出版社
+    book_price numeric(10, 2) NOT NULL, --售價
+    book_category varchar(50),          --書籍分類
+    book_image_path varchar(255),       --書籍圖片路徑
+    update_datetime timestamp,          --更新時間
+    create_datetime timestamp,          --建立時間
     CONSTRAINT pk_book PRIMARY KEY (book_id)
 );
 
