@@ -8,4 +8,4 @@ app.register_blueprint(testController, url_prefix='/test')
 
 # 啟動 Web Server
 if __name__ == '__main__':
-    app.run(port=Config.LISTENING_PORT)
+    app.run(port=Config.LISTENING_PORT,debug=True)

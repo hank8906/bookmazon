@@ -1,7 +1,7 @@
 class Config:
     DB_ACCOUNT = 'postgres'
-    DB_PASSWORD = '123456'
+    DB_PASSWORD = 'Jean2388'
     DB_NAME = 'bookstore'
     DB_SEVER_HOST_NAME = 'localhost'
-    DB_SEVER_HOST_PORT = '5433'
+    DB_SEVER_HOST_PORT = '5432'
     LISTENING_PORT = 5001
