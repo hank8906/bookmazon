@@ -7,8 +7,8 @@ from datetime import datetime
     使用者資訊
 """
 class User(Base):
-    __tablename__ = 'user'
-    __table_args__ = {"schema": "bookmazon"}
+    __tablename__ = 'user' # must write
+    __table_args__ = {"schema": "bookmazon"}  # must write
     user_account = mapped_column(String(20), primary_key=True)
     user_password = mapped_column(String(16))
     user_identification = mapped_column(String(1))

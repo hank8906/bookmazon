@@ -17,7 +17,7 @@ testController = Blueprint('testController', __name__)
 @testController.route('/add', methods=['GET'])
 def add():
     user = User(
-        user_account="john_doe",
+        user_account="john doe",
         user_password='password123',
         user_identification='A',
         user_email='john@example.com',
