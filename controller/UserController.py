@@ -1,8 +1,7 @@
 from datetime import datetime
-from flask import Blueprint, render_template, request, redirect, url_for, flash, render_template, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash,render_template, session
 from model.UserBo import UserBo
-from service.UserService import add_user_info, authenticate_user, get_user_info, update_user_profile, \
-    change_user_password, check_existing_user
+from service.UserService import add_user_info, authenticate_user, get_user_info, update_user_profile, change_user_password, check_existing_user
 import logging
 from utils import logger
 
@@ -39,6 +38,8 @@ def register():
     return render_template('register.html')
 
 
+
+
 @userController.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -51,7 +52,7 @@ def login():
             flash('Login successful!', 'success')
             return redirect(url_for('indexController.index'))
         # else:
-        # flash('Login failed. Please check your username and password.', 'error')
+            # flash('Login failed. Please check your username and password.', 'error')
 
     return render_template('login.html')
 
