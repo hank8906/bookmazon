@@ -67,7 +67,7 @@ def login():
 
 """
 
-################################
+##################################
 @userController.route('/logout', methods=['GET'])
 def logout():
     session.pop('user_account', None)
