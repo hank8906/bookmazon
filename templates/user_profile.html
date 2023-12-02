@@ -17,7 +17,7 @@
             <p>User Create_datetime: {{ user_info.create_datetime }}</p>
             <!-- 你可以根据需要自定义用户信息的显示方式 -->
             <br>
-            <a href="{{ url_for('userController.index') }}" class="btn btn-outline-dark">Back to Index</a>
+            <a href="{{ url_for('indexController.index') }}" class="btn btn-outline-dark">Back to Index</a>
         {% else %}
             <p>No user information available.</p>
         {% endif %}
