@@ -6,6 +6,8 @@ from sqlalchemy import create_engine
 """
     資料庫連線管理
 """
+
+
 class DBConfig:
     def __init__(self):
         # db connection string
@@ -16,5 +18,5 @@ class DBConfig:
         session_factory = sessionmaker(self.engine)
         self.session = scoped_session(session_factory)
 
-session = DBConfig().session
 
+session = DBConfig().session
