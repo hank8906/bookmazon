@@ -23,6 +23,7 @@ def register():
 
         user = UserBo(
             user_account=user_account,
+            user_name=request.form['user_name'],
             user_password=request.form['user_password'],
             user_identification="1",
             user_email=request.form['user_email'],
