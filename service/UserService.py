@@ -49,6 +49,7 @@ def add_user_info(user_bo: UserBo):
     user = User(
         user_account=user_bo.user_account,
         user_password=user_bo.user_password,
+        user_name=user_bo.user_name,
         user_identification=user_bo.user_identification,
         user_email=user_bo.user_email,
         user_birthday=user_bo.user_birthday,
