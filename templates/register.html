@@ -24,13 +24,13 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputName" name="user_account" type="text" placeholder="Enter your name" />
-                                                        <label for="inputName">User Name</label>
+                                                        <input class="form-control" id="inputName" name="user_account" type="text"  required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Must contain at least one number, one uppercase letter, one lowercase letter, and at least 8 characters" placeholder="Enter your name" />
+                                                        <label for="inputName">User Account</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" name="user_password" type="password" placeholder="Enter your password" />
+                                                        <input class="form-control" id="inputLastName" name="user_password" type="password"  required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Must contain at least one number, one uppercase letter, one lowercase letter, and at least 8 characters" placeholder="Enter your password" />
                                                         <label for="inputName">User Password</label>
                                                     </div>
                                                 </div>
@@ -40,7 +40,7 @@
                                                 <label for="inputEmail">Email address</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputBirthday" name="user_birthday" type="date" placeholder="Select your birthday" />
+                                                <input class="form-control" id="inputBirthday" name="user_birthday" type="date"  required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Must contain at least one number, one uppercase letter, one lowercase letter, and at least 8 characters" placeholder="Select your birthday" />
                                                 <label for="inputBirthday">User_birthday</label>
                                             </div>
                                             <div class="mt-4 mb-0">

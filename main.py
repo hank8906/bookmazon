@@ -1,8 +1,8 @@
 from flask import Flask
 from utils.dev_config import Config
 from controller.UserController import userController
-from controller.IndexController import indexController  # 修正导入
-from controller.TestController import testController
+from controller.IndexController import indexController
+
 import os
 from datetime import timedelta
 app = Flask(__name__)

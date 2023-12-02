@@ -18,6 +18,11 @@ def authenticate_user(user_account: str, user_password: str):
 
         # 驗證密碼是否正確
         if user_obj.user_password == user_password:
+            # 更新最後登入時間
+            user_obj.update_datetime = datetime.now()
+
+            # 提交更改到資料庫
+            session.commit()
             return True
         else:
             return False
@@ -51,7 +56,6 @@ def add_user_info(user_bo: UserBo):
         create_datetime=datetime.now()
     )
     try:
-        app_logger.info("Hello")
         session.add(user)
         session.commit()
     except Exception as e:
@@ -61,7 +65,7 @@ def add_user_info(user_bo: UserBo):
 
 
 # 檢查使用者帳戶是否已存在的函數
-def check_existing_user(user_account):
+def check_existing_user(user_account: str):
     try:
         existing_user = session.scalars(select(User).where(User.user_account == user_account)).first()
         return existing_user is not None
