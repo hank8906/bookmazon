@@ -11,6 +11,7 @@ class User(Base):
     __table_args__ = {"schema": "bookmazon"}  # must write
     user_account = mapped_column(String(20), primary_key=True)
     user_password = mapped_column(String(16))
+    user_name = mapped_column(String(50))
     user_identification = mapped_column(String(1))
     user_email = mapped_column(String(255))
     user_birthday = mapped_column(String(255))
