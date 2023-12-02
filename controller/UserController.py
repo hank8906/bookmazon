@@ -149,3 +149,5 @@ def change_password():
             flash('Failed to change password. Please check your current password.', 'error')
 
     return render_template('change_password.html')
+
+########
