@@ -11,7 +11,11 @@
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../static/css/styles.css" rel="stylesheet" />
+<!--        <link href="../static/css/styles.css" rel="stylesheet" />-->
+        <!-- static css -->
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/styles.css')}}">
+        <!-- Scripts.js-->
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     </head>
     <body>
         <!-- Navigation-->
@@ -34,11 +38,22 @@
                         </li>
                     </ul>
                     <form class="d-flex">
-                            <button class="btn btn-outline-dark  ms-2" type="submit">
-                                <i class="bi-cart-fill me-1"></i>
-                                Cart
+                            {% if current_user.is_authenticated %}
+                                <!-- 如果使用者已登入，則導向到購物車頁面 -->
+                                <a href="{{ url_for('cartController.view_cart') }}" class="btn btn-outline-dark ms-2">
+                                    <i class="bi-cart-fill me-1"></i>
+                                        Cart
+                                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart_item_count }}</span> <!-- 您可以修改這裡的數字以反映實際的購物車物品數量 -->
+                                </a>
+                            {% else %}
+                                <!-- 如果使用者未登入，則導向到登入頁面 -->
+                                <a href="javascript:void(0)" onclick="promptLogin('{{ url_for('userController.login') }}')" class="btn btn-outline-dark ms-2">
+                                    <i class="bi-cart-fill me-1"></i>
+                                        Cart
                                 <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                            </button>
+                                </a>
+                            {% endif %}
+
                             {% if not session.user_account %}
                                 <!-- 如果用户未登录，显示登录按钮或其他登录相关内容 -->
                                 <a href="{{ url_for('userController.login') }}" class="btn btn-outline-dark ms-2">Login</a>

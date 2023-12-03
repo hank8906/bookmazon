@@ -6,6 +6,10 @@ from service.UserService import add_user_info, authenticate_user, get_user_info,
 import logging
 from utils import logger
 
+# 增加了flask_login
+from flask_login import login_user, logout_user
+
+
 app_logger = logger.setup_logger(logging.INFO)
 userController = Blueprint('userController', __name__)
 
@@ -49,6 +53,11 @@ def login():
         # 使用 UserService 中的函數來驗證用戶帳戶和密碼
         if authenticate_user(user_account, user_password):
             session['user_account'] = user_account
+
+            # login_user
+            user = get_user_info(user_account)
+            login_user(user)
+
             flash('Login successful!', 'success')
             return redirect(url_for('indexController.index'))
         # else:
@@ -71,6 +80,9 @@ def login():
 @userController.route('/logout', methods=['GET'])
 def logout():
     session.pop('user_account', None)
+
+    logout_user() # 更動
+
     flash('Logout successful!', 'success')
     return redirect(url_for('userController.login'))
 
