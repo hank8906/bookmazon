@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from werkzeug.security import generate_password_hash, check_password_hash
 from model.UserBo import UserBo
 from utils.dbUtil import session
 from sqlalchemy import select, delete, update
@@ -14,10 +14,10 @@ app_logger = logger.setup_logger(logging.INFO)
 def authenticate_user(user_account: str, user_password: str):
     try:
         # 查詢使用者資訊
-        user_obj = session.scalars(select(User).where(User.user_account == user_account)).one()
+        user_obj: User = session.scalars(select(User).where(User.user_account == user_account)).one()
 
         # 驗證密碼是否正確
-        if user_obj.user_password == user_password:
+        if check_password_hash(user_obj.user_password, user_password):
             # 更新最後登入時間
             user_obj.update_datetime = datetime.now()
 
@@ -43,12 +43,13 @@ def authenticate_user(user_account: str, user_password: str):
     Raises:
 
 """
-
-
 def add_user_info(user_bo: UserBo):
+    # 在註冊時儲存使用者密碼的哈希值
+    hashed_password = generate_password_hash(user_bo.user_password, method='pbkdf2:sha256')
+
     user = User(
         user_account=user_bo.user_account,
-        user_password=user_bo.user_password,
+        user_password=hashed_password,
         user_name=user_bo.user_name,
         user_identification=user_bo.user_identification,
         user_email=user_bo.user_email,
@@ -153,7 +154,18 @@ def update_user_profile(user_account: str, new_user_email: str, new_user_birthda
     # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
     return 'profile_updated'
 
+"""
+    變更密碼
+    Args:
+        user_account: 使用者帳號
+        current_password: 原始密碼
+        new_password: 欲變更密碼
+    Returns:
 
+
+    Raises:
+
+"""
 def change_user_password(user_account: str, current_password: str, new_password: str):
     try:
         # 驗證當前密碼是否正確

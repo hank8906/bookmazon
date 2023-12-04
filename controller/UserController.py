@@ -1,15 +1,29 @@
-from datetime import datetime
-from flask import Blueprint, render_template, request, redirect, url_for, flash, render_template, session
+import logging
+
+from flask import Blueprint, request, redirect, url_for, flash, render_template, session
+
 from model.UserBo import UserBo
+from model.UserIdentity import UserIdentity
 from service.UserService import add_user_info, authenticate_user, get_user_info, update_user_profile, \
     change_user_password, check_existing_user
-import logging
 from utils import logger
 
 app_logger = logger.setup_logger(logging.INFO)
 userController = Blueprint('userController', __name__)
 
+"""
+    登入
+    Args:
+        user_account 帳號
+        user_password 密碼
+        user_name 名字
+        user_email 電子信箱
+        user_birthday 生日
+    Returns:
 
+    Raises:
+
+"""
 @userController.route('/register', methods=['GET', 'POST'])
 def register():
     # 此判斷式，確定使用者輸入資料時，才執行以下步驟
@@ -25,7 +39,7 @@ def register():
             user_account=user_account,
             user_name=request.form['user_name'],
             user_password=request.form['user_password'],
-            user_identification="1",
+            user_identification=UserIdentity.CUSTOMER,
             user_email=request.form['user_email'],
             user_birthday=request.form['user_birthday']
         )
@@ -39,7 +53,16 @@ def register():
 
     return render_template('register.html')
 
+"""
+    登入
+    Args:
+        user_account 帳號
+        user_password 密碼
+    Returns:
 
+    Raises:
+
+"""
 @userController.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -51,8 +74,8 @@ def login():
             session['user_account'] = user_account
             flash('Login successful!', 'success')
             return redirect(url_for('indexController.index'))
-        # else:
-        # flash('Login failed. Please check your username and password.', 'error')
+        else:
+            flash('Login failed. Please check your username and password.', 'danger')
 
     return render_template('login.html')
 
@@ -66,11 +89,9 @@ def login():
     Raises:
 
 """
-
-
 @userController.route('/logout', methods=['GET'])
 def logout():
-    session.pop('user_account', None)
+    session.clear()
     flash('Logout successful!', 'success')
     return redirect(url_for('userController.login'))
 
@@ -126,9 +147,6 @@ def update_profile():
 
     return render_template('update_profile.html', user_info=user_info)
 
-
-####################################################################
-
 @userController.route('/change_password', methods=['GET', 'POST'])
 def change_password():
     # 檢查用戶是否登入，如果沒有，導向到登入頁面
@@ -149,5 +167,3 @@ def change_password():
             flash('Failed to change password. Please check your current password.', 'error')
 
     return render_template('change_password.html')
-
-########
