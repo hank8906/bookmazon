@@ -2,6 +2,8 @@ import logging
 
 from flask import Blueprint, request, redirect, url_for, flash, render_template, session
 
+from form.LoginForm import LoginForm
+from form.RegistryForm import RegistryForm
 from model.UserBo import UserBo
 from model.UserIdentity import UserIdentity
 from service.UserService import add_user_info, authenticate_user, get_user_info, update_user_profile, \
@@ -26,32 +28,36 @@ userController = Blueprint('userController', __name__)
 """
 @userController.route('/register', methods=['GET', 'POST'])
 def register():
-    # 此判斷式，確定使用者輸入資料時，才執行以下步驟
-    if request.method == 'POST':
-        user_account = request.form['user_account']
+    form = RegistryForm()
 
-        # 檢查使用者是否存在
+    if form.validate_on_submit():
+        user_account = form.user_account.data
+
+        # Check if the user already exists
         if check_existing_user(user_account):
-            # 如果使用者存在，導向 already_exist_account 的頁面
-            return render_template('already_exist_account.html')
+            flash('這個帳號已經被註冊了，請更換一另組帳號。', 'danger')
+            return render_template('register.html', form=form)
 
         user = UserBo(
             user_account=user_account,
-            user_name=request.form['user_name'],
-            user_password=request.form['user_password'],
+            user_name=form.user_name.data,
+            user_gender=form.user_gender.data,
+            user_password=form.user_password.data,
             user_identification=UserIdentity.CUSTOMER,
-            user_email=request.form['user_email'],
-            user_birthday=request.form['user_birthday']
+            user_email=form.user_email.data,
+            user_birthday=form.user_birthday.data
         )
 
         try:
             add_user_info(user)
+            flash('帳號註冊成功，您可以登入了。', 'success')
             return redirect(url_for('userController.login'))
         except Exception as e:
             app_logger.error('Failed to add user information: %s', e)
+            flash('帳號註冊失敗，請您稍候嘗試，或聯繫網站管理人員。', 'danger')
             return render_template('401.html')
 
-    return render_template('register.html')
+    return render_template('register.html', form=form)
 
 """
     登入
@@ -65,19 +71,21 @@ def register():
 """
 @userController.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        user_account = request.form['user_account']
-        user_password = request.form['user_password']
+    form = LoginForm()
 
-        # 使用 UserService 中的函數來驗證用戶帳戶和密碼
+    if form.validate_on_submit():
+        user_account = form.user_account.data
+        user_password = form.user_password.data
+
+        # Use your authentication function to validate user credentials
         if authenticate_user(user_account, user_password):
             session['user_account'] = user_account
-            flash('Login successful!', 'success')
+            flash('登入成功!', 'success')
             return redirect(url_for('indexController.index'))
         else:
-            flash('Login failed. Please check your username and password.', 'danger')
+            flash('登入失敗！請您確認帳號、或密碼是否輸入有誤。', 'danger')
 
-    return render_template('login.html')
+    return render_template('login.html', form=form)
 
 
 """
@@ -92,7 +100,7 @@ def login():
 @userController.route('/logout', methods=['GET'])
 def logout():
     session.clear()
-    flash('Logout successful!', 'success')
+    flash('登出成功！', 'success')
     return redirect(url_for('userController.login'))
 
 
