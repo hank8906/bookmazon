@@ -21,3 +21,5 @@ GRANT CREATE ON SCHEMA bookmazon to user_001;
 -- 後端系統操作 db 的角色
 CREATE ROLE app_001 WITH LOGIN PASSWORD 'app_001';
 GRANT rl_sel, rl_del, rl_upd, rl_ins to app_001;
+-- 賦予 bookmazon schema 的使用權限
+GRANT USAGE ON SCHEMA bookmazon to app_001;
