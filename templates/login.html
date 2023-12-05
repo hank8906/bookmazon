@@ -30,13 +30,14 @@
                                     </div>
                                     <div class="card-body">
                                         <form method="POST" action="{{ url_for('userController.login') }}">
+                                            {{ form.csrf_token }}
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputAccount" name="user_account" type="text" placeholder="Enter your name" />
-                                                <label for="inputAccount">User Name</label>
+                                                {{ form.user_account(class="form-control", placeholder="Enter your account") }}
+                                                <label>User Account</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" name="user_password" type="password" placeholder="Password" />
-                                                <label for="inputPassword">Password</label>
+                                                {{ form.user_password(class="form-control", placeholder="Enter your password") }}
+                                                <label>Password</label>
                                             </div>
                                             <div class="form-check mb-3">
                                                 <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
