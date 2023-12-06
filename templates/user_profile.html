@@ -53,7 +53,7 @@
             </div>
 
             <br>
-            <a href="{{ url_for('indexController.index') }}" class="btn btn-back">Back to Index</a>
+            <a href="{{ url_for('productController.getProducts') }}" class="btn btn-back">Back to Index</a>
             <a href="{{ url_for('userController.change_password') }}" class="btn btn-back">Reset Password</a>
         {% else %}
             <p class="mt-3">No user information available.</p>
