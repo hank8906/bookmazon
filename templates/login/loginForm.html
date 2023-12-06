@@ -1,0 +1,43 @@
+<div class="col-lg-5">
+    <div class="card shadow-lg border-0 rounded-lg mt-5">
+        <div class="card-header"><h3 class="text-center font-weight-light my-4">帳號登入</h3>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endwith %}
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('userController.login') }}">
+                {{ form.csrf_token }}
+                <div class="form-floating mb-3">
+                    {{ form.user_account(class="form-control", placeholder="Enter your account") }}
+                    <label>使用者帳號</label>
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form.user_password(class="form-control", placeholder="Enter your password")
+                    }}
+                    <label>密碼</label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" id="inputRememberPassword" type="checkbox"
+                           value=""/>
+                    <label class="form-check-label" for="inputRememberPassword">記住密碼</label>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                    <a class="small" href="password.html">忘記密碼了嗎?</a>
+                    <button type="submit" class="d-grid btn btn-primary btn-block">登入</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center py-3">
+            <div class="small">
+                <a href="{{ url_for('userController.register') }}">需要帳號嗎? 立即註冊!</a>
+            </div>
+        </div>
+    </div>
+</div>

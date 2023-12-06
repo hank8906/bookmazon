@@ -1,0 +1,76 @@
+<div class="col-lg-7">
+    <div class="card shadow-lg border-0 rounded-lg mt-5">
+        <div class="card-header">
+            <h3 class="text-center font-weight-light my-4">註冊帳號</h3>
+            <!-- Flash Messages Section -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <!-- End Flash Messages Section -->
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('userController.register') }}">
+                {{ form.hidden_tag() }}
+                <div class="row mb-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        {{ form.user_account(class="form-control", placeholder="Enter your account") }}
+                        <label>使用者帳號</label>
+                        {% for error in form.user_account.errors %}
+                        <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="form-floating">
+                        {{ form.user_password(class="form-control", placeholder="Enter your password") }}
+                        <label>密碼</label>
+                        {% for error in form.user_password.errors %}
+                        <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        {{ form.user_name(class="form-control", placeholder="Enter your name") }}
+                        <label>使用者名稱</label>
+                        {% for error in form.user_name.errors %}
+                        <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        {{ form.user_gender(class="form-select") }}
+                        <label>性別</label>
+                        {% for error in form.user_name.errors %}
+                        <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form.user_email(class="form-control", placeholder="name@example.com") }}
+                    <label>電子信箱</label>
+                    {% for error in form.user_email.errors %}
+                    <span style="color: red;">{{ error }}</span><br>
+                    {% endfor %}
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form.user_birthday(class="form-control", placeholder="Select your birthday") }}
+                    <label>生日</label>
+                    {% for error in form.user_birthday.errors %}
+                    <span style="color: red;">{{ error }}</span><br>
+                    {% endfor %}
+                </div>
+                <div class="mt-4 mb-0">
+                    <button type="submit" class="d-grid btn btn-primary btn-block">建立帳號</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
