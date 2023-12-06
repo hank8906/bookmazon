@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from werkzeug.security import generate_password_hash, check_password_hash
 from model.UserBo import UserBo
 from utils.dbUtil import session
 from sqlalchemy import select, delete, update
@@ -9,15 +9,14 @@ import logging
 
 app_logger = logger.setup_logger(logging.INFO)
 
-
 # 在 UserService 中新增 authenticate_user 函式
 def authenticate_user(user_account: str, user_password: str):
     try:
         # 查詢使用者資訊
-        user_obj = session.scalars(select(User).where(User.user_account == user_account)).one()
+        user_obj: User = session.scalars(select(User).where(User.user_account == user_account)).one()
 
         # 驗證密碼是否正確
-        if user_obj.user_password == user_password:
+        if check_password_hash(user_obj.user_password, user_password):
             # 更新最後登入時間
             user_obj.update_datetime = datetime.now()
 
@@ -31,7 +30,6 @@ def authenticate_user(user_account: str, user_password: str):
         app_logger.error('Authentication failed: %s', e)
         return False
 
-
 """
     新增使用者資訊
     Args:
@@ -43,13 +41,15 @@ def authenticate_user(user_account: str, user_password: str):
     Raises:
 
 """
-
-
 def add_user_info(user_bo: UserBo):
+    # 在註冊時儲存使用者密碼的哈希值
+    hashed_password = generate_password_hash(user_bo.user_password, method='pbkdf2:sha256')
+
     user = User(
         user_account=user_bo.user_account,
-        user_password=user_bo.user_password,
+        user_password=hashed_password,
         user_name=user_bo.user_name,
+        user_gender=user_bo.user_gender,
         user_identification=user_bo.user_identification,
         user_email=user_bo.user_email,
         user_birthday=user_bo.user_birthday,
@@ -64,7 +64,6 @@ def add_user_info(user_bo: UserBo):
         app_logger.error('Failed to add user information: %s', e)
         raise e
 
-
 # 檢查使用者帳戶是否已存在的函數
 def check_existing_user(user_account: str):
     try:
@@ -73,7 +72,6 @@ def check_existing_user(user_account: str):
     except Exception as e:
         app_logger.error('Error checking existing user: %s', e)
         return False
-
 
 """
     取得使用者資訊
@@ -87,7 +85,6 @@ def check_existing_user(user_account: str):
 
 """
 
-
 def get_user_info(user_account: str):
     # CRUD 只有查詢不需要做 commit、rollback
     try:
@@ -96,7 +93,6 @@ def get_user_info(user_account: str):
         app_logger.error('Failed to query user information: %s', e)
         raise e
     return user_obj
-
 
 """
     刪除使用者資訊
@@ -110,7 +106,6 @@ def get_user_info(user_account: str):
 
 """
 
-
 def delete_user_info(user_account: str):
     try:
         statement = delete(User).where(User.user_account == user_account)
@@ -123,7 +118,6 @@ def delete_user_info(user_account: str):
     # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
     return 'deleted'
 
-
 """
     更新使用者資訊
     Args:
@@ -135,7 +129,6 @@ def delete_user_info(user_account: str):
     Raises:
 
 """
-
 
 def update_user_profile(user_account: str, new_user_email: str, new_user_birthday: str):
     try:
@@ -153,7 +146,18 @@ def update_user_profile(user_account: str, new_user_email: str, new_user_birthda
     # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
     return 'profile_updated'
 
+"""
+    變更密碼
+    Args:
+        user_account: 使用者帳號
+        current_password: 原始密碼
+        new_password: 欲變更密碼
+    Returns:
 
+
+    Raises:
+
+"""
 def change_user_password(user_account: str, current_password: str, new_password: str):
     try:
         # 驗證當前密碼是否正確
@@ -173,7 +177,6 @@ def change_user_password(user_account: str, current_password: str, new_password:
         app_logger.error('Failed to change user password: %s', e)
         return False
 
-
 """
     更新使用者資訊
     Args:
@@ -187,7 +190,6 @@ def change_user_password(user_account: str, current_password: str, new_password:
 
 """
 
-
 def update_user_info(user_account: str, password: str):
     try:
         statement = update(User).where(User.user_account == user_account).values(user_password=password)
@@ -200,7 +202,6 @@ def update_user_info(user_account: str, password: str):
 
     # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
     return 'updated'
-
 
 """
     修改使用者密碼
