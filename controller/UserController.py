@@ -157,6 +157,16 @@ def user_profile():
         return render_template('update_profile.html', user_info=user_info)
 """
 
+"""
+    更換密碼
+    Args:
+        user_account 帳號
+        user_current_password 現有的密碼
+        user_new_password 新的密碼
+    Returns:
+
+    Raises:
+
 @userController.route('/change_password', methods=['GET', 'POST'])
 def change_password():
     form = ChangePassword()
