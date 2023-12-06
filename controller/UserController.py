@@ -81,7 +81,7 @@ def login():
         if authenticate_user(user_account, user_password):
             session['user_account'] = user_account
             flash('登入成功!', 'success')
-            return redirect(url_for('indexController.index'))
+            return redirect(url_for('productController.getProducts'))
         else:
             flash('登入失敗！請您確認帳號、或密碼是否輸入有誤。', 'danger')
 

@@ -1,133 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Shop Item - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- <link href="css/styles.css" rel="stylesheet" />-->
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/slide.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/book.css') }}" rel="stylesheet"/>
+</head>
+<body>
 {% include 'product/header.html' %}
-    <div class="slider">
-        <div class="list">
-            <div class="item">
-                <img src="{{ url_for('static', filename='assets/img/bookstore_1.jpg') }}" alt="">
-            </div>
-            <div class="item">
-                <img src="{{ url_for('static', filename='assets/img/bookstore_2.jpg') }}" alt="">
-            </div>
-            <div class="item">
-                <img src="{{ url_for('static', filename='assets/img/bookstore_3.jpg') }}" alt="">
-            </div>
-            <div class="item">
-                <img src="{{ url_for('static', filename='assets/img/bookstore_4.jpg') }}" alt="">
-            </div>
-            <div class="item">
-                <img src="{{ url_for('static', filename='assets/img/bookstore_5.jpg') }}" alt="">
-            </div>
+<div class="slider">
+    <div class="list">
+        <div class="item">
+            <img src="{{ url_for('static', filename='assets/img/bookstore_1.jpg') }}" alt="">
         </div>
-        <div class="buttons">
-            <button id="prev"><</button>
-            <button id="next">></button>
+        <div class="item">
+            <img src="{{ url_for('static', filename='assets/img/bookstore_2.jpg') }}" alt="">
         </div>
-        <ul class="dots">
-            <li class="active"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+        <div class="item">
+            <img src="{{ url_for('static', filename='assets/img/bookstore_3.jpg') }}" alt="">
+        </div>
+        <div class="item">
+            <img src="{{ url_for('static', filename='assets/img/bookstore_4.jpg') }}" alt="">
+        </div>
+        <div class="item">
+            <img src="{{ url_for('static', filename='assets/img/bookstore_5.jpg') }}" alt="">
+        </div>
     </div>
+    <div class="buttons">
+        <button id="prev"><</button>
+        <button id="next">></button>
+    </div>
+    <ul class="dots">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
 
-  <div class="px-4 pt-5 my-5 text-center border-bottom">
+<div class="px-4 pt-5 my-5 text-center border-bottom">
     <h1 class="display-4 fw-bold text-body-emphasis">平台初衷</h1>
     <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">主要是讓每位學長姊可以藉由平台販賣二手書，讓二手教科書得以重複利用，也讓學生每學期購書的負擔降低，同時減少資源浪費，落實地球永續</p>
+        <p class="lead mb-4">主要是讓每位學長姊可以藉由平台販賣二手書，讓二手教科書得以重複利用，也讓學生每學期購書的負擔降低，同時減少資源浪費，落實地球永續</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3" id="scrollToNewBooksButton">新書上架</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4" id="scrollToRecommendBooksButton">精選推薦</button>
+            <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3" id="scrollToNewBooksButton">新書上架</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4" id="scrollToRecommendBooksButton">精選推薦
+            </button>
         </div>
     </div>
     <div class="overflow-hidden" style="max-height: 30vh;">
-      <div class="container px-5">
-        <img src="{{ url_for('static', filename='assets/img/bookstore_6.jpg') }}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
-      </div>
+        <div class="container px-5">
+            <img src="{{ url_for('static', filename='assets/img/bookstore_6.jpg') }}"
+                 class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500"
+                 loading="lazy">
+        </div>
     </div>
-  </div>
+</div>
 
-  <div class="container px-4 py-5" id="custom-cards">
+<div class="container px-4 py-5" id="custom-cards">
     <h2 class="pb-2 border-bottom">Custom cards</h2>
 
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-      <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">今日優惠</h3>
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                <small>Earth</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                <small>3d</small>
-              </li>
-            </ul>
-          </div>
+        <div class="col">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                 style="background-image: url('unsplash-photo-1.jpg');">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">今日優惠</h3>
+                    <ul class="d-flex list-unstyled mt-auto">
+                        <li class="me-auto">
+                            <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
+                                 class="rounded-circle border border-white">
+                        </li>
+                        <li class="d-flex align-items-center me-3">
+                            <svg class="bi me-2" width="1em" height="1em">
+                                <use xlink:href="#geo-fill"></use>
+                            </svg>
+                            <small>Earth</small>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <svg class="bi me-2" width="1em" height="1em">
+                                <use xlink:href="#calendar3"></use>
+                            </svg>
+                            <small>3d</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-2.jpg');">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">暢銷排行</h3>
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                <small>Pakistan</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                <small>4d</small>
-              </li>
-            </ul>
-          </div>
+        <div class="col">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                 style="background-image: url('unsplash-photo-2.jpg');">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">暢銷排行</h3>
+                    <ul class="d-flex list-unstyled mt-auto">
+                        <li class="me-auto">
+                            <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
+                                 class="rounded-circle border border-white">
+                        </li>
+                        <li class="d-flex align-items-center me-3">
+                            <svg class="bi me-2" width="1em" height="1em">
+                                <use xlink:href="#geo-fill"></use>
+                            </svg>
+                            <small>Pakistan</small>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <svg class="bi me-2" width="1em" height="1em">
+                                <use xlink:href="#calendar3"></use>
+                            </svg>
+                            <small>4d</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-3.jpg');">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">社群</h3>
-            <ul class="d-flex list-unstyled mt-auto">
-              <li class="me-auto">
-                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                <small>California</small>
-              </li>
-              <li class="d-flex align-items-center">
-                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                <small>5d</small>
-              </li>
-            </ul>
-          </div>
+        <div class="col">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                 style="background-image: url('unsplash-photo-3.jpg');">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">社群</h3>
+                    <ul class="d-flex list-unstyled mt-auto">
+                        <li class="me-auto">
+                            <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
+                                 class="rounded-circle border border-white">
+                        </li>
+                        <li class="d-flex align-items-center me-3">
+                            <svg class="bi me-2" width="1em" height="1em">
+                                <use xlink:href="#geo-fill"></use>
+                            </svg>
+                            <small>California</small>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <svg class="bi me-2" width="1em" height="1em">
+                                <use xlink:href="#calendar3"></use>
+                            </svg>
+                            <small>5d</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <div class="new-books-section">
+<div class="new-books-section">
     <h2 class="pb-2 border-bottom">新書上架</h2>
     <div class="new-books-container" id="newBooksContainer"></div>
     <button id="prevButton">上一頁</button>
     <button id="nextButton">下一頁</button>
-  </div>
+</div>
 
-  <div class="recommend-books-section">
+<div class="recommend-books-section">
     <h2 class="pb-2 border-bottom">精選推薦</h2>
     <div class="recommend-books-container" id="recommendBooksContainer"></div>
-  </div>
+</div>
 
-    <script>
+
+{% include './common/footer.html' %}
+
+</body>
+<script>
         document.addEventListener("DOMContentLoaded", function () {
             let currentPage = 1;
             const booksPerPage = 8;
@@ -213,22 +258,7 @@
 
                 // 將book.id嵌入到data屬性中
                 titleLinkElement.dataset.bookId = book.id;
-                titleLinkElement.addEventListener('click', function(event) {
-                    event.preventDefault(); // 防止點擊連結後跳轉頁面
-
-                    // 在這裡發送 AJAX 請求到相應的 API 端點
-                    const bookId = titleLinkElement.dataset.bookId;
-                    fetch(`/getProduct/${bookId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            // 在這裡處理從 API 返回的數據，可以更新頁面上的內容
-                            console.log(data);
-                        })
-                        .catch(error => {
-                            console.error('Error fetching data:', error);
-                        });
-                });
-
+                titleLinkElement.href = `/getProduct/${book.id}`;
                 titleLinkElement.textContent = book.title;
 
                 const authorElement = document.createElement("p");
@@ -248,5 +278,7 @@
 
 
 
-    </script>
-{% include 'product/footer.html' %}
+
+
+</script>
+</html>
