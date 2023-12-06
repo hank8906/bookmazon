@@ -166,7 +166,7 @@ def user_profile():
     Returns:
 
     Raises:
-
+"""
 @userController.route('/change_password', methods=['GET', 'POST'])
 def change_password():
     form = ChangePassword()
@@ -191,24 +191,3 @@ def change_password():
             return redirect(url_for('userController.change_password'))
 
     return render_template('change_password.html', form=form)
-
-
-"""
-@userController.route('/forgot_password', methods=['GET', 'POST'])
-def forgot_password():
-    if request.method == 'POST':
-        user_account = request.form['user_account']
-        email = request.form['email']
-
-        # 檢查用戶是否存在並且電子郵件正確
-        if user_exists_and_email_correct(user_account, email):
-            # 發送包含重置密碼連結的電子郵件
-            UserService().send_reset_password_email(user_account, email)
-            flash('Reset password link sent to your email. Please check your inbox.', 'success')
-            return redirect(url_for('userController.login'))
-        else:
-            flash('Invalid user account or email. Please try again.', 'error')
-
-    return render_template('forgot_password.html')
-
-"""
