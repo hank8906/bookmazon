@@ -57,7 +57,7 @@ def register():
             flash('帳號註冊失敗，請您稍候嘗試，或聯繫網站管理人員。', 'danger')
             return render_template('401.html')
 
-    return render_template('register.html', form=form)
+    return render_template('login/register.html', form=form)
 
 """
     登入
@@ -85,7 +85,7 @@ def login():
         else:
             flash('登入失敗！請您確認帳號、或密碼是否輸入有誤。', 'danger')
 
-    return render_template('login.html', form=form)
+    return render_template('login/login.html', form=form)
 
 
 """
