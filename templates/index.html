@@ -40,7 +40,6 @@
                                 <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                             </button>
                             {% if not session.user_account %}
-                                <!-- 如果用户未登录，显示登录按钮或其他登录相关内容 -->
                                 <a href="{{ url_for('userController.login') }}" class="btn btn-outline-dark ms-2">Login</a>
                             {% else %}
                                 <a href="{{ url_for('userController.user_profile') }}" class="btn btn-outline-dark ms-2">Welcome, {{ session.user_account }}!</a>
