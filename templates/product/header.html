@@ -1,0 +1,51 @@
+<!-- Header-->
+<nav class="py-2 bg-body-tertiary border-bottom">
+    <div class="container d-flex flex-wrap">
+        <ul class="nav me-auto">
+            <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active"
+                                    aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">About</a></li>
+        </ul>
+
+        <form class="d-flex">
+            <button class="btn btn-outline-dark" type="submit">
+                <i class="bi-cart-fill me-1"></i>
+                Cart
+                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            </button>
+        </form>
+
+        <ul class="nav">
+           {% if not session.user_account %}
+                <!-- 如果用使用者登入顯示此内容 -->
+            <li class="nav-item"><a href="{{ url_for('userController.login') }}" class="btn btn-outline-dark ms-2">Login</a></li>
+            <li class="nav-item"><a href="{{ url_for('userController.register') }}" class="nav-link link-body-emphasis px-2">Sign up</a></li>
+            {% else %}
+            <li class="nav-item"><a href="{{ url_for('userController.user_profile') }}" class="btn btn-outline-dark ms-2">Welcome, {{ session.user_account }}!</a></li>
+            <li class="nav-item"><a href="{{ url_for('userController.logout') }}" class="btn btn-outline-dark ms-2">Logout</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<header class="py-3 mb-4 border-bottom">
+    <div class="container d-flex flex-wrap justify-content-center">
+        <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+            <span class="fs-4">Bookmazon</span>
+        </a>
+
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+
+    </div>
+</header>
+<!-- Header-->

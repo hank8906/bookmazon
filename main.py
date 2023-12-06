@@ -3,6 +3,8 @@ from utils.dev_config import Config
 from controller.UserController import userController
 from controller.IndexController import indexController
 from controller.CartController import cartController
+from controller.TestController import testController
+from controller.ProductController import productController
 
 import os
 from datetime import timedelta
@@ -12,7 +14,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=31)
 
 # 註冊藍圖
 # app.register_blueprint(testController, url_prefix='/test')
-app.register_blueprint(indexController, url_prefix='/')
+# app.register_blueprint(indexController, url_prefix='/')
 app.register_blueprint(userController, url_prefix='/user')
 app.register_blueprint(cartController, url_prefix='/cart')
 
@@ -31,6 +33,7 @@ def load_user(user_account):
     user = session.query(User).filter(User.user_account == user_account).first()
     return user
 
+app.register_blueprint(productController, url_prefix='/')
 
 # 啟動 Web Server
 if __name__ == '__main__':

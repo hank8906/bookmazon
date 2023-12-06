@@ -1,0 +1,20 @@
+<style>
+       header {
+            background-color: #fff; /* Set the background color of the header */
+            color: #000; /* Set the text color of the header */
+            padding: 1rem; /* Add some padding for better visual appearance */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+
+</style>
+<header class="py-3 mb-4 border-bottom">
+    <div class="container d-flex flex-wrap justify-content-center">
+        <a href="{{ url_for('productController.getProducts') }}"
+           class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+            <span class="fs-4">Bookmazon</span>
+        </a>
+    </div>
+</header>

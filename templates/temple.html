@@ -1,0 +1,28 @@
+<!-- user_profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 其他头部信息 -->
+</head>
+<body>
+    <div class="container mt-5">
+        {% if user_info %}
+            <h2>User Profile</h2>
+            <p>User Account: {{ user_info.user_account }}</p>
+            <p>User Email: {{ user_info.user_email }}</p>
+            <p>User Password: {{ user_info.password }}</p>
+            <p>User Identification: {{ user_info.identification }}</p>
+            <p>User Birthday: {{ user_info.user_birthday }}</p>
+            <p>User Update_datetime: {{ user_info.update_datetime }}</p>
+            <p>User Create_datetime: {{ user_info.create_datetime }}</p>
+            <!-- 你可以根据需要自定义用户信息的显示方式 -->
+            <br>
+            <a href="{{ url_for('indexController.index') }}" class="btn btn-outline-dark">Back to Index</a>
+        {% else %}
+            <p>No user information available.</p>
+        {% endif %}
+    </div>
+
+    <!-- 其他页面内容 -->
+</body>
+</html>
