@@ -36,7 +36,7 @@ def register():
         # Check if the user already exists
         if check_existing_user(user_account):
             flash('這個帳號已經被註冊了，請更換一另組帳號。', 'danger')
-            return render_template('register.html', form=form)
+            return render_template('login/register.html', form=form)
 
         user = UserBo(
             user_account=user_account,
