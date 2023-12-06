@@ -26,14 +26,14 @@ import logging
 
 """
 def get_book_info():
-    item_result = (
+    book_result = (
         session.query(Item.item_id, Book.book_id, Book.book_name, Book.book_author, Book.book_price)
-        .join(Book, Item.book_id == Book.book_id)
+        .join(Item, Book.book_id == Item.book_id)
         .order_by(Item.item_id.asc())
         .all()
     )
 
-    return item_result
+    return book_result
 
 
 """
