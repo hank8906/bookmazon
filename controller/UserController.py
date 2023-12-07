@@ -1,13 +1,14 @@
 import logging
 
-from flask import Blueprint, request, redirect, url_for, flash, render_template, session
+from flask import Blueprint, redirect, url_for, flash, render_template, session
 
+from form.ChangePassword import ChangePasswordForm
 from form.LoginForm import LoginForm
 from form.RegistryForm import RegistryForm
 from model.UserBo import UserBo
 from model.UserIdentity import UserIdentity
-from service.UserService import add_user_info, authenticate_user, get_user_info, update_user_profile, \
-    change_user_password, check_existing_user
+from service.UserService import add_user_info, authenticate_user, get_user_info, change_user_password, \
+    check_existing_user
 from utils import logger
 
 app_logger = logger.setup_logger(logging.INFO)
@@ -127,51 +128,66 @@ def user_profile():
     user_account = session['user_account']
     user_info = get_user_info(user_account)
 
-    return render_template('user_profile.html', user_info=user_info)
+    return render_template('login/user_profile.html', user_info=user_info)
 
-
-@userController.route('/update_profile', methods=['GET', 'POST'])
-def update_profile():
-    # 檢查用戶是否登入，如果沒有，導向到登入頁面
-    if 'user_account' not in session:
-        flash('Please log in to access this page.', 'error')
-        return redirect(url_for('userController.login'))
-
-    if request.method == 'POST':
+"""
+    @userController.route('/update_profile', methods=['GET', 'POST'])
+    def update_profile():
+        # 檢查用戶是否登入，如果沒有，導向到登入頁面
+        if 'user_account' not in session:
+            flash('Please log in to access this page.', 'error')
+            return redirect(url_for('userController.login'))
+    
+        if request.method == 'POST':
+            user_account = session['user_account']
+            new_user_email = request.form['new_user_email']
+            new_user_birthday = request.form['new_user_birthday']
+    
+            # 使用 UserService 中的函數來更新用戶資料
+            if update_user_profile(user_account, new_user_email, new_user_birthday):
+                flash('Profile updated successfully!', 'success')
+                return redirect(url_for('userController.user_profile'))
+            else:
+                flash('Failed to update profile. Please try again.', 'error')
+    
+        # 取得用戶資訊，這裡假設有一個名為 get_user_info 的函數可以取得用戶資訊
         user_account = session['user_account']
-        new_user_email = request.form['new_user_email']
-        new_user_birthday = request.form['new_user_birthday']
+        user_info = get_user_info(user_account)
+    
+        return render_template('update_profile.html', user_info=user_info)
+"""
 
-        # 使用 UserService 中的函數來更新用戶資料
-        if update_user_profile(user_account, new_user_email, new_user_birthday):
-            flash('Profile updated successfully!', 'success')
-            return redirect(url_for('userController.user_profile'))
-        else:
-            flash('Failed to update profile. Please try again.', 'error')
+"""
+    更換密碼
+    Args:
+        user_account 帳號
+        user_current_password 現有的密碼
+        user_new_password 新的密碼
+    Returns:
 
-    # 取得用戶資訊，這裡假設有一個名為 get_user_info 的函數可以取得用戶資訊
-    user_account = session['user_account']
-    user_info = get_user_info(user_account)
-
-    return render_template('update_profile.html', user_info=user_info)
-
+    Raises:
+"""
 @userController.route('/change_password', methods=['GET', 'POST'])
 def change_password():
+    form = ChangePasswordForm()
+
     # 檢查用戶是否登入，如果沒有，導向到登入頁面
     if 'user_account' not in session:
-        flash('Please log in to access this page.', 'error')
-        return redirect(url_for('userController.login'))
+        flash('請先登入', 'error')
+        return redirect(url_for('userController.user_profile'))
 
-    if request.method == 'POST':
-        user_account = session['user_account']
-        current_password = request.form['current_password']
-        new_password = request.form['new_password']
+    # 檢查用戶是否登入，如果沒有，導向到登入頁面
+    if form.validate_on_submit():
+        current_password = form.current_password.data
+        new_password = form.new_password.data
+        user_account = session['user_account']  # 從 session 中獲取用戶帳號
 
-        # 使用 UserService 中的函數來修改用戶密碼
+        # 修改這一行，確保在 session 中儲存了用戶的帳號
         if change_user_password(user_account, current_password, new_password):
-            flash('Password changed successfully!', 'success')
+            flash('更換密碼成功!', 'success')
             return redirect(url_for('userController.user_profile'))
         else:
-            flash('Failed to change password. Please check your current password.', 'error')
+            flash('更換密碼失敗，請重新嘗試', 'danger')
+            return redirect(url_for('userController.change_password'))
 
-    return render_template('change_password.html')
+    return render_template('login/change_password.html', form=form)

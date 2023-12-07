@@ -6,6 +6,7 @@ from sqlalchemy import select, delete, update
 from model.User import User
 from utils import logger
 import logging
+from sqlalchemy import select, and_
 
 app_logger = logger.setup_logger(logging.INFO)
 
@@ -147,37 +148,6 @@ def update_user_profile(user_account: str, new_user_email: str, new_user_birthda
     return 'profile_updated'
 
 """
-    變更密碼
-    Args:
-        user_account: 使用者帳號
-        current_password: 原始密碼
-        new_password: 欲變更密碼
-    Returns:
-
-
-    Raises:
-
-"""
-def change_user_password(user_account: str, current_password: str, new_password: str):
-    try:
-        # 驗證當前密碼是否正確
-        if not authenticate_user(user_account, current_password):
-            app_logger.error('Failed to change password. Incorrect current password.')
-            return False
-
-        # 更新密碼
-        statement = update(User).where(User.user_account == user_account).values(user_password=new_password)
-        session.execute(statement)
-        session.commit()
-
-        app_logger.info('Password changed successfully.')
-        return True
-    except Exception as e:
-        session.rollback()
-        app_logger.error('Failed to change user password: %s', e)
-        return False
-
-"""
     更新使用者資訊
     Args:
         user_account: 使用者帳號
@@ -203,6 +173,7 @@ def update_user_info(user_account: str, password: str):
     # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
     return 'updated'
 
+
 """
     修改使用者密碼
     Args:
@@ -215,3 +186,48 @@ def update_user_info(user_account: str, password: str):
     Raises:
 
 """
+
+
+def change_user_password(user_account: str, current_password: str, new_password: str):
+    try:
+
+        # 驗證當前密碼是否正確
+        if not authenticate_user(user_account, current_password):
+            app_logger.error('Failed to change password. Incorrect current password.')
+            return False
+        hashed_password = generate_password_hash(new_password, method='pbkdf2:sha256')
+        # 更新密碼
+        statement = update(User).where(User.user_account == user_account).values(user_password=hashed_password)
+        session.execute(statement)
+        session.commit()
+
+        app_logger.info('Password changed successfully.')
+        return True
+    except Exception as e:
+        session.rollback()
+        app_logger.error('Failed to change user password: %s', e)
+        return False
+
+"""
+    變更密碼
+    Args:
+        user_account: 使用者帳號
+        current_password: 原始密碼
+        new_password: 欲變更密碼
+    Returns:
+
+
+    Raises:
+
+"""
+
+
+def user_exists_and_email_correct(self, user_account, email):
+    try:
+        # 檢查用戶是否存在並且電子郵件正確
+        query = select([UserBo]).where(and_(UserBo.user_account == user_account, UserBo.email == email))
+        result = session.execute(query).fetchone()
+        return result is not None
+    except Exception as e:
+        app_logger.error('Error checking user existence and email correctness: %s', e)
+        return False
