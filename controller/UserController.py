@@ -11,7 +11,7 @@ from service.UserService import add_user_info, authenticate_user, get_user_info,
     change_user_password, check_existing_user, user_exists_and_email_correct
 from utils import logger
 
-# 增加了flask_login
+# flask_login
 from flask_login import login_user, logout_user
 
 
@@ -86,11 +86,13 @@ def login():
         if authenticate_user(user_account, user_password):
             session['user_account'] = user_account
             flash('登入成功!', 'success')
-            return redirect(url_for('productController.getProducts'))
 
-            # login_user
+            # flask_login
             user = get_user_info(user_account)
             login_user(user)
+
+            return redirect(url_for('productController.getProducts'))
+
 
             flash('Login successful!', 'success')
             return redirect(url_for('indexController.index'))
@@ -114,7 +116,8 @@ def logout():
     session.clear()
     flash('登出成功！', 'success')
 
-    logout_user()  # 更動
+    # flask_login
+    logout_user()
 
     flash('Logout successful!', 'success')
     return redirect(url_for('userController.login'))

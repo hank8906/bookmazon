@@ -38,22 +38,6 @@
                         </li>
                     </ul>
                     <form class="d-flex">
-                            {% if current_user.is_authenticated %}
-                                <!-- 如果使用者已登入，則導向到購物車頁面 -->
-                                <a href="{{ url_for('cartController.view_cart') }}" class="btn btn-outline-dark ms-2">
-                                    <i class="bi-cart-fill me-1"></i>
-                                        Cart
-                                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart_item_count }}</span> <!-- 您可以修改這裡的數字以反映實際的購物車物品數量 -->
-                                </a>
-                            {% else %}
-                                <!-- 如果使用者未登入，則導向到登入頁面 -->
-                                <a href="javascript:void(0)" onclick="promptLogin('{{ url_for('userController.login') }}')" class="btn btn-outline-dark ms-2">
-                                    <i class="bi-cart-fill me-1"></i>
-                                        Cart
-                                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                                </a>
-                            {% endif %}
-
                             {% if not session.user_account %}
                                 <a href="{{ url_for('userController.login') }}" class="btn btn-outline-dark ms-2">Login</a>
                             {% else %}

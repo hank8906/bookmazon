@@ -27,20 +27,20 @@ class CartService:
             app_logger.error('Database transaction error: %s', e)
             raise  # 中斷當前的程式流程，拋出異常
 
-    # TODO
-    def add_to_cart(self, user_account, item_id):
+    # 加入購物車
+    def add_to_cart(self, user_account, item_id, quantity):
         """Add a book to the user's cart. Check stock before adding."""
         with self.handle_transaction():
             # 檢查庫存
             item = session.query(Item).filter(Item.item_id == item_id).first()
-            if not item or Item.book_count <= 0:
+            if not item or item.book_count < quantity:
                 flash('商品無庫存', 'warning')
                 return False
 
             # 獲取或創建購物車
             cart = self.get_or_create_cart(user_account)
             cart_item = session.query(CartItem).filter(
-                CartItem.cart_id == Cart.cart_id, CartItem.item_id == item_id).first()
+                CartItem.cart_id == cart.cart_id, CartItem.item_id == item_id).first()
 
             # 更新或添加購物車項目
             if cart_item:
@@ -48,24 +48,20 @@ class CartService:
                     flash('購物車中的商品數量超出庫存，無法再添加', 'warning')
                     return False
 
-            self.update_cart_item(cart, item_id)
+            self.update_cart_item(cart, item_id, quantity)
 
             return True
 
-    # TODO
-    def update_cart_item(self, cart, item_id):
-
-        """Update or add a new item in the cart."""
-        cart_item = session.query(CartItem).filter(CartItem.cart_id == Cart.cart_id,
-                                               CartItem.item_id == item_id).first()  # 修改：使用 utils 中的 session 進行查詢
+    def update_cart_item(self, cart, item_id, quantity):
+        cart_item = session.query(CartItem).filter(CartItem.cart_id == cart.cart_id,
+                                                   CartItem.item_id == item_id).first()
         if cart_item:
-            cart_item.quantity += 1
-
+            cart_item.quantity += quantity
         else:
-            cart_item = CartItem(cart_id=Cart.cart_id, item_id=item_id, quantity=1, create_datetime=datetime.now())
+            cart_item = CartItem(cart_id=cart.cart_id, item_id=item_id, quantity=quantity,
+                                 create_datetime=datetime.now())
             session.add(cart_item)
 
-    # TODO
     def get_or_create_cart(self, user_account):
         """Get an existing cart or create a new one for the user."""
         cart = session.query(Cart).filter(Cart.user_account == user_account).first()  # 修改：使用 utils 中的 session 進行查詢
@@ -74,7 +70,7 @@ class CartService:
             session.add(cart)
         return cart
 
-    # TODO : 塞假資料去測試是可以用，但實際上未知
+    # 顯示購物車內內容
     def get_cart_items(self, user_account):
         try:
             cart = session.query(Cart).filter(Cart.user_account == user_account).first()
@@ -89,7 +85,7 @@ class CartService:
             app_logger.error('Database error during cart retrieval: %s', e)
             return []
 
-    #TODO : 同上
+    # 刪除購物車內內容
     def remove_from_cart(self, cart_item_id):
         """Remove an item from the cart."""
         with self.handle_transaction():
@@ -105,19 +101,6 @@ class CartService:
                 return True
 
             return False
-
-
-    # def calculate_total_price(self, user_account):
-    #     """Calculate the total price of all items in the user's cart."""
-    #     try:
-    #         cart_items = self.get_cart_items(user_account)
-    #         books = session.query(Book).filter(
-    #             Book.book_id.in_([Item.item_id for item in cart_items])).all()  # 修改：使用 utils 中的 session 進行查詢
-    #         book_price_map = {Book.book_id: Book.book_price for book in books}
-    #         return sum(CartItem.quantity * book_price_map.get(Item.book_id, 0) for item in cart_items)
-    #     except SQLAlchemyError as e:
-    #         app_logger.error('Error during price calculation: %s', e)
-    #         return 0
 
     def calculate_total_price(self, user_account):
         try:

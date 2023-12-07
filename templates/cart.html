@@ -10,6 +10,15 @@
 <body>
     <div class="container mt-5">
         <h2>{{current_user.user_account}}的購物車</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endwith %}
         {% if cart_items|length > 0 %}
             <table class="table">
                 <thead>
@@ -43,7 +52,7 @@
                 <h4>{{ total_price }}</h4>
             </div>
             <div class="d-flex justify-content-between mt-3">
-                <a href="{{ url_for('indexController.index') }}" class="btn btn-secondary">繼續購物</a>
+                <a href="{{ url_for('productController.getProducts') }}" class="btn btn-secondary">繼續購物</a>
 
                 <!-- TODO : 結帳功能-->
                 <a href="#" class="btn btn-primary">前往結帳</a>
@@ -52,7 +61,7 @@
             <div class="alert alert-warning" role="alert">
                 {{current_user.user_account}}的購物車是空的！
             </div>
-            <a href="{{ url_for('indexController.index') }}" class="btn btn-primary">返回商店</a>
+            <a href="{{ url_for('productController.getProducts') }}" class="btn btn-primary">返回商店</a>
         {% endif %}
     </div>
 
