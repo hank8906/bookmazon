@@ -1,14 +1,14 @@
 import logging
 
-from flask import Blueprint, request, redirect, url_for, flash, render_template, session
+from flask import Blueprint, redirect, url_for, flash, render_template, session
 
+from form.ChangePassword import ChangePasswordForm
 from form.LoginForm import LoginForm
 from form.RegistryForm import RegistryForm
-from form.ChangePassword import ChangePassword
 from model.UserBo import UserBo
 from model.UserIdentity import UserIdentity
-from service.UserService import add_user_info, authenticate_user, get_user_info, update_user_profile, \
-    change_user_password, check_existing_user, user_exists_and_email_correct
+from service.UserService import add_user_info, authenticate_user, get_user_info, change_user_password, \
+    check_existing_user
 from utils import logger
 
 app_logger = logger.setup_logger(logging.INFO)
@@ -128,7 +128,7 @@ def user_profile():
     user_account = session['user_account']
     user_info = get_user_info(user_account)
 
-    return render_template('user_profile.html', user_info=user_info)
+    return render_template('login/user_profile.html', user_info=user_info)
 
 """
     @userController.route('/update_profile', methods=['GET', 'POST'])
@@ -169,7 +169,7 @@ def user_profile():
 """
 @userController.route('/change_password', methods=['GET', 'POST'])
 def change_password():
-    form = ChangePassword()
+    form = ChangePasswordForm()
 
     # 檢查用戶是否登入，如果沒有，導向到登入頁面
     if 'user_account' not in session:
@@ -187,7 +187,7 @@ def change_password():
             flash('更換密碼成功!', 'success')
             return redirect(url_for('userController.user_profile'))
         else:
-            flash('更換密碼失敗，請重新嘗試', 'error')
+            flash('更換密碼失敗，請重新嘗試', 'danger')
             return redirect(url_for('userController.change_password'))
 
-    return render_template('change_password.html', form=form)
+    return render_template('login/change_password.html', form=form)
