@@ -27,9 +27,9 @@ def getProducts():
     Raises:
 
 """
-@productController.route('/getProduct/<id>', methods=['GET'])
-def getDetailProductInfo(id: str):
-    data = get_detail_book_info(id)
+@productController.route('/getProduct/<item_id>', methods=['GET'])
+def getDetailProductInfo(item_id: str):
+    data = get_detail_book_info(item_id)
     return render_template("product/index.html", data=data)
 
 """
