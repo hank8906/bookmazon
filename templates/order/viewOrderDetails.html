@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>訂單明細</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>訂單明細 - 訂單編號: {{ order.order_id }}</h2>
+        <p>訂單總價: 計算方法需依據您的業務邏輯</p>
+
+        <h3>商品列表</h3>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>商品名稱</th>
+                    <th>數量</th>
+                    <th>單價</th>
+                    <th>小計</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order_item, item, book in order_items %}
+                <tr>
+                    <td>{{ book.book_name }}</td>
+                    <td>{{ order_item.quantity }}</td>
+                    <td>{{ book.book_price }}</td>
+                    <td>{{ order_item.quantity * book.book_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ url_for('productController.getProducts') }}" class="btn btn-primary">返回首頁</a>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

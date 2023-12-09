@@ -5,6 +5,7 @@ from controller.IndexController import indexController
 from controller.CartController import cartController
 from controller.TestController import testController
 from controller.ProductController import productController
+# from controller.OrderController import orderController
 
 import os
 from datetime import timedelta
@@ -16,8 +17,9 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=31)
 # app.register_blueprint(testController, url_prefix='/test')
 # app.register_blueprint(indexController, url_prefix='/')
 app.register_blueprint(userController, url_prefix='/user')
-app.register_blueprint(cartController, url_prefix='/cart')
 app.register_blueprint(productController, url_prefix='/')
+app.register_blueprint(cartController, url_prefix='/cart')
+# app.register_blueprint(orderController, url_prefix='/order')
 
 # 這坨login manager的東西我不知道要放哪(´_ゝ`)
 from flask_login import LoginManager

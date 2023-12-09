@@ -33,7 +33,7 @@ class CartService:
         with self.handle_transaction():
             # 檢查庫存
             item = session.query(Item).filter(Item.item_id == item_id).first()
-            if not item or item.book_count < quantity:
+            if not item or item.book_count < 1:
                 flash('商品無庫存', 'warning')
                 return False
 

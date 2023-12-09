@@ -26,14 +26,16 @@ def add_to_cart():
 
     # 從請求中獲取資料
     item_id = request.form.get('item_id')
-    quantity = request.form.get('quantity', type=int)
+    # quantity = request.form.get('quantity', type=int)
 
     # 資料驗證
-    if not item_id or not quantity or quantity <= 0:
+    # if not item_id or not quantity or quantity <= 0:
+    #     return jsonify({'success': False, 'message': '參數錯誤!'})
+    if not item_id:
         return jsonify({'success': False, 'message': '參數錯誤!'})
 
     # 業務邏輯
-    success = cartService.add_to_cart(current_user.user_account, item_id, quantity)
+    success = cartService.add_to_cart(current_user.user_account, item_id, 1)
     if success:
         return jsonify({'success': True, 'message': '商品已加入購物車'})
     else:

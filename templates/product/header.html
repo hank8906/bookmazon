@@ -18,6 +18,8 @@
                         Cart
                     <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart_item_count }}</span> <!-- 您可以修改這裡的數字以反映實際的購物車物品數量 -->
                 </a>
+                <!-- 如果使用者已登入，則導向到查看所有訂單 -->
+
             {% else %}
                 <!-- 不顯示按紐 -->
             {% endif %}
