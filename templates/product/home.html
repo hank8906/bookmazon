@@ -16,6 +16,20 @@
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='css/slide.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='css/book.css') }}" rel="stylesheet"/>
+    <style>
+    .book {
+        max-height: 300px; /* 設定書名容器的最大高度，可以根據需要調整 */
+        overflow: hidden;
+    }
+
+    .book a {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* 顯示省略號 */
+    }
+</style>
+
 </head>
 <body>
 {% include 'product/header.html' %}
@@ -193,8 +207,8 @@
                         title: "{{ book.book_name }}",
                         author: "{{ book.book_author }}",
                         price: "{{ book.book_price }}",
-                        id: "{{ book.book_id }}",
-                        image:""
+                        id: "{{ book.item_id }}",
+                        image:"{{ book.book_image_path }}"
                     },
                 {% endfor %}
             ];
@@ -251,7 +265,7 @@
                 BookElement.classList.add("book");
 
                 const imageElement = document.createElement("img");
-                imageElement.src = book.image;
+                imageElement.src = '../static/'+book.image;
                 imageElement.alt = book.title;
 
                 const titleLinkElement = document.createElement("a");
