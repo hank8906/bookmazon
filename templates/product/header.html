@@ -26,12 +26,12 @@
         </form>
 
         <ul class="nav">
-           {% if not session.user_account %}
+           {% if not current_user.is_authenticated %}
                 <!-- 如果用使用者登入顯示此内容 -->
             <li class="nav-item"><a href="{{ url_for('userController.login') }}" class="btn btn-outline-dark ms-2">Login</a></li>
             <li class="nav-item"><a href="{{ url_for('userController.register') }}" class="nav-link link-body-emphasis px-2">Sign up</a></li>
             {% else %}
-            <li class="nav-item"><a href="{{ url_for('userController.user_profile') }}" class="btn btn-outline-dark ms-2">Welcome, {{ session.user_account }}!</a></li>
+            <li class="nav-item"><a href="{{ url_for('userController.user_profile') }}" class="btn btn-outline-dark ms-2">Welcome, {{ current_user.user.user_account }}!</a></li>
             <li class="nav-item"><a href="{{ url_for('userController.logout') }}" class="btn btn-outline-dark ms-2">Logout</a></li>
             {% endif %}
         </ul>

@@ -87,7 +87,6 @@ def check_existing_user(user_account: str):
 """
 
 def get_user_info(user_account: str):
-    # CRUD 只有查詢不需要做 commit、rollback
     try:
         user_obj = session.scalars(select(User).where(User.user_account == user_account)).one()
     except Exception as e:

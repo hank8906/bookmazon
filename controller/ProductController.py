@@ -24,7 +24,7 @@ def getProducts():
     cartService = CartService()
     cart_item_count = 0
     if current_user.is_authenticated:
-        cart_item_count = cartService.get_cart_item_count(current_user.user_account)
+        cart_item_count = cartService.get_cart_item_count(current_user.user.user_account)
 
     return render_template("product/home.html", data=data, cart_item_count=cart_item_count)
 
@@ -45,7 +45,7 @@ def getDetailProductInfo(item_id: str):
     cartService = CartService()
     cart_item_count = 0
     if current_user.is_authenticated:
-        cart_item_count = cartService.get_cart_item_count(current_user.user_account)
+        cart_item_count = cartService.get_cart_item_count(current_user.user.user_account)
 
     return render_template("product/index.html", data=data, cart_item_count=cart_item_count)
 

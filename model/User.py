@@ -5,12 +5,11 @@ from sqlalchemy.orm import mapped_column
 
 from model.BaseModel import Base
 
-from flask_login import UserMixin
 
 """
     使用者資訊
 """
-class User(UserMixin, Base):
+class User(Base):
     __tablename__ = 'user' # must write
     __table_args__ = {"schema": "bookmazon"}  # must write
     user_account = mapped_column(String(20), primary_key=True)
@@ -23,7 +22,4 @@ class User(UserMixin, Base):
     update_datetime = mapped_column(DateTime, default=datetime.now())
     create_datetime = mapped_column(DateTime, default=datetime.now())
 
-    # login manager
-    def get_id(self):
-        return self.user_account
 

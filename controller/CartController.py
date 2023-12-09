@@ -9,8 +9,8 @@ cartService = CartService()
 @cartController.route('/view_cart', methods=['GET'])
 @login_required
 def view_cart():
-    cart_items = cartService.get_cart_items(current_user.user_account)
-    total_price = cartService.calculate_total_price(current_user.user_account) # 計算購物車商品總價
+    cart_items = cartService.get_cart_items(current_user.user.user_account)
+    total_price = cartService.calculate_total_price(current_user.user.user_account) # 計算購物車商品總價
 
     return render_template('cart.html', cart_items=cart_items, total_price=total_price)
 
@@ -19,7 +19,7 @@ def view_cart():
 def add_to_cart():
     # form = AddToCartForm()
     # if form.validate_on_submit():
-    #     success = cartService.add_to_cart(current_user.user_account, form.item_id.data, form.quantity.data)
+    #     success = cartService.add_to_cart(current_user.user.user_account, form.item_id.data, form.quantity.data)
     #     return jsonify({'success': success})
     # else:
     #     return jsonify({'success': False})
@@ -35,7 +35,7 @@ def add_to_cart():
         return jsonify({'success': False, 'message': '參數錯誤!'})
 
     # 業務邏輯
-    success = cartService.add_to_cart(current_user.user_account, item_id, 1)
+    success = cartService.add_to_cart(current_user.user.user_account, item_id, 1)
     if success:
         return jsonify({'success': True, 'message': '商品已加入購物車'})
     else:
