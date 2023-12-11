@@ -5,11 +5,12 @@ from sqlalchemy.orm import mapped_column
 
 from model.BaseModel import Base
 
+
 """
     使用者資訊
 """
 class User(Base):
-    __tablename__ = 'user'  # must write
+    __tablename__ = 'user' # must write
     __table_args__ = {"schema": "bookmazon"}  # must write
     user_account = mapped_column(String(20), primary_key=True)
     user_password = mapped_column(Text)
@@ -20,3 +21,5 @@ class User(Base):
     user_birthday = mapped_column(String(255))
     update_datetime = mapped_column(DateTime, default=datetime.now())
     create_datetime = mapped_column(DateTime, default=datetime.now())
+
+
