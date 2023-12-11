@@ -25,7 +25,7 @@ app.register_blueprint(cartController, url_prefix='/cart')
 # 初始化 Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'userController.login'
+# login_manager.login_view = 'userController.login'
 # 用戶加載函數
 @login_manager.user_loader
 def load_user(user_account):

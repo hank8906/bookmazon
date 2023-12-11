@@ -1,17 +1,19 @@
+import logging
+from contextlib import contextmanager
+from datetime import datetime
+
+from sqlalchemy import func
+from sqlalchemy.exc import SQLAlchemyError
+
+from enumeration.SystemMessage import ShoppingCartSystemCode, CommonSystemCode
+from exception.BusinessError import BusinessError
+from model.Book import Book
 from model.Cart import Cart
 from model.CartItem import CartItem
-from model.Book import Book
 from model.Item import Item
-from utils.dbUtil import session
-from sqlalchemy.exc import SQLAlchemyError
-from datetime import datetime
-from contextlib import contextmanager
-from flask import flash
-from sqlalchemy import func
-
 # Logger
 from utils import logger
-import logging
+from utils.dbUtil import session
 
 app_logger = logger.setup_logger(logging.INFO)
 
@@ -25,32 +27,45 @@ class CartService:
         except SQLAlchemyError as e:
             session.rollback()
             app_logger.error('Database transaction error: %s', e)
-            raise  # 中斷當前的程式流程，拋出異常
+            error_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
+            message = CommonSystemCode.DATABASE_FAILED.value.get('message')
+            raise BusinessError(message=message, error_code=error_code)
 
     # 加入購物車
     def add_to_cart(self, user_account, item_id, quantity):
-        """Add a book to the user's cart. Check stock before adding."""
         with self.handle_transaction():
             # 檢查庫存
             item = session.query(Item).filter(Item.item_id == item_id).first()
-            if not item or item.book_count < 1:
-                flash('商品無庫存', 'warning')
-                return False
+            if quantity > item.book_count:
+                error_code = ShoppingCartSystemCode.QUANTITY_EXCEEDS_STOCK.value.get('system_code')
+                message = ShoppingCartSystemCode.QUANTITY_EXCEEDS_STOCK.value.get('message')
+                raise BusinessError(message=message, error_code=error_code)
 
-            # 獲取或創建購物車
+            if not item or item.book_count < 1:
+                error_code = ShoppingCartSystemCode.OUT_OF_STOCK.value.get('system_code')
+                message = ShoppingCartSystemCode.OUT_OF_STOCK.value.get('message')
+                raise BusinessError(message=message, error_code=error_code)
+
+            # 檢查購物車選購數量(購物車原本選購該商品的數量加上選購數量)
+            cart_item_count = self.get_cart_item_count(user_account) + quantity
+            if cart_item_count > item.book_count:
+                error_code = ShoppingCartSystemCode.EXCEEDS_MAX_STOCK.value.get('system_code')
+                message = ShoppingCartSystemCode.EXCEEDS_MAX_STOCK.value.get('message')
+                raise BusinessError(message=message, error_code=error_code)
+
+            # 建立購物車
             cart = self.get_or_create_cart(user_account)
             cart_item = session.query(CartItem).filter(
                 CartItem.cart_id == cart.cart_id, CartItem.item_id == item_id).first()
 
-            # 更新或添加購物車項目
+            # 加入商品到購物車
             if cart_item:
                 if cart_item.quantity >= item.book_count:
-                    flash('購物車中的商品數量超出庫存，無法再添加', 'warning')
-                    return False
+                    error_code = ShoppingCartSystemCode.QUANTITY_EXCEEDS_STOCK.value.get('system_code')
+                    message = ShoppingCartSystemCode.QUANTITY_EXCEEDS_STOCK.value.get('message')
+                    raise BusinessError(message=message, error_code=error_code)
 
             self.update_cart_item(cart, item_id, quantity)
-
-            return True
 
     def update_cart_item(self, cart, item_id, quantity):
         cart_item = session.query(CartItem).filter(CartItem.cart_id == cart.cart_id,
