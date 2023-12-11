@@ -4,13 +4,13 @@ from flask import Flask
 from controller.CartController import cartController
 from controller.ProductController import productController
 from controller.UserController import userController
+from controller.OrderController import orderController
 from model.AuthUser import AuthUser
 from utils.dev_config import Config
 from flask_login import LoginManager
 from model.User import User
 from utils.dbUtil import session
 
-# from controller.OrderController import orderController
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
@@ -20,7 +20,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=31)
 app.register_blueprint(userController, url_prefix='/user')
 app.register_blueprint(productController, url_prefix='/')
 app.register_blueprint(cartController, url_prefix='/cart')
-# app.register_blueprint(orderController, url_prefix='/order')
+app.register_blueprint(orderController, url_prefix='/order')
 
 # 初始化 Flask-Login
 login_manager = LoginManager()

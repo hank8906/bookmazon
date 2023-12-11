@@ -36,6 +36,13 @@ class CartService:
         with self.handle_transaction():
             # 檢查庫存
             item = session.query(Item).filter(Item.item_id == item_id).first()
+
+            # if quantity not integer or quantity <= 0
+            if not isinstance(quantity, int) or quantity <= 0:
+                error_code = ShoppingCartSystemCode.ITEM_NOT_FOUND.value.get('system_code')
+                message = ShoppingCartSystemCode.ITEM_NOT_FOUND.value.get('message')
+                raise BusinessError(message=message, error_code=error_code)
+
             if quantity > item.book_count:
                 error_code = ShoppingCartSystemCode.QUANTITY_EXCEEDS_STOCK.value.get('system_code')
                 message = ShoppingCartSystemCode.QUANTITY_EXCEEDS_STOCK.value.get('message')
@@ -46,7 +53,7 @@ class CartService:
                 message = ShoppingCartSystemCode.OUT_OF_STOCK.value.get('message')
                 raise BusinessError(message=message, error_code=error_code)
 
-            # 檢查購物車選購數量(購物車原本選購該商品的數量加上選購數量)
+            # 檢查購物車選購數量(購物車原本選購該商品的數量加上選購數量) ->這樣會變成只要購物車裡有一個>=庫存，就沒辦法新增其他商品?
             cart_item_count = self.get_cart_item_count(user_account) + quantity
             if cart_item_count > item.book_count:
                 error_code = ShoppingCartSystemCode.EXCEEDS_MAX_STOCK.value.get('system_code')
@@ -105,7 +112,7 @@ class CartService:
         """Remove an item from the cart."""
         with self.handle_transaction():
             cart_item = session.query(CartItem).filter(
-                CartItem.cart_item_id == cart_item_id).first()  # 修改：使用 utils 中的 session 進行查詢
+                CartItem.cart_item_id == cart_item_id).first()
 
             # 數量歸零就刪掉
             if cart_item is not None:

@@ -72,8 +72,10 @@
     <div class="d-flex justify-content-between mt-3">
         <a href="{{ url_for('productController.getProducts') }}" class="btn btn-secondary">繼續購物</a>
 
-        <!-- TODO : 結帳功能-->
-        <a href="#" class="btn btn-primary">前往結帳</a>
+        <!-- 商品結帳-->
+        <form action="{{ url_for('orderController.checkout') }}" method="post">
+            <button type="submit" class="btn btn-primary">前往結帳</button>
+        </form>
     </div>
     {% else %}
     <div class="alert alert-warning" role="alert">
