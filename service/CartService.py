@@ -54,11 +54,11 @@ class CartService:
                 raise BusinessError(message=message, error_code=error_code)
 
             # 檢查購物車選購數量(購物車原本選購該商品的數量加上選購數量) ->這樣會變成只要購物車裡有一個>=庫存，就沒辦法新增其他商品?
-            cart_item_count = self.get_cart_item_count(user_account) + quantity
-            if cart_item_count > item.book_count:
-                error_code = ShoppingCartSystemCode.EXCEEDS_MAX_STOCK.value.get('system_code')
-                message = ShoppingCartSystemCode.EXCEEDS_MAX_STOCK.value.get('message')
-                raise BusinessError(message=message, error_code=error_code)
+            # cart_item_count = self.get_cart_item_count(user_account) + quantity
+            # if cart_item_count > item.book_count:
+            #     error_code = ShoppingCartSystemCode.EXCEEDS_MAX_STOCK.value.get('system_code')
+            #     message = ShoppingCartSystemCode.EXCEEDS_MAX_STOCK.value.get('message')
+            #     raise BusinessError(message=message, error_code=error_code)
 
             # 建立購物車
             cart = self.get_or_create_cart(user_account)
@@ -114,15 +114,16 @@ class CartService:
             cart_item = session.query(CartItem).filter(
                 CartItem.cart_item_id == cart_item_id).first()
 
-            # 數量歸零就刪掉
-            if cart_item is not None:
-                if cart_item.quantity > 1:
-                    cart_item.quantity -= 1
-                else:
-                    session.delete(cart_item)
-                return True
+            session.delete(cart_item)
 
-            return False
+            # if cart_item is not None:
+            #     if cart_item.quantity > 1:
+            #         cart_item.quantity -= 1
+            #     else:
+            #         session.delete(cart_item)
+            #     return True
+            #
+            # return False
 
     def calculate_total_price(self, user_account):
         try:

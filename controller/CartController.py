@@ -14,7 +14,8 @@ cartService = CartService()
 """
     查看購物車
     Args:
-
+        cart_items 購物車商品
+        total_price 購物車商品總價
     Returns:
 
     Raises:
@@ -31,7 +32,8 @@ def view_cart():
 """
     加入購物車
     Args:
-
+        item_id 商品ID
+        quantity 購買數量
     Returns:
 
     Raises:
@@ -74,10 +76,36 @@ def view_cart_item_quantity():
         json_message.data = {'cart_item_quantity': cart_item_quantity}
     return json.dumps(json_message.__dict__)
 
-# 按下刪除按鈕一次數量減一個
+"""
+    刪除購物車商品
+    Args:
+        cart_item_id 購物車商品ID
+    Returns:
+
+    Raises:
+        None
+"""
 @cartController.route('/remove_from_cart/<cart_item_id>', methods=['POST'])
 @login_required
 def remove_from_cart(cart_item_id):
     cartService.remove_from_cart(cart_item_id)
     flash('商品已從購物車移除', 'success')
     return redirect(url_for('cartController.view_cart'))
+
+"""
+    結帳
+    Args:
+        cart_items 購物車商品
+        total_price 購物車商品總價
+    Returns:
+
+    Raises:
+        None
+"""
+@cartController.route('/checkout', methods=['GET'])
+@login_required
+def checkout():
+    cart_items = cartService.get_cart_items(current_user.user.user_account)
+    total_price = cartService.calculate_total_price(current_user.user.user_account)
+
+    return render_template('order/addOrder.html', cart_items=cart_items, total_price=total_price)

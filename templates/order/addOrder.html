@@ -1,3 +1,4 @@
+<!-- addOrder.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,27 +27,17 @@
     </style>
 </head>
 <body>
-{% include '/product/header.html' %}
-<div class="container mt-5 content-body">
-    <h2>購物車</h2>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% for category, message in messages %}
-    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                aria-label="Close"></button>
-    </div>
-    {% endfor %}
-    {% endwith %}
-    {% if cart_items|length > 0 %}
+    {% include '/product/header.html' %}
+    <div class="container">
+        <h2>結帳</h2>
+        <h3>商品明細</h3>
+        <form action="{{ url_for('orderController.checkout') }}" method="post">
         <table class="table">
             <thead>
                 <tr>
                     <th></th>
                     <th>書名</th>
                     <th>價格</th>
-<!--                    <th>數量</th>-->
-<!--                    <th>小計</th>-->
                     <th>數量</th>
                 </tr>
             </thead>
@@ -61,33 +52,26 @@
                     </td>
                     <td>{{ book.book_name }}</td>
                     <td>{{ book.book_price }}</td>
-<!--                    <td>{{ cart_item.quantity }}</td>-->
-<!--                    <td>{{ cart_item.quantity * book.book_price }}</td>-->
                     <td>
-                        {{ cart_item.quantity }}
+                        <input type="number" name="quantity-{{ cart_item.cart_item_id }}"
+                               min="1" value="{{ cart_item.quantity }}" class="quantity-input">
+                        <input type="hidden" name="cart_item_id" value="{{ cart_item.cart_item_id }}" class="quantity-input">
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-    <div class="d-flex justify-content-end">
-        <h4 class="me-2">總計：</h4>
-        <h4>{{ total_price }}</h4>
+        <div class="d-flex justify-content-end">
+            <h4 class="me-2">總計：</h4>
+            <h4 id="total-price">{{ total_price }}</h4>
+        </div>
+        <h3>收件人資訊</h3>
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">收件人姓名</label>
+            <input type="text" class="form-control" id="recipient-name" name="recipient-name" value="{{current_user.user.user_account}}">
+        </div>
+            <button type="submit" class="btn btn-primary">提交訂單</button>
+        </form>
     </div>
-    <div class="d-flex justify-content-between mt-3">
-        <a href="{{ url_for('productController.getProducts') }}" class="btn btn-secondary">繼續購物</a>
-
-        <!-- 商品結帳-->
-        <a href="{{ url_for('cartController.checkout') }}" class="btn btn-secondary">前往結帳</a>
-    </div>
-    {% else %}
-    <div class="alert alert-warning" role="alert">
-        {{current_user.user.user_account}}的購物車是空的！
-    </div>
-    <a href="{{ url_for('productController.getProducts') }}" class="btn btn-primary">返回商店</a>
-    {% endif %}
-</div>
-{% include 'common/footer.html' %}
-
 </body>
 </html>
