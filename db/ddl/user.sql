@@ -3,7 +3,7 @@ DROP TABLE bookmazon.user;
 -- 創建 user 表格
 CREATE TABLE bookmazon.user (
     user_account VARCHAR(20) NOT NULL,  --使用者帳號
-    user_password VARCHAR(16) NOT NULL, --使用者密碼
+    user_password TEXT NOT NULL, --使用者密碼
     user_name VARCHAR(50) NOT NULL,     --使用者姓名
     user_gender VARCHAR(1),             --性別
     user_email VARCHAR(255),            --使用者電子郵件

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .user-avatar {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 20px auto 10px; /* 調整大頭貼上方的 margin-top，下方的 margin 也稍微調整 */
+            z-index: 2; /* 提高大頭貼的 z-index，確保在藍色卡片之上 */
+        }
+
+        .user-name {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px; /* 調整名稱與圖片的間距 */
+            z-index: 2; /* 提高使用者名稱的 z-index，確保在藍色卡片之上 */
+        }
+
+        .left-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1; /* 設定藍色卡片的 z-index，低於大頭貼和使用者名稱，使之顯示在它們的下方 */
+        }
+
+        .blue-card {
+            background-color: #007BFF;
+            padding: 10px;
+            width: 100%;
+            color: white;
+            border-radius: 0 0 10px 10px; /* 調整底部左右邊角的圓角 */
+        }
+
+        .content-body {
+            min-height: 80vh;
+        }
+
+    </style>
+</head>
+<body>
+
+{% include './common/header.html' %}
+
+<div class="container mt-5 content-body">
+    <h1 class="text-center mb-4">會員資料表</h1>
+
+    <div class="row">
+        <!-- 左邊卡片 -->
+        <div class="col-md-4">
+            <div class="card left-card">
+                <img src="../static/assets/img/avatar.png" class="card-img-top user-avatar" alt="User Avatar">
+                <div class="card-body">
+                    <h5 class="card-title user-name">{{ user_info.user_name }}</h5>
+                </div>
+                <div class="blue-card">
+                    <!-- 藍色卡片內容 -->
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右邊卡片 -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="userAccount" class="form-label">使用者帳號</label>
+                        <input type="text" class="form-control" id="userAccount" readonly
+                               value="{{ user_info.user_account }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">電子信箱地址</label>
+                        <input type="email" class="form-control" id="userEmail" readonly
+                               value="{{ user_info.user_email }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="userBirthday" class="form-label">出生日期</label>
+                        <input type="date" class="form-control" id="userBirthday" readonly
+                               value="{{ user_info.user_birthday }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="userGender" class="form-label">性別</label>
+                        <input type="text" class="form-control" id="userGender" readonly
+                               value="{{user_info.user_gender }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('userController.change_password') }}'">更換密碼</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include './common/footer.html' %}
+
+<!-- Bootstrap 5 JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

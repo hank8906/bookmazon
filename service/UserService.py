@@ -1,23 +1,23 @@
 from datetime import datetime
-
+from werkzeug.security import generate_password_hash, check_password_hash
 from model.UserBo import UserBo
 from utils.dbUtil import session
 from sqlalchemy import select, delete, update
 from model.User import User
 from utils import logger
 import logging
+from sqlalchemy import select, and_
 
 app_logger = logger.setup_logger(logging.INFO)
-
 
 # 在 UserService 中新增 authenticate_user 函式
 def authenticate_user(user_account: str, user_password: str):
     try:
         # 查詢使用者資訊
-        user_obj = session.scalars(select(User).where(User.user_account == user_account)).one()
+        user_obj: User = session.scalars(select(User).where(User.user_account == user_account)).one()
 
         # 驗證密碼是否正確
-        if user_obj.user_password == user_password:
+        if check_password_hash(user_obj.user_password, user_password):
             # 更新最後登入時間
             user_obj.update_datetime = datetime.now()
 
@@ -31,7 +31,6 @@ def authenticate_user(user_account: str, user_password: str):
         app_logger.error('Authentication failed: %s', e)
         return False
 
-
 """
     新增使用者資訊
     Args:
@@ -43,13 +42,15 @@ def authenticate_user(user_account: str, user_password: str):
     Raises:
 
 """
-
-
 def add_user_info(user_bo: UserBo):
+    # 在註冊時儲存使用者密碼的哈希值
+    hashed_password = generate_password_hash(user_bo.user_password, method='pbkdf2:sha256')
+
     user = User(
         user_account=user_bo.user_account,
-        user_password=user_bo.user_password,
+        user_password=hashed_password,
         user_name=user_bo.user_name,
+        user_gender=user_bo.user_gender,
         user_identification=user_bo.user_identification,
         user_email=user_bo.user_email,
         user_birthday=user_bo.user_birthday,
@@ -64,7 +65,6 @@ def add_user_info(user_bo: UserBo):
         app_logger.error('Failed to add user information: %s', e)
         raise e
 
-
 # 檢查使用者帳戶是否已存在的函數
 def check_existing_user(user_account: str):
     try:
@@ -73,7 +73,6 @@ def check_existing_user(user_account: str):
     except Exception as e:
         app_logger.error('Error checking existing user: %s', e)
         return False
-
 
 """
     取得使用者資訊
@@ -87,16 +86,13 @@ def check_existing_user(user_account: str):
 
 """
 
-
 def get_user_info(user_account: str):
-    # CRUD 只有查詢不需要做 commit、rollback
     try:
         user_obj = session.scalars(select(User).where(User.user_account == user_account)).one()
     except Exception as e:
         app_logger.error('Failed to query user information: %s', e)
         raise e
     return user_obj
-
 
 """
     刪除使用者資訊
@@ -110,7 +106,6 @@ def get_user_info(user_account: str):
 
 """
 
-
 def delete_user_info(user_account: str):
     try:
         statement = delete(User).where(User.user_account == user_account)
@@ -123,7 +118,6 @@ def delete_user_info(user_account: str):
     # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
     return 'deleted'
 
-
 """
     更新使用者資訊
     Args:
@@ -135,7 +129,6 @@ def delete_user_info(user_account: str):
     Raises:
 
 """
-
 
 def update_user_profile(user_account: str, new_user_email: str, new_user_birthday: str):
     try:
@@ -153,27 +146,6 @@ def update_user_profile(user_account: str, new_user_email: str, new_user_birthda
     # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
     return 'profile_updated'
 
-
-def change_user_password(user_account: str, current_password: str, new_password: str):
-    try:
-        # 驗證當前密碼是否正確
-        if not authenticate_user(user_account, current_password):
-            app_logger.error('Failed to change password. Incorrect current password.')
-            return False
-
-        # 更新密碼
-        statement = update(User).where(User.user_account == user_account).values(user_password=new_password)
-        session.execute(statement)
-        session.commit()
-
-        app_logger.info('Password changed successfully.')
-        return True
-    except Exception as e:
-        session.rollback()
-        app_logger.error('Failed to change user password: %s', e)
-        return False
-
-
 """
     更新使用者資訊
     Args:
@@ -186,7 +158,6 @@ def change_user_password(user_account: str, current_password: str, new_password:
     Raises:
 
 """
-
 
 def update_user_info(user_account: str, password: str):
     try:
@@ -214,3 +185,48 @@ def update_user_info(user_account: str, password: str):
     Raises:
 
 """
+
+
+def change_user_password(user_account: str, current_password: str, new_password: str):
+    try:
+
+        # 驗證當前密碼是否正確
+        if not authenticate_user(user_account, current_password):
+            app_logger.error('Failed to change password. Incorrect current password.')
+            return False
+        hashed_password = generate_password_hash(new_password, method='pbkdf2:sha256')
+        # 更新密碼
+        statement = update(User).where(User.user_account == user_account).values(user_password=hashed_password)
+        session.execute(statement)
+        session.commit()
+
+        app_logger.info('Password changed successfully.')
+        return True
+    except Exception as e:
+        session.rollback()
+        app_logger.error('Failed to change user password: %s', e)
+        return False
+
+"""
+    變更密碼
+    Args:
+        user_account: 使用者帳號
+        current_password: 原始密碼
+        new_password: 欲變更密碼
+    Returns:
+
+
+    Raises:
+
+"""
+
+
+def user_exists_and_email_correct(self, user_account, email):
+    try:
+        # 檢查用戶是否存在並且電子郵件正確
+        query = select([UserBo]).where(and_(UserBo.user_account == user_account, UserBo.email == email))
+        result = session.execute(query).fetchone()
+        return result is not None
+    except Exception as e:
+        app_logger.error('Error checking user existence and email correctness: %s', e)
+        return False
