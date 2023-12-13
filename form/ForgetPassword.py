@@ -4,5 +4,5 @@ from wtforms.validators import DataRequired, Email, Length
 
 
 class ForgetPassword(FlaskForm):
-    user_password = PasswordField('User Password', validators=[DataRequired(), Length(min=1, max=20)])
+    user_email = StringField('User Email', validators=[DataRequired(), Email(), Length(max=255)])
     submit = SubmitField('ForgetPassword')

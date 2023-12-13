@@ -1,17 +1,19 @@
 import logging
 
-from flask import Blueprint, redirect, url_for, flash, render_template, session
+from flask import Blueprint, redirect, url_for, flash, render_template
 from flask_login import login_user, logout_user, current_user, login_required
 
 from form.ChangePassword import ChangePasswordForm
 from form.LoginForm import LoginForm
 from form.RegistryForm import RegistryForm
+from form.ForgetPassword import ForgetPassword
 from model.AuthUser import AuthUser
 from model.UserBo import UserBo
 from model.UserIdentity import UserIdentity
 from service.UserService import add_user_info, authenticate_user, get_user_info, change_user_password, \
-    check_existing_user
+    check_existing_user, check_user_email_validity, generate_reset_token
 from utils import logger
+from utils.EmailUutil import send_reset_email
 
 app_logger = logger.setup_logger(logging.INFO)
 userController = Blueprint('userController', __name__)
@@ -30,6 +32,8 @@ userController = Blueprint('userController', __name__)
     Raises:
 
 """
+
+
 @userController.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistryForm()
@@ -63,6 +67,7 @@ def register():
 
     return render_template('login/register.html', form=form)
 
+
 """
     登入
     Args:
@@ -73,6 +78,8 @@ def register():
     Raises:
 
 """
+
+
 @userController.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -91,6 +98,7 @@ def login():
 
     return render_template('login/login.html', form=form)
 
+
 """
     登出
     Args:
@@ -100,11 +108,14 @@ def login():
     Raises:
 
 """
+
+
 @userController.route('/logout', methods=['GET'])
 def logout():
     logout_user()
     flash('登出成功！', 'success')
     return redirect(url_for('userController.login'))
+
 
 """
     會員資料
@@ -115,6 +126,8 @@ def logout():
     Raises:
 
 """
+
+
 @userController.route('/user_profile', methods=['GET'])
 @login_required
 def user_profile():
@@ -132,6 +145,10 @@ def user_profile():
 
     Raises:
 """
+
+
+# update_user_profile function
+
 @userController.route('/change_password', methods=['GET', 'POST'])
 @login_required
 def change_password():
@@ -152,29 +169,34 @@ def change_password():
 
     return render_template('login/change_password.html', form=form)
 
-"""
-    @userController.route('/update_profile', methods=['GET', 'POST'])
-    def update_profile():
-        # 檢查用戶是否登入，如果沒有，導向到登入頁面
-        if 'user_account' not in session:
-            flash('Please log in to access this page.', 'error')
-            return redirect(url_for('userController.login'))
 
-        if request.method == 'POST':
-            user_account = session['user_account']
-            new_user_email = request.form['new_user_email']
-            new_user_birthday = request.form['new_user_birthday']
+@userController.route('/forget_password', methods=['GET', 'POST'])
+def forget_password():
+    try:
+        app_logger.info('forget_password')
+        form = ForgetPassword()
 
-            # 使用 UserService 中的函數來更新用戶資料
-            if update_user_profile(user_account, new_user_email, new_user_birthday):
-                flash('Profile updated successfully!', 'success')
-                return redirect(url_for('userController.user_profile'))
-            else:
-                flash('Failed to update profile. Please try again.', 'error')
+        if form.validate_on_submit():
+            app_logger.info('validate_on_submit')
 
-        # 取得用戶資訊，這裡假設有一個名為 get_user_info 的函數可以取得用戶資訊
-        user_account = session['user_account']
-        user_info = get_user_info(user_account)
+            user_email = form.user_email.data
+            app_logger.info(user_email)
 
-        return render_template('update_profile.html', user_info=user_info)
-"""
+            try:
+                if check_user_email_validity(user_email):
+                    reset_token = generate_reset_token(user_email)
+                    send_reset_email(reset_token)
+                    return redirect(url_for('userController.login'))
+                else:
+                    raise ValueError('Invalid email address')
+
+            except Exception as e:
+                app_logger.error('Error processing forget password request: %s', e)
+                flash('發生錯誤，請稍後再試。', 'danger')
+
+        return render_template('login/forget_password.html', form=form)
+
+    except Exception as e:
+        app_logger.error('An unexpected error occurred: %s', e)
+        flash('發生意外錯誤，請聯繫系統管理員。', 'danger')
+        return render_template('401.html')

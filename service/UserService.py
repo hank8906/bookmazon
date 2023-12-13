@@ -1,14 +1,21 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask import current_app as app
+from model.PasswordResetToken import PasswordResetToken
 from model.UserBo import UserBo
 from utils.dbUtil import session
 from sqlalchemy import select, delete, update
 from model.User import User
 from utils import logger
 import logging
+import secrets
 from sqlalchemy import select, and_
+from flask_mail import Message, Mail
+
+from utils.dev_config import Config
 
 app_logger = logger.setup_logger(logging.INFO)
+
 
 # 在 UserService 中新增 authenticate_user 函式
 def authenticate_user(user_account: str, user_password: str):
@@ -31,6 +38,7 @@ def authenticate_user(user_account: str, user_password: str):
         app_logger.error('Authentication failed: %s', e)
         return False
 
+
 """
     新增使用者資訊
     Args:
@@ -42,6 +50,8 @@ def authenticate_user(user_account: str, user_password: str):
     Raises:
 
 """
+
+
 def add_user_info(user_bo: UserBo):
     # 在註冊時儲存使用者密碼的哈希值
     hashed_password = generate_password_hash(user_bo.user_password, method='pbkdf2:sha256')
@@ -65,6 +75,7 @@ def add_user_info(user_bo: UserBo):
         app_logger.error('Failed to add user information: %s', e)
         raise e
 
+
 # 檢查使用者帳戶是否已存在的函數
 def check_existing_user(user_account: str):
     try:
@@ -73,6 +84,7 @@ def check_existing_user(user_account: str):
     except Exception as e:
         app_logger.error('Error checking existing user: %s', e)
         return False
+
 
 """
     取得使用者資訊
@@ -86,6 +98,7 @@ def check_existing_user(user_account: str):
 
 """
 
+
 def get_user_info(user_account: str):
     try:
         user_obj = session.scalars(select(User).where(User.user_account == user_account)).one()
@@ -93,6 +106,7 @@ def get_user_info(user_account: str):
         app_logger.error('Failed to query user information: %s', e)
         raise e
     return user_obj
+
 
 """
     刪除使用者資訊
@@ -106,6 +120,7 @@ def get_user_info(user_account: str):
 
 """
 
+
 def delete_user_info(user_account: str):
     try:
         statement = delete(User).where(User.user_account == user_account)
@@ -118,6 +133,7 @@ def delete_user_info(user_account: str):
     # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
     return 'deleted'
 
+
 """
     更新使用者資訊
     Args:
@@ -129,6 +145,7 @@ def delete_user_info(user_account: str):
     Raises:
 
 """
+
 
 def update_user_profile(user_account: str, new_user_email: str, new_user_birthday: str):
     try:
@@ -146,6 +163,7 @@ def update_user_profile(user_account: str, new_user_email: str, new_user_birthda
     # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
     return 'profile_updated'
 
+
 """
     更新使用者資訊
     Args:
@@ -158,6 +176,7 @@ def update_user_profile(user_account: str, new_user_email: str, new_user_birthda
     Raises:
 
 """
+
 
 def update_user_info(user_account: str, password: str):
     try:
@@ -207,6 +226,7 @@ def change_user_password(user_account: str, current_password: str, new_password:
         app_logger.error('Failed to change user password: %s', e)
         return False
 
+
 """
     變更密碼
     Args:
@@ -223,10 +243,52 @@ def change_user_password(user_account: str, current_password: str, new_password:
 
 def user_exists_and_email_correct(self, user_account, email):
     try:
-        # 檢查用戶是否存在並且電子郵件正確
+        # 檢查會員是否存在並且電子郵件正確
         query = select([UserBo]).where(and_(UserBo.user_account == user_account, UserBo.email == email))
         result = session.execute(query).fetchone()
         return result is not None
     except Exception as e:
         app_logger.error('Error checking user existence and email correctness: %s', e)
         return False
+
+
+def check_user_email_validity(user_email: str):
+    try:
+        # 檢查會員是否存在
+        existing_user = session.scalars(select(User).where(User.user_email == user_email)).first()
+        return existing_user is not None
+    except Exception as e:
+        app_logger.error('Error checking user email validity: %s', e)
+        return False
+
+
+def generate_random_token():
+    return secrets.token_urlsafe(32)
+
+
+def save_password_reset_token_to_database(token_obj: PasswordResetToken):
+    try:
+        # 保存密碼重設令牌到資料庫
+        session.add(token_obj)
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        app_logger.error('Failed to save password reset token to database: %s', e)
+        raise e
+
+
+def generate_reset_token(user_email: str):
+    try:
+        # 產生重置密碼的 token
+        reset_token = generate_random_token()
+
+        # 建立一個密碼重置令牌對象，並儲存到資料庫
+        token_obj = PasswordResetToken(user_email=user_email, token=reset_token, update_datetime=datetime.now(),
+                                       create_datetime=datetime.now())
+        # 儲存到資料庫或其他持久化儲存中
+        save_password_reset_token_to_database(token_obj)
+
+        return reset_token
+    except Exception as e:
+        app_logger.error('Error generating reset token: %s', e)
+        return None
