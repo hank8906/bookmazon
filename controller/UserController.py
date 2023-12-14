@@ -4,16 +4,18 @@ from flask import Blueprint, redirect, url_for, flash, render_template
 from flask_login import login_user, logout_user, current_user, login_required
 
 from form.ChangePassword import ChangePasswordForm
+from form.ForgetPassword import ForgetPassword
 from form.LoginForm import LoginForm
 from form.RegistryForm import RegistryForm
-from form.ForgetPassword import ForgetPassword
+from form.ResetPasswordForm import ResetPasswordForm
 from model.AuthUser import AuthUser
 from model.UserBo import UserBo
 from model.UserIdentity import UserIdentity
 from service.UserService import add_user_info, authenticate_user, get_user_info, change_user_password, \
-    check_existing_user, check_user_email_validity, generate_reset_token
+    check_existing_user, check_user_email_validity, generate_reset_token, validate_reset_token, invalidate_reset_token, \
+    reset_new_password
 from utils import logger
-from utils.EmailUutil import send_reset_email
+from utils.EmailUutil import send_email
 
 app_logger = logger.setup_logger(logging.INFO)
 userController = Blueprint('userController', __name__)
@@ -185,7 +187,9 @@ def forget_password():
             try:
                 if check_user_email_validity(user_email):
                     reset_token = generate_reset_token(user_email)
-                    send_reset_email(reset_token)
+                    subject = "Password Reset Request"
+                    body = f"Click the following link to reset your password: http://127.0.0.1:5001/user/reset_password/{reset_token}"
+                    send_email(reset_token, subject, body)
                     return redirect(url_for('userController.login'))
                 else:
                     raise ValueError('Invalid email address')
@@ -200,3 +204,40 @@ def forget_password():
         app_logger.error('An unexpected error occurred: %s', e)
         flash('發生意外錯誤，請聯繫系統管理員。', 'danger')
         return render_template('401.html')
+
+
+@userController.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token: str):
+    if not token:
+        flash('缺少重設密碼令牌', 'danger')
+        return render_template('401.html')
+
+    # 在 GET 請求時進行令牌驗證
+    is_valid = validate_reset_token(token)
+    if not is_valid:
+        flash('重設密碼令牌無效或已過期', 'danger')
+        return render_template('404.html')
+    try:
+        form = ResetPasswordForm()
+        if form.validate_on_submit():
+            # 在 POST 請求時處理表單提交
+            new_password = form.new_password.data
+            confirm_password = form.confirm_password.data
+
+            if new_password == confirm_password:
+                if reset_new_password(token, new_password):
+                    # 使重設令牌無效
+                    invalidate_reset_token(token)
+                    flash('密碼已成功重設', 'success')
+                    return redirect(url_for('userController.login'))
+                else:
+                    flash('重設密碼失敗，請重試', 'danger')
+            else:
+                flash('兩次輸入的密碼不一致，請確保兩次輸入的密碼相同', 'danger')
+
+        return render_template('login/reset_password.html', form=form, token=token)
+
+    except Exception as e:
+        app_logger.error('An unexpected error occurred: %s', e)
+        flash('發生意外錯誤，請聯繫系統管理員。', 'danger')
+        return render_template('404.html')
