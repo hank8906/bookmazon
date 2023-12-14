@@ -20,9 +20,10 @@
         .content-body {
             min-height: 80vh;
         }
-        .quantity-input {
+        .quantity-number-input {
             width: 80px;
         }
+
 
     </style>
 </head>
@@ -30,6 +31,7 @@
     {% include '/product/header.html' %}
     <div class="container">
         <h2>結帳</h2>
+        <hr>
         <h3>商品明細</h3>
         <form action="{{ url_for('orderController.checkout') }}" method="post">
         <table class="table">
@@ -51,10 +53,12 @@
                         </form>
                     </td>
                     <td>{{ book.book_name }}</td>
-                    <td>{{ book.book_price }}</td>
+                    <td class="book-price">{{ book.book_price }}</td>
                     <td>
+                        <button type="button" class="quantity-decrease btn btn-light">-</button>
                         <input type="number" name="quantity-{{ cart_item.cart_item_id }}"
-                               min="1" value="{{ cart_item.quantity }}" class="quantity-input">
+                               min="1" value="{{ cart_item.quantity }}" class="quantity-number-input">
+                        <button type="button" class="quantity-increase btn btn-light">+</button>
                         <input type="hidden" name="cart_item_id" value="{{ cart_item.cart_item_id }}" class="quantity-input">
                     </td>
                 </tr>
@@ -70,8 +74,53 @@
             <label for="recipient-name" class="col-form-label">收件人姓名</label>
             <input type="text" class="form-control" id="recipient-name" name="recipient-name" value="{{current_user.user.user_account}}">
         </div>
-            <button type="submit" class="btn btn-primary">提交訂單</button>
+        <div class="d-flex justify-content-between mt-3">
+            <a href="{{ url_for('productController.getProducts') }}" class="btn btn-secondary btn-lg">返回商店</a>
+            <button type="submit" class="btn btn-danger btn-lg">提交訂單</button>
+        </div>
         </form>
     </div>
 </body>
+<script>
+    // 當頁面加載完成後執行
+    document.addEventListener('DOMContentLoaded', function () {
+        // 為每個數量輸入框添加事件監聽器
+        document.querySelectorAll('.quantity-number-input').forEach(function(input) {
+            input.addEventListener('change', function() {
+                updateTotalPrice();
+            });
+        });
+        document.querySelectorAll('.quantity-increase').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var input = button.previousElementSibling;
+                input.value = parseInt(input.value, 10) + 1;
+                updateTotalPrice();
+            });
+        });
+
+        document.querySelectorAll('.quantity-decrease').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var input = button.nextElementSibling;
+                if (parseInt(input.value, 10) > 1) {
+                    input.value = parseInt(input.value, 10) - 1;
+                }
+                updateTotalPrice();
+            });
+        });
+        // 初始時也計算一次總計
+        updateTotalPrice();
+    });
+
+    function updateTotalPrice() {
+        var total = 0;
+        // 遍歷每個數量輸入框
+        document.querySelectorAll('.quantity-number-input').forEach(function(input) {
+            var quantity = parseInt(input.value, 10); // 將數量轉換為整數
+            var price = parseFloat(input.closest('tr').querySelector('.book-price').textContent); // 將價格轉換為浮點數
+            total += quantity * price;
+        });
+        // 更新總價格
+        document.getElementById('total-price').textContent = total.toFixed(2); // 固定到兩位小數
+    }
+</script>
 </html>
