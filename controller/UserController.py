@@ -230,7 +230,7 @@ def forget_password():
                     reset_token = generate_reset_token(user_email)
                     subject = "Password Reset Request"
                     body = f"Click the following link to reset your password: http://127.0.0.1:5001/user/reset_password/{reset_token}"
-                    send_email(reset_token, subject, body)
+                    send_email(subject, body)
                     return redirect(url_for('userController.login'))
                 else:
                     raise ValueError('Invalid email address')

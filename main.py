@@ -1,29 +1,30 @@
 import os
 from datetime import timedelta
+
+from cryptography.fernet import Fernet
 from flask import Flask
-from flask_mail import Mail
+from flask_login import LoginManager
 
 from controller.CartController import cartController
 from controller.ProductController import productController
 from controller.UserController import userController
 from model.AuthUser import AuthUser
-from utils.EmailUutil import init_email
-from utils.dev_config import Config
-from flask_login import LoginManager
 from model.User import User
+from utils.EmailUutil import init_email
+from utils.config import params
 from utils.dbUtil import session
-from cryptography.fernet import Fernet
+
 # from controller.OrderController import orderController
 
 app = Flask(__name__)
-cipher_suite = Fernet(Config.PRIVATE_KEY)
+cipher_suite = Fernet(params['PRIVATE_KEY'])
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=31)
-app.config['MAIL_SERVER'] = Config.MAIL_SERVER
-app.config['MAIL_PORT'] = Config.MAIL_PORT
-app.config['MAIL_USE_SSL'] = Config.MAIL_USE_SSL
-app.config['MAIL_USERNAME'] = Config.MAIL_USERNAME
-decrypted_password = cipher_suite.decrypt(Config.MAIL_PASSWORD)
+app.config['MAIL_SERVER'] = params['MAIL_SERVER']
+app.config['MAIL_PORT'] = params['MAIL_PORT']
+app.config['MAIL_USE_SSL'] = eval(params['MAIL_USE_SSL'])
+app.config['MAIL_USERNAME'] = params['MAIL_USERNAME']
+decrypted_password = cipher_suite.decrypt(params['MAIL_PASSWORD'])
 app.config['MAIL_PASSWORD'] = decrypted_password.decode('utf-8')
 init_email(app)
 # 註冊藍圖

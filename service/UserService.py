@@ -1,18 +1,17 @@
-from datetime import datetime, timedelta
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask import current_app as app
-from model.PasswordResetToken import PasswordResetToken
-from model.UserBo import UserBo
-from utils.dbUtil import session
-from sqlalchemy import select, delete, update
-from model.User import User
-from utils import logger
 import logging
 import secrets
-from sqlalchemy import select, and_
-from flask_mail import Message, Mail
+from datetime import datetime, timedelta
+
 from flask import url_for
-from utils.dev_config import Config
+from sqlalchemy import delete, update
+from sqlalchemy import select, and_
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from model.PasswordResetToken import PasswordResetToken
+from model.User import User
+from model.UserBo import UserBo
+from utils import logger
+from utils.dbUtil import session
 
 app_logger = logger.setup_logger(logging.INFO)
 
@@ -286,9 +285,6 @@ def generate_reset_token(user_email: str):
                                        create_datetime=datetime.now())
         # 儲存到資料庫
         save_password_reset_token_to_database(token_obj)
-
-        # 生成重置密码链接
-        reset_link = url_for('userController.reset_password', token=reset_token, _external=True)
 
         return reset_token
     except Exception as e:
