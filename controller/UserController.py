@@ -4,6 +4,7 @@ from flask import Blueprint, redirect, url_for, flash, render_template
 from flask_login import login_user, logout_user, current_user, login_required
 
 from form.ChangePassword import ChangePasswordForm
+from form.EditUserProfile import EditUserProfile
 from form.ForgetPassword import ForgetPassword
 from form.LoginForm import LoginForm
 from form.RegistryForm import RegistryForm
@@ -13,7 +14,7 @@ from model.UserBo import UserBo
 from model.UserIdentity import UserIdentity
 from service.UserService import add_user_info, authenticate_user, get_user_info, change_user_password, \
     check_existing_user, check_user_email_validity, generate_reset_token, validate_reset_token, invalidate_reset_token, \
-    reset_new_password
+    reset_new_password, update_user_profile
 from utils import logger
 from utils.EmailUutil import send_email
 
@@ -135,6 +136,46 @@ def logout():
 def user_profile():
     user_info = get_user_info(current_user.user.user_account)
     return render_template('login/user_profile.html', user_info=user_info)
+
+
+"""
+    更改會員資料
+    Args:
+        user_name
+        user_email
+        user_birthday
+    Returns:
+
+    Raises:
+
+"""
+
+
+@userController.route('edit_user_profile', methods=['GET', 'POST'])
+@login_required
+def edit_user_profile():
+    form = EditUserProfile()
+    if form.validate_on_submit():
+        try:
+            # current_user.user.user_name = form.user_name.data
+            # current_user.user.user_email = form.user_email.data
+            # current_user.user.user_birthday = form.user_birthday.data
+
+            # 使用服務函數更新用戶資料
+            update_user_profile(current_user.user.user_account, form.user_name.data, form.user_email.data, form.user_birthday.data)
+
+            flash('會員資料更新成功！', 'success')
+            return redirect(url_for('userController.user_profile'))
+        except Exception as e:
+            app_logger.error('Failed to update user information: %s', e)
+            flash('會員資料更新失敗，清稍後嘗試。', 'danger')
+            return render_template('401.html')
+    # 表單上顯示當前的會員資料
+    form.user_name.data = current_user.user.user_name
+    form.user_email.data = current_user.user.user_email
+    form.user_birthday.data = current_user.user.user_birthday
+
+    return render_template('login/edit_user_profile.html', form=form)
 
 
 """

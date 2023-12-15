@@ -147,9 +147,10 @@ def delete_user_info(user_account: str):
 """
 
 
-def update_user_profile(user_account: str, new_user_email: str, new_user_birthday: str):
+def update_user_profile(user_account: str, new_user_name: str, new_user_email: str, new_user_birthday: str):
     try:
         statement = update(User).where(User.user_account == user_account).values(
+            user_name=new_user_name,
             user_email=new_user_email,
             user_birthday=new_user_birthday
         )
@@ -160,7 +161,7 @@ def update_user_profile(user_account: str, new_user_email: str, new_user_birthda
         app_logger.error('Failed to update user profile: %s', e)
         raise e
 
-    # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
+    # 理論上不用回傳資料，為方便測試有更新到資料，回傳字串
     return 'profile_updated'
 
 
@@ -178,18 +179,6 @@ def update_user_profile(user_account: str, new_user_email: str, new_user_birthda
 """
 
 
-def update_user_info(user_account: str, password: str):
-    try:
-        statement = update(User).where(User.user_account == user_account).values(user_password=password)
-        session.execute(statement)
-        session.commit()
-    except Exception as e:
-        session.rollback()
-        app_logger.error('Failed to update user information: %s', e)
-        raise e
-
-    # 更新理論上不用回傳資料，為方便測試有更新到資料，回傳字串
-    return 'updated'
 
 
 """
