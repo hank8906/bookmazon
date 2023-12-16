@@ -51,6 +51,7 @@
             min-height: 80vh;
         }
 
+
     </style>
 </head>
 <body>
@@ -66,7 +67,7 @@
             <div class="card left-card">
                 <img src="../static/assets/img/avatar.png" class="card-img-top user-avatar" alt="User Avatar">
                 <div class="card-body">
-                    <h5 class="card-title user-name">{{ user_info.user_name }}</h5>
+                    <h5 class="card-title user-name">{{ current_user.user.user_name }}</h5>
                 </div>
                 <div class="blue-card">
                     <!-- 藍色卡片內容 -->
@@ -74,39 +75,45 @@
                 </div>
             </div>
         </div>
-
         <!-- 右邊卡片 -->
         <div class="col-md-8">
             <div class="card">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endwith %}
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label for="userAccount" class="form-label">使用者帳號</label>
-                        <input type="text" class="form-control" id="userAccount" readonly
-                               value="{{ user_info.user_account }}">
-                    </div>
+                    <form method="POST" action="{{ url_for('userController.edit_user_profile') }}">
+                        {{ form.csrf_token }}
+                        <div class="form-floating mb-3">
+                            {{ form.user_name(class="form-control", placeholder="Enter your name") }}
+                            <label>使用者姓名</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.user_email(class="form-control", placeholder="name@example.com") }}
+                            <label>電子信箱</label>
+                            {% for error in form.user_email.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                            {% endfor %}
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="userEmail" class="form-label">電子信箱地址</label>
-                        <input type="email" class="form-control" id="userEmail" readonly
-                               value="{{ user_info.user_email }}">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="userBirthday" class="form-label">出生日期</label>
-                        <input type="date" class="form-control" id="userBirthday" readonly
-                               value="{{ user_info.user_birthday }}">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="userGender" class="form-label">性別</label>
-                        <input type="text" class="form-control" id="userGender" readonly
-                               value="{{user_info.user_gender }}">
-                    </div>
-
-                    <div class="mb-3">
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('userController.change_password') }}'">更換密碼</button>
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('userController.edit_user_profile') }}'">更換會員資料</button>
-                    </div>
+                        <div class="mb-3">
+                            {{ form.user_birthday(class="form-control", placeholder="Select your birthday") }}
+                            <label>出生日期</label>
+                            {% for error in form.user_birthday.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                            {% endfor %}
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <a class="small" href="{{ url_for('userController.user_profile') }}">返回會員資料</a>
+                            <button type="submit" class="d-grid btn btn-primary btn-block">更改資料</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
