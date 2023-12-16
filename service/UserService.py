@@ -376,7 +376,7 @@ def validate_reset_token(token: str):
 
         # 註記 token 過期了
         try:
-            mark_token(token=token, mark=TokenStatus.EXPIRED.value)
+            mark_token(token=token, mark=TokenStatus.EXPIRED)
         except BusinessError as e:
             raise e
 
