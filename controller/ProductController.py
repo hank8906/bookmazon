@@ -16,6 +16,8 @@ productController = Blueprint('productController', __name__)
     Raises:
 
 """
+
+
 @productController.route('/', methods=['GET'])
 def getProducts():
     data = get_book_info()
@@ -28,6 +30,7 @@ def getProducts():
 
     return render_template("product/home.html", data=data, cart_item_count=cart_item_count)
 
+
 """
     查看詳細書籍資訊
     Args:
@@ -37,6 +40,8 @@ def getProducts():
     Raises:
 
 """
+
+
 @productController.route('/getProduct/<item_id>', methods=['GET'])
 def getDetailProductInfo(item_id: str):
     data = get_detail_book_info(item_id)
@@ -48,6 +53,7 @@ def getDetailProductInfo(item_id: str):
         cart_item_count = cartService.get_cart_item_count(current_user.user.user_account)
 
     return render_template("product/index.html", data=data, cart_item_count=cart_item_count)
+
 
 """
     TODO 查詢書籍資訊
