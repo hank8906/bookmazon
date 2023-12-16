@@ -14,6 +14,7 @@ class PasswordResetToken(Base):
     id = mapped_column(Integer, primary_key=True)
     user_email = mapped_column(String(255), nullable=False)
     token = mapped_column(String(255), nullable=False)
+    token_status = mapped_column(String(1), nullable=False)
     update_datetime = mapped_column(DateTime, default=datetime.now())
     create_datetime = mapped_column(DateTime, default=datetime.now())
 

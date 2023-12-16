@@ -51,6 +51,7 @@
             min-height: 80vh;
         }
 
+
     </style>
 </head>
 <body>
@@ -77,13 +78,22 @@
         <!-- 右邊卡片 -->
         <div class="col-md-8">
             <div class="card">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endwith %}
                 <div class="card-body">
                     <form method="POST" action="{{ url_for('userController.edit_user_profile') }}">
                         {{ form.csrf_token }}
-                       <div class="form-floating mb-3">
+                        <div class="form-floating mb-3">
                             {{ form.user_name(class="form-control", placeholder="Enter your name") }}
                             <label>使用者姓名</label>
-                       </div>
+                        </div>
                         <div class="form-floating mb-3">
                             {{ form.user_email(class="form-control", placeholder="name@example.com") }}
                             <label>電子信箱</label>
