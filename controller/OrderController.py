@@ -179,8 +179,8 @@ def cancel_order(order_id):
     if order.user_account != current_user.user.user_account:
         flash("您無權取消此訂單", "warning")
         return redirect(url_for('productController.getProducts'))
-
-    cancel_an_order(order_id)
-    # 在這裡處理取消訂單的邏輯
-    flash("訂單已取消", "success")
-    return redirect(url_for('orderController.view_order'))
+    else:
+        cancel_an_order(order_id)
+        # 在這裡處理取消訂單的邏輯
+        flash("訂單已取消", "success")
+        return redirect(url_for('orderController.view_order'))

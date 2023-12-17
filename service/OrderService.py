@@ -150,8 +150,13 @@ def cancel_an_order(order_id):
         if order.user_account != current_user.user.user_account:
             raise PermissionError("您無權取消此訂單")
 
+        # oreder_status!=0就不可以取消訂單
+        if order.order_status != '0':
+            raise PermissionError("此訂單無法取消")
+
         # 在這裡處理取消訂單的邏輯
         order.status = "Cancelled"
+        order.order_status = '2' # 訂單狀態改成 2: 取消
 
         session.commit()
 
