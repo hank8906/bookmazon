@@ -2,11 +2,9 @@ from flask import Blueprint, request, redirect, url_for, flash, render_template
 from service.OrderService import add_order, get_order_by_id, get_order_items, get_user_orders, update_order, \
     cancel_an_order
 from flask_login import login_required, current_user
-from service.CartService import CartService
+from service.CartService import get_cart_items
 
 orderController = Blueprint('orderController', __name__)
-
-cartService = CartService()
 
 """
     建立會員的訂單
@@ -23,7 +21,7 @@ cartService = CartService()
 @login_required
 def checkout():
     # 獲取目前使用者的購物車項目
-    cart_items = cartService.get_cart_items(current_user.user.user_account)
+    cart_items = get_cart_items(current_user.user.user_account)
 
     # 初始化用於儲存更新後數量的字典
     updated_quantities = {}

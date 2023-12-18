@@ -124,9 +124,9 @@ def remove_from_cart(cart_item_id):
     #
     # return False
 
-def calculate_total_price(self, user_account):
+def calculate_total_price(user_account):
     try:
-        cart_items = self.get_cart_items(user_account)
+        cart_items = get_cart_items(user_account)
         total_price = sum(cart_item.quantity * book.book_price for cart_item, item, book in cart_items)
         return total_price
     except SQLAlchemyError as e:
