@@ -133,7 +133,7 @@ def update_order(order_id, new_order_data):
     except SQLAlchemyError as e:
         # 更新失敗時回滾事務並顯示錯誤 Flash 訊息
         session.rollback()
-        app_logger.error(f"訂單修改失敗，請稍後再試。錯誤信息：{str(e)}")
+        app_logger.error(f"訂單修改失敗，請稍後再試。錯誤資訊：{str(e)}")
         return None
 
 

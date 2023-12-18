@@ -28,8 +28,8 @@ decrypted_password = cipher_suite.decrypt(params['MAIL_PASSWORD'])
 app.config['MAIL_PASSWORD'] = decrypted_password.decode('utf-8')
 init_email(app)
 # 註冊藍圖
-app.register_blueprint(userController, url_prefix='/user')
 app.register_blueprint(productController, url_prefix='/')
+app.register_blueprint(userController, url_prefix='/user')
 app.register_blueprint(cartController, url_prefix='/cart')
 app.register_blueprint(orderController, url_prefix='/order')
 
