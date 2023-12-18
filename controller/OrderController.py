@@ -182,5 +182,5 @@ def cancel_order(order_id):
     else:
         cancel_an_order(order_id)
         # 在這裡處理取消訂單的邏輯
-        flash("訂單已取消", "success")
+        flash("訂單取消中，等待管理人員審核", "success")
         return redirect(url_for('orderController.view_order'))
