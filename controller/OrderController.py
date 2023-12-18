@@ -2,11 +2,9 @@ from flask import Blueprint, request, redirect, url_for, flash, render_template
 from service.OrderService import add_order, get_order_by_id, get_order_items, get_user_orders, update_order, \
     cancel_an_order
 from flask_login import login_required, current_user
-from service.CartService import CartService
+from service.CartService import get_cart_items
 
 orderController = Blueprint('orderController', __name__)
-
-cartService = CartService()
 
 """
     建立會員的訂單
@@ -18,12 +16,11 @@ cartService = CartService()
         
 """
 
-
 @orderController.route('/checkout', methods=['POST'])
 @login_required
 def checkout():
     # 獲取目前使用者的購物車項目
-    cart_items = cartService.get_cart_items(current_user.user.user_account)
+    cart_items = get_cart_items(current_user.user.user_account)
 
     # 初始化用於儲存更新後數量的字典
     updated_quantities = {}
@@ -58,7 +55,6 @@ def checkout():
         flash("結帳失敗", "error")
         return redirect(url_for('cartController.view_cart'))
 
-
 """
     查看會員的訂單明細
     Args:
@@ -68,7 +64,6 @@ def checkout():
     Raises:
         
 """
-
 
 @orderController.route('/view_order_details/<int:order_id>', methods=['GET'])
 @login_required
@@ -92,7 +87,6 @@ def view_order_details(order_id):
     # 將訂單和訂單項目傳遞給模板，並呈現訂單詳細資訊的頁面
     return render_template('order/viewOrderDetails.html', order=order, order_items=order_items)
 
-
 """
     查看會員所有的訂單
     Args:
@@ -102,7 +96,6 @@ def view_order_details(order_id):
     Raises:
         None
 """
-
 
 @orderController.route('/view_order')
 @login_required
@@ -115,7 +108,6 @@ def view_order():
 
     # 將訂單列表傳遞給模板，並呈現訂單總覽的頁面
     return render_template('order/viewOrder.html', orders=orders)
-
 
 # 修改訂單
 @orderController.route('/modify_order/<int:order_id>', methods=['GET', 'POST'])
@@ -161,7 +153,6 @@ def modify_order(order_id):
 
     # 渲染修改訂單的模板
     return render_template('order/modifyOrder.html', order=order)
-
 
 # 取消訂單
 @orderController.route('/cancel_order/<int:order_id>', methods=['POST'])
