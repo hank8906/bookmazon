@@ -199,7 +199,7 @@ def change_password():
             change_user_password(current_user.user.user_account, current_password, new_password)
             message = UserSystemCode.UPDATE_PASSWD_SUCCESS.value.get('message')
             flash(message, 'success')
-            return redirect(url_for('userController.user_profile'))
+            return redirect(url_for('userController.change_password'))
         except BusinessError as e:
             flash(e.message, 'danger')
             return redirect(url_for('userController.change_password'))
@@ -256,8 +256,7 @@ def reset_password(token: str):
     try:
         validate_reset_token(token)
     except BusinessError as e:
-        flash(e.message, 'danger')
-        return render_template('404.html')
+        return render_template('common/403.html', error_message=e.message)
 
     form = ResetPasswordForm()
     if form.validate_on_submit():
@@ -274,7 +273,6 @@ def reset_password(token: str):
             flash(message, 'success')
             return redirect(url_for('userController.login'))
         except BusinessError as e:
-            flash(e.message, 'danger')
-            return render_template('404.html')
+            return render_template('common/403.html', error_message=e.message)
 
     return render_template('login/reset_password.html', form=form, token=token)

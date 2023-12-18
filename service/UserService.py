@@ -2,10 +2,11 @@ import logging
 import secrets
 from datetime import datetime, timedelta
 
-from sqlalchemy import delete, update
 from sqlalchemy import select
+from sqlalchemy import update
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from enumeration.EmailTemplateEnum import EmailTemplateEnum
 from enumeration.SystemMessage import UserSystemCode, CommonSystemCode
 from enumeration.TokenStatus import TokenStatus
 from exception.BusinessError import BusinessError
@@ -13,7 +14,7 @@ from model.PasswordResetToken import PasswordResetToken
 from model.User import User
 from model.UserBo import UserBo
 from utils import logger
-from utils.EmailUutil import send_email
+from utils.EmailUutil import send_htm_email
 from utils.config import params
 from utils.dbUtil import session
 
@@ -237,13 +238,21 @@ def change_user_password(user_account: str, current_password: str, new_password:
         system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
 
-    # 通知會員密碼變更
-    email_list = session.query(User.user_email).where(User.user_account == user_account).first()
-    user_email = email_list[0]
-    subject = "[Bookmazon.com] 會員密碼變更通知"
-    body = "親愛的會員：\n 提醒您，您的密碼近期有變更過，若這不是您變更的，請您聯絡客服人員，謝謝。\n\n順頌時祺"
+    # 查詢會員名稱
     try:
-        send_email(subject, body, [user_email])
+        result = session.query(User.user_name, User.user_email).where(User.user_account == user_account).first()
+    except Exception as e:
+        app_logger.error('Error validating reset token: %s', e)
+        message = CommonSystemCode.DATABASE_FAILED.value.get('message')
+        system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
+        raise BusinessError(error_code=system_code, message=message)
+
+    user_name = result[0]
+    user_email = result[1]
+
+    # 通知會員密碼變更
+    try:
+        send_htm_email(EmailTemplateEnum.RESET_PASSWORD, [user_email], user_name=user_name)
     except Exception as e:
         app_logger.error('Failed to send user email notification: %s', e)
 
@@ -275,9 +284,22 @@ def check_user_email_validity(user_email: str):
         raise BusinessError(error_code=system_code, message=message)
 
 def send_reset_password_email(token: str, user_email: str):
-    subject = "[Bookmazon.com] 密碼重置通知信件"
-    body = f"親愛的會員您好:\n請點擊下方連結，進行密碼重置。\nhttp://{params['APP_SEVER_HOST_NAME']}:{params['LISTENING_PORT']}/user/reset_password/{token}\n\n順頌時祺"
-    send_email(subject, body, [user_email])
+    # 查詢會員名稱
+    try:
+        result = session.query(User.user_name).filter(User.user_email == user_email).first()
+    except Exception as e:
+        app_logger.error('Error validating reset token: %s', e)
+        message = CommonSystemCode.DATABASE_FAILED.value.get('message')
+        system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
+        raise BusinessError(error_code=system_code, message=message)
+
+    user_name = ''
+
+    if result is not None:
+        user_name = result[0]
+
+    link = f"http://{params['APP_SEVER_HOST_NAME']}:{params['LISTENING_PORT']}/user/reset_password/{token}"
+    send_htm_email(EmailTemplateEnum.FORGOT_PASSWORD, [user_email], user_name=user_name, link=link)
 
 """
     產生重置密碼使用的 token
