@@ -44,7 +44,7 @@ class TestUserService:
     @pytest.mark.auth_success
     def test_authenticate_user_success(self):
         try:
-            authenticate_user('Justin', '123456789')
+            authenticate_user('Justin', '12345')
             assert True
         except BusinessError:
             assert False
