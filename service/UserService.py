@@ -32,6 +32,8 @@ app_logger = logger.setup_logger(logging.INFO)
     Raises:
 
 """
+
+
 def authenticate_user(user_account: str, user_password: str):
     try:
         # 查詢使用者資訊
@@ -48,6 +50,7 @@ def authenticate_user(user_account: str, user_password: str):
         system_code = UserSystemCode.LOGIN_FAILED.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
 
+
 """
     新增使用者資訊
     Args:
@@ -59,6 +62,7 @@ def authenticate_user(user_account: str, user_password: str):
     Raises:
 
 """
+
 
 def add_user_info(user_bo: UserBo):
     # 在註冊時儲存使用者密碼的哈希值
@@ -85,6 +89,7 @@ def add_user_info(user_bo: UserBo):
         system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
 
+
 """
     檢查使用者帳戶是否已存在
     Args:
@@ -96,6 +101,8 @@ def add_user_info(user_bo: UserBo):
     Raises:
         BusinessError
 """
+
+
 def check_existing_user(user_account: str):
     try:
         result = session.scalars(select(User).where(User.user_account == user_account)).first()
@@ -110,8 +117,9 @@ def check_existing_user(user_account: str):
         system_code = UserSystemCode.REGISTERED_ACCOUNT.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
 
+
 """
-    檢查使用者 email是否註冊或使用
+    檢查使用者 email 是否註冊 或 使用
     Args:
         user_email 使用者Email
 
@@ -121,6 +129,8 @@ def check_existing_user(user_account: str):
     Raises:
         BusinessError
 """
+
+
 def check_existing_email(user_account: str, user_email: str):
     try:
         user = session.scalars(select(User).where(User.user_email == user_email)).first()
@@ -143,6 +153,7 @@ def check_existing_email(user_account: str, user_email: str):
     system_code = UserSystemCode.REGISTERED_EMAILED.value.get('system_code')
     raise BusinessError(error_code=system_code, message=message)
 
+
 """
     取得使用者資訊
     Args:
@@ -155,6 +166,7 @@ def check_existing_email(user_account: str, user_email: str):
 
 """
 
+
 def get_user_info(user_account: str):
     try:
         user_obj = session.scalars(select(User).where(User.user_account == user_account)).one()
@@ -162,6 +174,7 @@ def get_user_info(user_account: str):
         app_logger.error('Failed to query user information: %s', e)
         raise e
     return user_obj
+
 
 """
     更新使用者資訊
@@ -175,6 +188,8 @@ def get_user_info(user_account: str):
     Raises:
 
 """
+
+
 def update_user_profile(user_account: str, new_user_name: str, new_user_email: str, new_user_birthday: str):
     # 檢查使用者 email是否註冊或使用
     check_existing_email(user_account, new_user_email)
@@ -194,6 +209,7 @@ def update_user_profile(user_account: str, new_user_name: str, new_user_email: s
         system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
 
+
 """
     修改使用者密碼
     Args:
@@ -207,6 +223,7 @@ def update_user_profile(user_account: str, new_user_name: str, new_user_email: s
         BusinessError 業務邏輯錯誤
 
 """
+
 
 def change_user_password(user_account: str, current_password: str, new_password: str):
     # 驗證舊密碼是否正確
@@ -256,6 +273,7 @@ def change_user_password(user_account: str, current_password: str, new_password:
     except Exception as e:
         app_logger.error('Failed to send user email notification: %s', e)
 
+
 """
     檢查會員email是否存在
     Args:
@@ -267,6 +285,7 @@ def change_user_password(user_account: str, current_password: str, new_password:
         BusinessError 業務邏輯錯誤
 
 """
+
 
 def check_user_email_validity(user_email: str):
     try:
@@ -282,6 +301,7 @@ def check_user_email_validity(user_email: str):
         message = UserSystemCode.EMAIL_NOT_EXISTED.value.get('message')
         system_code = UserSystemCode.EMAIL_NOT_EXISTED.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
+
 
 def send_reset_password_email(token: str, user_email: str):
     # 查詢會員名稱
@@ -301,6 +321,7 @@ def send_reset_password_email(token: str, user_email: str):
     link = f"http://{params['APP_SEVER_HOST_NAME']}:{params['LISTENING_PORT']}/user/reset_password/{token}"
     send_htm_email(EmailTemplateEnum.FORGOT_PASSWORD, [user_email], user_name=user_name, link=link)
 
+
 """
     產生重置密碼使用的 token
     Args:
@@ -312,6 +333,8 @@ def send_reset_password_email(token: str, user_email: str):
         BusinessError 業務邏輯錯誤
 
 """
+
+
 def generate_reset_token(user_email: str):
     # 產生重置密碼的 token
     reset_token = secrets.token_urlsafe(32)
@@ -335,6 +358,7 @@ def generate_reset_token(user_email: str):
         system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
 
+
 """
    儲存重置密碼使用的 token
     Args:
@@ -346,6 +370,8 @@ def generate_reset_token(user_email: str):
         BusinessError 業務邏輯錯誤
 
 """
+
+
 def save_password_reset_token_to_database(token_obj: PasswordResetToken):
     try:
         # 保存密碼重設 token 到資料庫
@@ -355,6 +381,7 @@ def save_password_reset_token_to_database(token_obj: PasswordResetToken):
         session.rollback()
         app_logger.error('Failed to save password reset token to database: %s', e)
         raise e
+
 
 """
    驗證發出去 token 是否存在且有效
@@ -367,6 +394,8 @@ def save_password_reset_token_to_database(token_obj: PasswordResetToken):
         BusinessError 業務邏輯錯誤
 
 """
+
+
 def validate_reset_token(token: str):
     try:
         # 查询資料庫，查找與 token 匹配的紀錄
@@ -404,6 +433,7 @@ def validate_reset_token(token: str):
 
         raise BusinessError(error_code=system_code, message=message)
 
+
 """
    （忘記密碼）重設新密碼
     Args:
@@ -417,6 +447,8 @@ def validate_reset_token(token: str):
         BusinessError 業務邏輯錯誤
 
 """
+
+
 def reset_new_password(token: str, new_password: str, confirm_password: str):
     if new_password != confirm_password:
         message = UserSystemCode.PASSWORD_NOT_SAME.value.get('message')
@@ -442,6 +474,7 @@ def reset_new_password(token: str, new_password: str, confirm_password: str):
         system_code = UserSystemCode.EXPIRED_TOKEN.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
 
+
 """
    註記 token 用過了
     Args:
@@ -453,6 +486,8 @@ def reset_new_password(token: str, new_password: str, confirm_password: str):
         BusinessError 業務邏輯錯誤
 
 """
+
+
 def mark_token_used(token: str):
     # 查询資料庫，查找與 token 匹配的紀錄
     token_obj = session.scalars(select(PasswordResetToken).where(PasswordResetToken.token == token)).one()
@@ -470,6 +505,7 @@ def mark_token_used(token: str):
     except BusinessError as e:
         raise e
 
+
 """
    註記 token
     Args:
@@ -482,6 +518,8 @@ def mark_token_used(token: str):
         BusinessError 業務邏輯錯誤
 
 """
+
+
 def mark_token(token: str, mark: TokenStatus):
     try:
         statement = update(PasswordResetToken).where(PasswordResetToken.token == token).values(
