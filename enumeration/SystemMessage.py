@@ -32,3 +32,4 @@ class ShoppingCartSystemCode(Enum):
     ADD_TO_CART_SUCCESS = {'system_code': '6004', 'message': '商品已加入購物車'}
     QUANTITY_EXCEEDS_STOCK = {'system_code': '6005', 'message': '購物車中的商品數量超出庫存，無法再添加'}
     EXCEEDS_MAX_STOCK = {'system_code': '6006', 'message': '選購的商品數量超出庫存'}
+    ITEM_REMOVED = {'system_code': '6007', 'message': '商品已從購物車移除'}
