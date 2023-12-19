@@ -1,0 +1,16 @@
+[2023-12-19 19:48:57] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x2ed9f762010>' is not persisted
+[2023-12-19 19:48:57] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x2ed9f762010>' is not persisted
+[2023-12-19 19:53:03] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x1a534f9c9d0>' is not persisted
+[2023-12-19 19:53:03] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x1a534f9c9d0>' is not persisted
+[2023-12-19 19:55:56] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x24f8089ca50>' is not persisted
+[2023-12-19 19:55:56] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x24f8089ca50>' is not persisted
+[2023-12-19 19:57:17] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x1911d69c790>' is not persisted
+[2023-12-19 19:57:17] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x1911d69c790>' is not persisted
+[2023-12-19 20:00:52] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x232e309c950>' is not persisted
+[2023-12-19 20:00:52] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x232e309c950>' is not persisted
+[2023-12-19 20:04:02] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x2a797a9ce90>' is not persisted
+[2023-12-19 20:04:02] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x2a797a9ce90>' is not persisted
+[2023-12-19 20:06:34] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x2090389e050>' is not persisted
+[2023-12-19 20:06:34] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x2090389e050>' is not persisted
+[2023-12-19 20:12:14] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x22e45c9df10>' is not persisted
+[2023-12-19 20:12:14] {OrderService.py:67} ERROR - Create order error: Instance '<CartItem at 0x22e45c9df10>' is not persisted
