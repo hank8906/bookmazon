@@ -383,7 +383,7 @@ class TestCartService:
     @pytest.mark.get_cart_item_count_failed
     def test_get_cart_item_count_failed(self):
         try:
-            get_cart_item_count(invalid_user)
+            assert get_cart_item_count(invalid_user) == 0
             # assert False
         except BusinessError:
             assert True
