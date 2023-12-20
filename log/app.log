@@ -1942,3 +1942,943 @@ LINE 1: UPDATE bookmazon.password_reset_tokens SET token_status='2',...
 [2023-12-20 16:54:10] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
 [2023-12-20 17:06:59] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
 [2023-12-20 17:06:59] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 17:20:57] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 602184), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 832389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:20:57] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 602184), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 832389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:20:58] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 602184), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 832389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:20:58] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 602184), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 832389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:20:58] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 602184), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 832389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:20:58] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 602184), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 832389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:20:58] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 602184), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 832389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:20:58] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 602184), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 20, 57, 832389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:21:07] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 199497), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 428670)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:21:07] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 199497), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 428670)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:21:07] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 199497), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 428670)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:21:07] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 199497), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 428670)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:21:07] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 199497), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 428670)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:21:07] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 199497), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 428670)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:21:08] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 199497), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 428670)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:21:08] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 199497), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 21, 7, 428670)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:22:46] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 237847), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 467284)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:22:46] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 237847), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 467284)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:22:47] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 237847), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 467284)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:22:47] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 237847), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 467284)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:22:47] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 237847), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 467284)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:22:47] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 237847), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 467284)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:22:47] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 237847), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 467284)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:22:47] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 237847), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 22, 46, 467284)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:14] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 287619), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 522325)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:23:14] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 287619), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 522325)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:23:15] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 287619), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 522325)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:15] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 287619), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 522325)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:15] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 287619), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 522325)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:15] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 287619), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 522325)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:15] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 287619), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 522325)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:15] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 287619), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 14, 522325)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:19] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 603606), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 963288)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:23:19] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 603606), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 963288)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:23:20] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 603606), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 963288)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:20] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 603606), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 963288)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:20] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 603606), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 963288)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:20] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 603606), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 963288)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:20] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 603606), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 963288)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:23:20] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 603606), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 23, 19, 963288)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:25:46] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 548074), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 943628)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:25:46] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 548074), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 943628)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:25:47] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 548074), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 943628)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:25:47] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 548074), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 943628)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:25:47] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 548074), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 943628)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:25:47] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 548074), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 943628)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:25:47] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 548074), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 943628)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:25:47] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 548074), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 25, 46, 943628)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:27:44] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 16433), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 512474)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:27:44] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 16433), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 512474)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:27:45] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 16433), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 512474)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:27:45] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 16433), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 512474)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:27:45] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 16433), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 512474)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:27:45] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 16433), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 512474)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:27:45] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 16433), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 512474)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:27:45] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 16433), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 27, 44, 512474)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:28:01] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 501253), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 836412)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:28:01] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 501253), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 836412)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:28:02] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 501253), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 836412)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:28:02] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 501253), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 836412)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:28:02] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 501253), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 836412)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:28:02] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 501253), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 836412)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:28:02] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 501253), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 836412)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:28:02] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 501253), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 28, 1, 836412)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:21] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 207984), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 443829)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:32:21] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 207984), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 443829)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:32:22] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 207984), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 443829)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:22] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 207984), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 443829)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:22] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 207984), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 443829)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:22] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 207984), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 443829)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:22] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 207984), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 443829)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:22] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 207984), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 21, 443829)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:44] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 288848), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 677764)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:32:44] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 288848), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 677764)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:32:45] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 288848), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 677764)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:45] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 288848), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 677764)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:45] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 288848), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 677764)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:45] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 288848), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 677764)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:45] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 288848), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 677764)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:32:45] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 288848), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 32, 44, 677764)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:52:43] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 13110), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 350795)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:52:43] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 13110), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 350795)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:52:43] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 13110), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 350795)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:52:43] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 13110), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 350795)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:52:43] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 13110), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 350795)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:52:43] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 13110), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 350795)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:52:43] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 13110), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 350795)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:52:43] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 13110), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 52, 43, 350795)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:39] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 38, 851412), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 39, 80915)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:58:39] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 38, 851412), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 39, 80915)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:58:39] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 38, 851412), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 39, 80915)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:39] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 38, 851412), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 39, 80915)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:39] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 38, 851412), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 39, 80915)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:39] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 38, 851412), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 39, 80915)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:39] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 38, 851412), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 39, 80915)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:39] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 38, 851412), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 39, 80915)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:49] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 622566), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 942106)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:58:49] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 622566), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 942106)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:58:50] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 622566), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 942106)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:50] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 622566), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 942106)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:50] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 622566), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 942106)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:50] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 622566), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 942106)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:50] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 622566), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 942106)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:58:50] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 622566), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 58, 49, 942106)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:59:33] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 162599), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 379389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:59:33] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 162599), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 379389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 17:59:33] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 162599), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 379389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:59:33] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 162599), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 379389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:59:33] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 162599), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 379389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:59:33] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 162599), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 379389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:59:34] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 162599), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 379389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 17:59:34] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 162599), 'create_datetime': datetime.datetime(2023, 12, 20, 17, 59, 33, 379389)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:06:01] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 356679), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 590943)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 18:06:01] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 356679), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 590943)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 18:06:02] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 356679), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 590943)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:06:02] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 356679), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 590943)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:06:02] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 356679), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 590943)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:06:02] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 356679), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 590943)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:06:02] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 356679), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 590943)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:06:02] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 356679), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 6, 1, 590943)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:07:31] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 142687), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 615206)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 18:07:31] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 142687), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 615206)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 18:07:32] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 142687), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 615206)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:07:32] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 142687), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 615206)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:07:32] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 142687), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 615206)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:07:32] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 142687), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 615206)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:07:32] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 142687), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 615206)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:07:32] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 142687), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 7, 31, 615206)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:08:23] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:08:23] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:09:05] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:09:05] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:09:18] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 9, 17, 797897), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 9, 18, 191612)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 18:09:18] {CartService.py:171} ERROR - Database error during cart retrieval: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 9, 17, 797897), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 9, 18, 191612)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2023-12-20 18:09:19] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 9, 17, 797897), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 9, 18, 191612)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:09:19] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 9, 17, 797897), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 9, 18, 191612)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:09:19] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 9, 17, 797897), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 9, 18, 191612)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:09:19] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 9, 17, 797897), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 9, 18, 191612)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:09:19] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 9, 17, 797897), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 9, 18, 191612)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:09:19] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 18, 9, 17, 797897), 'create_datetime': datetime.datetime(2023, 12, 20, 18, 9, 18, 191612)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 18:10:17] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:10:17] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:19:31] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:19:31] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:19:47] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:19:47] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:40:29] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 18:40:29] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 19:03:16] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 48019), 'create_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 567292)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 19:03:16] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 48019), 'create_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 567292)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 19:03:17] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 48019), 'create_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 567292)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 19:03:17] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 48019), 'create_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 567292)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 19:03:17] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 48019), 'create_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 567292)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 19:03:17] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 48019), 'create_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 567292)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 19:03:17] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 48019), 'create_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 567292)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 19:03:17] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.StringDataRightTruncation) value too long for type character varying(20)
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': 'invalid_user_account1', 'update_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 48019), 'create_datetime': datetime.datetime(2023, 12, 20, 19, 3, 15, 567292)}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 19:05:16] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 19:05:16] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 19:09:41] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 19:09:41] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 20:18:01] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.NotNullViolation) null value in column "user_account" of relation "cart" violates not-null constraint
+DETAIL:  Failing row contains (26, null, 2023-12-20 20:18:01.176608, 2023-12-20 20:18:01.402896).
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': None, 'update_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 176608), 'create_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 402896)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 20:18:01] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.NotNullViolation) null value in column "user_account" of relation "cart" violates not-null constraint
+DETAIL:  Failing row contains (26, null, 2023-12-20 20:18:01.176608, 2023-12-20 20:18:01.402896).
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': None, 'update_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 176608), 'create_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 402896)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 20:18:02] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.NotNullViolation) null value in column "user_account" of relation "cart" violates not-null constraint
+DETAIL:  Failing row contains (26, null, 2023-12-20 20:18:01.176608, 2023-12-20 20:18:01.402896).
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': None, 'update_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 176608), 'create_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 402896)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 20:18:02] {CartService.py:171} ERROR - Database error during cart retrieval: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.NotNullViolation) null value in column "user_account" of relation "cart" violates not-null constraint
+DETAIL:  Failing row contains (26, null, 2023-12-20 20:18:01.176608, 2023-12-20 20:18:01.402896).
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': None, 'update_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 176608), 'create_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 402896)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 20:18:02] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.NotNullViolation) null value in column "user_account" of relation "cart" violates not-null constraint
+DETAIL:  Failing row contains (26, null, 2023-12-20 20:18:01.176608, 2023-12-20 20:18:01.402896).
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': None, 'update_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 176608), 'create_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 402896)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 20:18:02] {CartService.py:108} ERROR - Error during count cart designated item: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.NotNullViolation) null value in column "user_account" of relation "cart" violates not-null constraint
+DETAIL:  Failing row contains (26, null, 2023-12-20 20:18:01.176608, 2023-12-20 20:18:01.402896).
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': None, 'update_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 176608), 'create_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 402896)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 20:18:02] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.NotNullViolation) null value in column "user_account" of relation "cart" violates not-null constraint
+DETAIL:  Failing row contains (26, null, 2023-12-20 20:18:01.176608, 2023-12-20 20:18:01.402896).
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': None, 'update_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 176608), 'create_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 402896)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 20:18:02] {CartService.py:193} ERROR - Database transaction error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(psycopg2.errors.NotNullViolation) null value in column "user_account" of relation "cart" violates not-null constraint
+DETAIL:  Failing row contains (26, null, 2023-12-20 20:18:01.176608, 2023-12-20 20:18:01.402896).
+
+[SQL: INSERT INTO bookmazon.cart (user_account, update_datetime, create_datetime) VALUES (%(user_account)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart.cart_id]
+[parameters: {'user_account': None, 'update_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 176608), 'create_datetime': datetime.datetime(2023, 12, 20, 20, 18, 1, 402896)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+[2023-12-20 20:19:48] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 20:19:48] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 20:36:43] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 20:36:43] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
