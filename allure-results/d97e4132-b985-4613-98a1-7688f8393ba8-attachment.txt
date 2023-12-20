@@ -1,9 +1,0 @@
-[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.cart.cart_id AS bookmazon_cart_cart_id, bookmazon.cart.user_account AS bookmazon_cart_user_account, bookmazon.cart.update_datetime AS bookmazon_cart_update_datetime, bookmazon.cart.create_datetime AS bookmazon_cart_create_datetime 
-FROM bookmazon.cart 
-WHERE bookmazon.cart.user_account = %(user_account_1)s 
- LIMIT %(param_1)s
-[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.07984s ago] {'user_account_1': 'User0006', 'param_1': 1}
-[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT sum(bookmazon.cart_item.quantity) AS sum_1 
-FROM bookmazon.cart_item 
-WHERE bookmazon.cart_item.cart_id = %(cart_id_1)s AND bookmazon.cart_item.item_id = %(item_id_1)s
-[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.07674s ago] {'cart_id_1': 5, 'item_id_1': 999}
