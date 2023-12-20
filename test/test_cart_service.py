@@ -161,19 +161,21 @@ class TestCartService:
         except BusinessError:
             assert True
 
-    # # # 1.6 加入購物車 失敗 : 數值包含字串
-    # @pytest.mark.add_to_cart_invalid_value_string
-    # def test_add_to_cart_invalid_value_string(self):
-    #     user_account = user
-    #     item_id = item
-    #     # invalid quantity
-    #     invalid_value = 'not integer'
-    #
-    #     try:
-    #         add_item_to_cart(user_account, item_id, invalid_value)
-    #         assert False
-    #     except BusinessError:
-    #         assert True
+    # 1.6 加入購物車 失敗 : 數值包含字串
+    @pytest.mark.add_to_cart_invalid_value_string
+    def test_add_to_cart_invalid_value_string(self):
+        user_account = user
+        item_id = item
+        # invalid quantity
+        invalid_value = 'not integer'
+
+        try:
+            add_item_to_cart(user_account, item_id, invalid_value)
+            # assert error occurs
+            assert False
+
+        except TypeError:
+            assert True
 
     # 1.7 加入購物車 失敗 : 商品狀態為 0
     # @pytest.mark.add_to_cart_invalid_status
@@ -242,13 +244,14 @@ class TestCartService:
             assert False
 
     # 3.2 建立或取得購物車 失敗 : 會員帳號不存在
-    # @pytest.mark.get_or_create_cart_failed
-    # def test_get_or_create_cart_failed(self):
-    #     try:
-    #         cart = get_or_create_cart(invalid_user)
-    #         assert cart is None
-    #     except BusinessError:
-    #         assert True
+    @pytest.mark.get_or_create_cart_failed
+    def test_get_or_create_cart_failed(self):
+        try:
+            cart = get_or_create_cart(invalid_user)
+            assert cart.cart_id is None
+            # assert cart is None
+        except BusinessError:
+            assert True
 
     ## 4 更新購物車品項數量
     # 4.1 更新購物車品項數量 成功
@@ -383,7 +386,7 @@ class TestCartService:
     @pytest.mark.get_cart_item_count_failed
     def test_get_cart_item_count_failed(self):
         try:
-            get_cart_item_count(invalid_user)
+            assert get_cart_item_count(invalid_user) == 0
             # assert False
         except BusinessError:
             assert True

@@ -8,5 +8,4 @@ htmlcov/
 docs/_build/
 dist/
 venv/
-allure-results/
-
+/allure-results/
