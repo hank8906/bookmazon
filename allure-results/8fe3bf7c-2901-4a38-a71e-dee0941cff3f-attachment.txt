@@ -1,0 +1,4 @@
+2023-12-20 16:14:07,000 INFO sqlalchemy.engine.Engine SELECT bookmazon.password_reset_tokens.id, bookmazon.password_reset_tokens.user_email, bookmazon.password_reset_tokens.token, bookmazon.password_reset_tokens.token_status, bookmazon.password_reset_tokens.update_datetime, bookmazon.password_reset_tokens.create_datetime 
+FROM bookmazon.password_reset_tokens 
+WHERE bookmazon.password_reset_tokens.token = %(token_1)s
+2023-12-20 16:14:07,000 INFO sqlalchemy.engine.Engine [cached since 0.005992s ago] {'token_1': 'NJvyIOjjM2i_yZpjBiNbhHguhaKdtn4gNAGOjeRafXo'}

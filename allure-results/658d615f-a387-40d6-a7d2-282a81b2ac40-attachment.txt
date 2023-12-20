@@ -1,0 +1,4 @@
+2023-12-20 16:14:05,762 INFO sqlalchemy.engine.Engine SELECT bookmazon."user".user_account, bookmazon."user".user_password, bookmazon."user".user_name, bookmazon."user".user_gender, bookmazon."user".user_identification, bookmazon."user".user_email, bookmazon."user".user_birthday, bookmazon."user".update_datetime, bookmazon."user".create_datetime 
+FROM bookmazon."user" 
+WHERE bookmazon."user".user_account = %(user_account_1)s
+2023-12-20 16:14:05,762 INFO sqlalchemy.engine.Engine [cached since 0.05391s ago] {'user_account_1': 'test_user1'}

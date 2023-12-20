@@ -1,0 +1,2 @@
+2023-12-20 16:14:07,660 INFO sqlalchemy.engine.Engine UPDATE bookmazon.password_reset_tokens SET token_status=%(token_status)s, update_datetime=%(update_datetime)s WHERE bookmazon.password_reset_tokens.token = %(token_1)s
+2023-12-20 16:14:07,660 INFO sqlalchemy.engine.Engine [cached since 0.3222s ago] {'token_status': '2', 'update_datetime': datetime.datetime(2023, 12, 20, 16, 14, 7, 659510), 'token_1': 'dJQTLDrKwKs3GQEUjKzUeLVge1dw_aKRz7DpVk2raLs'}

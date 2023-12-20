@@ -1,0 +1,2 @@
+[2023-12-20 16:45:42] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped
+[2023-12-20 16:45:42] {CartService.py:193} ERROR - Database transaction error: Class 'builtins.NoneType' is not mapped

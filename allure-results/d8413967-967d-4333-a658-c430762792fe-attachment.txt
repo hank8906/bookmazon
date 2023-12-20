@@ -1,0 +1,28 @@
+[2023-12-20 16:14:07] {UserService.py:404} ERROR - Error validating reset token: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT bookmazon.password_reset_tokens.id, bookmazon.password_reset_tokens.user_email, bookmazon.password_reset_tokens.token, bookmazon.password_reset_tokens.token_status, bookmazon.password_reset_tokens.update_datetime, bookmazon.password_reset_tokens.create_datetime 
+FROM bookmazon.password_reset_tokens 
+WHERE bookmazon.password_reset_tokens.token = %(token_1)s]
+[parameters: {'token_1': 'NJvyIOjjM2i_yZpjBiNbhHguhaKdtn4gNAGOjeRafXo'}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2023-12-20 16:14:07] {UserService.py:404} ERROR - Error validating reset token: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT bookmazon.password_reset_tokens.id, bookmazon.password_reset_tokens.user_email, bookmazon.password_reset_tokens.token, bookmazon.password_reset_tokens.token_status, bookmazon.password_reset_tokens.update_datetime, bookmazon.password_reset_tokens.create_datetime 
+FROM bookmazon.password_reset_tokens 
+WHERE bookmazon.password_reset_tokens.token = %(token_1)s]
+[parameters: {'token_1': 'NJvyIOjjM2i_yZpjBiNbhHguhaKdtn4gNAGOjeRafXo'}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2023-12-20 16:14:07] {UserService.py:404} ERROR - Error validating reset token: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT bookmazon.password_reset_tokens.id, bookmazon.password_reset_tokens.user_email, bookmazon.password_reset_tokens.token, bookmazon.password_reset_tokens.token_status, bookmazon.password_reset_tokens.update_datetime, bookmazon.password_reset_tokens.create_datetime 
+FROM bookmazon.password_reset_tokens 
+WHERE bookmazon.password_reset_tokens.token = %(token_1)s]
+[parameters: {'token_1': 'NJvyIOjjM2i_yZpjBiNbhHguhaKdtn4gNAGOjeRafXo'}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2023-12-20 16:14:07] {UserService.py:404} ERROR - Error validating reset token: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT bookmazon.password_reset_tokens.id, bookmazon.password_reset_tokens.user_email, bookmazon.password_reset_tokens.token, bookmazon.password_reset_tokens.token_status, bookmazon.password_reset_tokens.update_datetime, bookmazon.password_reset_tokens.create_datetime 
+FROM bookmazon.password_reset_tokens 
+WHERE bookmazon.password_reset_tokens.token = %(token_1)s]
+[parameters: {'token_1': 'NJvyIOjjM2i_yZpjBiNbhHguhaKdtn4gNAGOjeRafXo'}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)

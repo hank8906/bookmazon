@@ -1,0 +1,5 @@
+2023-12-20 16:45:42,338 INFO sqlalchemy.engine.Engine SELECT bookmazon.cart.cart_id AS bookmazon_cart_cart_id, bookmazon.cart.user_account AS bookmazon_cart_user_account, bookmazon.cart.update_datetime AS bookmazon_cart_update_datetime, bookmazon.cart.create_datetime AS bookmazon_cart_create_datetime 
+FROM bookmazon.cart 
+WHERE bookmazon.cart.user_account = %(user_account_1)s 
+ LIMIT %(param_1)s
+2023-12-20 16:45:42,338 INFO sqlalchemy.engine.Engine [cached since 0.1018s ago] {'user_account_1': 'invalid_user_account1', 'param_1': 1}

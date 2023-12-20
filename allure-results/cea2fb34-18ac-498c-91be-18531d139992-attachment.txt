@@ -1,0 +1,8 @@
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:2689 BEGIN (implicit)
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.cart_item.cart_item_id AS bookmazon_cart_item_cart_item_id, bookmazon.cart_item.cart_id AS bookmazon_cart_item_cart_id, bookmazon.cart_item.item_id AS bookmazon_cart_item_item_id, bookmazon.cart_item.quantity AS bookmazon_cart_item_quantity, bookmazon.cart_item.update_datetime AS bookmazon_cart_item_update_datetime, bookmazon.cart_item.create_datetime AS bookmazon_cart_item_create_datetime 
+FROM bookmazon.cart_item 
+WHERE bookmazon.cart_item.cart_item_id = %(cart_item_id_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.1021s ago] {'cart_item_id_1': 999, 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:2692 ROLLBACK
+[1m[31mERROR   [0m C:\Users\user\PycharmProjects\pythonProject\bookmazon\utils\logger.py:CartService.py:193 Database transaction error: Class 'builtins.NoneType' is not mapped

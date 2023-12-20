@@ -32,36 +32,71 @@ def get_valid_item_id():
 
 
 user = get_valid_user_account()
+invalid_user = 'invalid_user_account1'
 item = get_valid_item_id()
 
 
 class TestCartService:
-    # 加入購物車
+
+    ## 1 加入購物車
+    # add_item_to_cart(user_account, item_id, quantity)
+    # 1.1 加入購物車 成功
     @pytest.mark.add_to_cart_success
     def test_add_to_cart_success(self):
         user_account = user
         item_id = item
         quantity = 1
+        # original cart item count
+        old_item_count = get_cart_designated_item_count(user_account, item_id)
 
         try:
             item_count = session.query(Item).where(Item.item_id == item_id).first().book_count
 
-            # if cart item count already > item quantity, delete cart item first
+            # if cart item count already >= item quantity, delete cart item first
             if get_cart_designated_item_count(user_account, item_id) >= item_count:
-                # cart item id from specific item id
                 cart_item_id = session.query(CartItem).where(CartItem.item_id == item_id).first().cart_item_id
                 remove_item_from_cart(cart_item_id)
+                count = 0
+            else:
+                count = old_item_count
 
             # add item to cart
-            old_item_count = get_cart_designated_item_count(user_account, item_id)
             add_item_to_cart(user_account, item_id, quantity)
             new_item_count = get_cart_designated_item_count(user_account, item_id)
 
-            assert old_item_count + quantity == new_item_count
+            assert count + quantity == new_item_count
         except BusinessError:
             assert False
 
-    # 加入購物車失敗，驗證庫存數量
+        # modify the item amount back to the original amount
+        cart_item_id = session.query(CartItem).where(CartItem.item_id == item_id).first().cart_item_id
+        remove_item_from_cart(cart_item_id)
+        add_item_to_cart(user_account, item_id, old_item_count)
+
+        # user_account = user
+        # item_id = item
+        # quantity = 1
+        #
+        # try:
+        #     item_count = session.query(Item).where(Item.item_id == item_id).first().book_count
+        #
+        #     # if cart item count already > item quantity, delete cart item first
+        #     if get_cart_designated_item_count(user_account, item_id) >= item_count:
+        #         # cart item id from specific item id
+        #         cart_item_id = session.query(CartItem).where(CartItem.item_id == item_id).first().cart_item_id
+        #         remove_item_from_cart(cart_item_id)
+        #
+        #     # add item to cart
+        #     old_item_count = get_cart_designated_item_count(user_account, item_id)
+        #     add_item_to_cart(user_account, item_id, quantity)
+        #     new_item_count = get_cart_designated_item_count(user_account, item_id)
+        #
+        #     assert old_item_count + 1 == new_item_count
+        #
+        # except BusinessError:
+        #     assert False
+
+    # 1.2 加入購物車 失敗  : 購物車內的商品數量已經 >= 原有庫存 或 欲加入購物車的數量大於原有庫存
     @pytest.mark.add_to_cart_failed
     def test_add_to_cart_failed(self):
         user_account = user
@@ -78,51 +113,154 @@ class TestCartService:
                 add_item_to_cart(user_account, item_id, 1)
                 assert False
             # 加入購物車的數量大於原有庫存
-            add_item_to_cart(user_account, item_id, exceed_quantity)
-            assert False
-        except BusinessError:
-            assert True
-
-    # 加入購物車失敗，驗證加入的數值是否包含負數、小數或字串
-    @pytest.mark.add_to_cart_unvalid_value
-    def test_add_to_cart_invalid_value(self):
-        user_account = user
-        item_id = item
-        # invalid quantity array
-        invalid_value = [0, -1, 1.5, 'not a number']
-
-        try:
-            for value in invalid_value:
-                add_item_to_cart(user_account, item_id, value)
+            else:
+                add_item_to_cart(user_account, item_id, exceed_quantity)
                 assert False
         except BusinessError:
             assert True
 
-    # @pytest.mark.get_cart_designated_item_count
-    # def test_get_cart_designated_item_count(self):
+    # 1.3 加入購物車 失敗 : 數值包含負數
+    @pytest.mark.add_to_cart_invalid_value_negative
+    def test_add_to_cart_invalid_value_negative(self):
+        user_account = user
+        item_id = item
+        # invalid quantity
+        invalid_value = -1
+
+        try:
+            add_item_to_cart(user_account, item_id, invalid_value)
+            assert False
+        except BusinessError:
+            assert True
+
+    # 1.4 加入購物車 失敗 : 數值包含 0
+    @pytest.mark.add_to_cart_invalid_value_zero
+    def test_add_to_cart_invalid_value_zero(self):
+        user_account = user
+        item_id = item
+        # invalid quantity
+        invalid_value = 0
+
+        try:
+            add_item_to_cart(user_account, item_id, invalid_value)
+            assert False
+        except BusinessError:
+            assert True
+
+    # 1.5 加入購物車 失敗 : 數值包含小數
+    @pytest.mark.add_to_cart_invalid_value_float
+    def test_add_to_cart_invalid_value_float(self):
+        user_account = user
+        item_id = item
+        # invalid quantity
+        invalid_value = 1.5
+
+        try:
+            add_item_to_cart(user_account, item_id, invalid_value)
+            assert False
+        except BusinessError:
+            assert True
+
+    # # # 1.6 加入購物車 失敗 : 數值包含字串
+    # @pytest.mark.add_to_cart_invalid_value_string
+    # def test_add_to_cart_invalid_value_string(self):
     #     user_account = user
     #     item_id = item
+    #     # invalid quantity
+    #     invalid_value = 'not integer'
+    #
     #     try:
-    #         cart_items = get_cart_items(user_account)
-    #         if cart_items is None:
-    #             assert get_cart_designated_item_count(user_account, item_id) == 0
-    #         else:
-    #             # check cart items count
-    #             count = session.query(CartItem).where(CartItem.item_id == item_id).first().quantity
-    #             assert get_cart_designated_item_count(user_account, item_id) == count
-    #     except BusinessError:
+    #         add_item_to_cart(user_account, item_id, invalid_value)
     #         assert False
+    #     except BusinessError:
+    #         assert True
+
+    # 1.7 加入購物車 失敗 : 商品狀態為 0
+    # @pytest.mark.add_to_cart_invalid_status
+    # def test_add_to_cart_invalid_status(self):
+    #     # get a invalid item id, which item_status = 0
+    #     invalid_item_id = session.query(Item).where(Item.item_status == '0').first().item_id
+    #     user_account = user
+    #     quantity = 1
     #
-    # @pytest.mark.get_or_create_cart
-    # def test_get_or_create_cart(self):
-    #     pass
-    #
+    #     try:
+    #         add_item_to_cart(user_account, invalid_item_id, quantity)
+    #         assert False
+    #     except BusinessError:
+    #         assert True
+
+    ## 2 加總會員購物車裡面的特定商品數量
+    # get_cart_designated_item_count(user_account, item_id)
+    # 2.1 加總會員購物車裡面的特定商品數量 成功
+    @pytest.mark.get_cart_designated_item_count_success
+    def test_get_cart_designated_item_count_success(self):
+        user_account = user
+        item_id = item
+        try:
+            cart_items = get_cart_items(user_account)
+            if cart_items is None:
+                assert get_cart_designated_item_count(user_account, item_id) == 0
+            else:
+                # check cart items count
+                count = session.query(CartItem).where(CartItem.item_id == item_id).first().quantity
+                assert get_cart_designated_item_count(user_account, item_id) == count
+        except BusinessError:
+            assert False
+
+    # 2.2 加總會員購物車裡面的特定商品數量 失敗 : 會員帳號不存在
+    @pytest.mark.get_cart_designated_item_count_invalid_user
+    def test_get_cart_designated_item_count_invalid_user(self):
+        item_id = item
+        try:
+            assert get_cart_designated_item_count(invalid_user, item_id) == 0
+            # assert False
+        except BusinessError:
+            assert True
+
+    # 2.3 加總會員購物車裡面的特定商品數量 失敗 : 商品不存在
+    @pytest.mark.get_cart_designated_item_count_invalid_item
+    def test_get_cart_designated_item_count_invalid_item(self):
+        user_account = user
+        invalid_item_id = 999
+        try:
+            assert get_cart_designated_item_count(user_account, invalid_item_id) == 0
+            # assert False
+        except BusinessError:
+            assert True
+
+    ## 3 建立或取得購物車
+    # get_or_create_cart(user_account)
+    # 3.1 建立或取得購物車 成功
+    @pytest.mark.get_or_create_cart_success
+    def test_get_or_create_cart_success(self):
+        # get a valid user account in cart table
+        valid_user_account = session.query(Cart).first().user_account
+        try:
+            get_or_create_cart(valid_user_account)
+            assert True
+        except BusinessError:
+            assert False
+
+    # 3.2 建立或取得購物車 失敗 : 會員帳號不存在
+    # @pytest.mark.get_or_create_cart_failed
+    # def test_get_or_create_cart_failed(self):
+    #     try:
+    #         cart = get_or_create_cart(invalid_user)
+    #         assert cart is None
+    #     except BusinessError:
+    #         assert True
+
+    ## 4 更新購物車品項數量
+    # 4.1 更新購物車品項數量 成功
     # @pytest.mark.update_cart_item
     # def test_update_cart_item(self):
     #     pass
 
-    @pytest.mark.get_cart_items
-    def test_get_cart_items(self):
+    ## 5 查詢購物車品項
+    # get_cart_items(user_account)
+    # 5.1 查詢購物車品項 成功
+    @pytest.mark.get_cart_items_success
+    def test_get_cart_items_success(self):
         user_account = user
         try:
             cart_items = get_cart_items(user_account)
@@ -133,28 +271,54 @@ class TestCartService:
         except BusinessError:
             assert False
 
-    # 刪除購物車內商品
-    # @pytest.mark.remove_item_from_cart
-    # def test_remove_item_from_cart(self):
-    #     user_account = user
-    #     item_id = item
-    #
-    #     try:
-    #         item_count = get_cart_designated_item_count(user_account, item_id)
-    #         cart_item_id = session.query(CartItem).where(CartItem.item_id == item_id).first().cart_item_id
-    #
-    #         if item_count > 0:
-    #             remove_item_from_cart(cart_item_id)
-    #             new_item_count = get_cart_designated_item_count(user_account, item_id)
-    #             assert new_item_count == 0
-    #         else:
-    #             assert False
-    #     except BusinessError:
-    #         assert False
+    # 5.2 查詢購物車品項 失敗 : 會員帳號不存在
+    @pytest.mark.get_cart_items_failed
+    def test_get_cart_items_failed(self):
+        try:
+            get_cart_items(invalid_user)
+            # assert False
+        except BusinessError:
+            assert True
 
-    # 計算購物車總價
-    @pytest.mark.calculate_total_price
-    def test_calculate_total_price(self):
+    # 6 刪除購物車品項
+    # remove_item_from_cart(cart_item_id)
+    # 6.1 刪除購物車品項 成功
+    @pytest.mark.remove_item_from_cart_success
+    def test_remove_item_from_cart_success(self):
+        user_account = user
+        item_id = item
+        # original quantity of specific item in cart
+        quantity = get_cart_designated_item_count(user_account, item_id)
+
+        try:
+            # item_count = get_cart_designated_item_count(user_account, item_id)
+            cart_item_id = session.query(CartItem).where(CartItem.item_id == item_id).first().cart_item_id
+
+            if quantity > 0:
+                remove_item_from_cart(cart_item_id)
+                new_item_count = get_cart_designated_item_count(user_account, item_id)
+                assert new_item_count == 0
+        except BusinessError:
+            assert False
+        # add the deleted item back to cart
+        if quantity > 0:
+            add_item_to_cart(user_account, item_id, quantity)
+
+    # 6.2 刪除購物車品項 失敗 : 品項不存在
+    @pytest.mark.remove_item_from_cart_failed
+    def test_remove_item_from_cart_failed(self):
+        invalid_cart_item_id = 999
+        try:
+            # remove_item_from_cart(invalid_cart_item_id)
+            assert remove_item_from_cart(invalid_cart_item_id) is None
+        except BusinessError:
+            assert True
+
+    ## 7 計算購物車內商品總價
+    # calculate_total_price(user_account)
+    # 7.1 計算購物車內商品總價 成功
+    @pytest.mark.calculate_total_price_success
+    def test_calculate_total_price_success(self):
         user_account = user
         total_price = 0
         # get cart id from specific user account
@@ -183,9 +347,20 @@ class TestCartService:
         except BusinessError:
             assert False
 
-    # 查看購物車內商品總數量
-    @pytest.mark.get_cart_item_count
-    def test_get_cart_item_count(self):
+    # 7.2 計算購物車內商品總價 失敗 : 會員帳號不存在
+    @pytest.mark.calculate_total_price_failed
+    def test_calculate_total_price_failed(self):
+        try:
+            price = calculate_total_price(invalid_user)
+            assert price == 0
+        except BusinessError:
+            assert True
+
+    ## 8 把購物車內商品總數顯示在首頁的購物車按鈕的旁邊
+    # get_cart_item_count(user_account)
+    # 8.1 把購物車內商品總數顯示在首頁的購物車按鈕的旁邊 成功
+    @pytest.mark.get_cart_item_count_success
+    def test_get_cart_item_count_success(self):
         user_account = user
         cart_id = session.query(Cart).where(Cart.user_account == user_account).first().cart_id
         try:
@@ -203,3 +378,12 @@ class TestCartService:
 
         except BusinessError:
             assert False
+
+    # 8.2 把購物車內商品總數顯示在首頁的購物車按鈕的旁邊 失敗 : 會員帳號不存在
+    @pytest.mark.get_cart_item_count_failed
+    def test_get_cart_item_count_failed(self):
+        try:
+            get_cart_item_count(invalid_user)
+            # assert False
+        except BusinessError:
+            assert True

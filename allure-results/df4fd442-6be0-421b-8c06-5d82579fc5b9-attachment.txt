@@ -1,0 +1,72 @@
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.cart.cart_id AS bookmazon_cart_cart_id, bookmazon.cart.user_account AS bookmazon_cart_user_account, bookmazon.cart.update_datetime AS bookmazon_cart_update_datetime, bookmazon.cart.create_datetime AS bookmazon_cart_create_datetime 
+FROM bookmazon.cart 
+WHERE bookmazon.cart.user_account = %(user_account_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [generated in 0.00024s] {'user_account_1': 'User0006', 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT sum(bookmazon.cart_item.quantity) AS sum_1 
+FROM bookmazon.cart_item 
+WHERE bookmazon.cart_item.cart_id = %(cart_id_1)s AND bookmazon.cart_item.item_id = %(item_id_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [generated in 0.00019s] {'cart_id_1': 5, 'item_id_1': 3}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.item.item_id AS bookmazon_item_item_id, bookmazon.item.book_id AS bookmazon_item_book_id, bookmazon.item.item_status AS bookmazon_item_item_status, bookmazon.item.book_count AS bookmazon_item_book_count, bookmazon.item.provider_account AS bookmazon_item_provider_account, bookmazon.item.update_datetime AS bookmazon_item_update_datetime, bookmazon.item.create_datetime AS bookmazon_item_create_datetime 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [generated in 0.00018s] {'item_id_1': 3, 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.cart.cart_id AS bookmazon_cart_cart_id, bookmazon.cart.user_account AS bookmazon_cart_user_account, bookmazon.cart.update_datetime AS bookmazon_cart_update_datetime, bookmazon.cart.create_datetime AS bookmazon_cart_create_datetime 
+FROM bookmazon.cart 
+WHERE bookmazon.cart.user_account = %(user_account_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.007336s ago] {'user_account_1': 'User0006', 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT sum(bookmazon.cart_item.quantity) AS sum_1 
+FROM bookmazon.cart_item 
+WHERE bookmazon.cart_item.cart_id = %(cart_id_1)s AND bookmazon.cart_item.item_id = %(item_id_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.005006s ago] {'cart_id_1': 5, 'item_id_1': 3}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.item.item_id AS bookmazon_item_item_id, bookmazon.item.book_id AS bookmazon_item_book_id, bookmazon.item.item_status AS bookmazon_item_item_status, bookmazon.item.book_count AS bookmazon_item_book_count, bookmazon.item.provider_account AS bookmazon_item_provider_account, bookmazon.item.update_datetime AS bookmazon_item_update_datetime, bookmazon.item.create_datetime AS bookmazon_item_create_datetime 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.003781s ago] {'item_id_1': 3, 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.cart.cart_id AS bookmazon_cart_cart_id, bookmazon.cart.user_account AS bookmazon_cart_user_account, bookmazon.cart.update_datetime AS bookmazon_cart_update_datetime, bookmazon.cart.create_datetime AS bookmazon_cart_create_datetime 
+FROM bookmazon.cart 
+WHERE bookmazon.cart.user_account = %(user_account_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.01108s ago] {'user_account_1': 'User0006', 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT sum(bookmazon.cart_item.quantity) AS sum_1 
+FROM bookmazon.cart_item 
+WHERE bookmazon.cart_item.cart_id = %(cart_id_1)s AND bookmazon.cart_item.item_id = %(item_id_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.008684s ago] {'cart_id_1': 5, 'item_id_1': 3}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.cart.cart_id AS bookmazon_cart_cart_id, bookmazon.cart.user_account AS bookmazon_cart_user_account, bookmazon.cart.update_datetime AS bookmazon_cart_update_datetime, bookmazon.cart.create_datetime AS bookmazon_cart_create_datetime 
+FROM bookmazon.cart 
+WHERE bookmazon.cart.user_account = %(user_account_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.01313s ago] {'user_account_1': 'User0006', 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.cart_item.cart_item_id AS bookmazon_cart_item_cart_item_id, bookmazon.cart_item.cart_id AS bookmazon_cart_item_cart_id, bookmazon.cart_item.item_id AS bookmazon_cart_item_item_id, bookmazon.cart_item.quantity AS bookmazon_cart_item_quantity, bookmazon.cart_item.update_datetime AS bookmazon_cart_item_update_datetime, bookmazon.cart_item.create_datetime AS bookmazon_cart_item_create_datetime 
+FROM bookmazon.cart_item 
+WHERE bookmazon.cart_item.cart_id = %(cart_id_1)s AND bookmazon.cart_item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [generated in 0.00016s] {'cart_id_1': 5, 'item_id_1': 3, 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.cart_item.cart_item_id AS bookmazon_cart_item_cart_item_id, bookmazon.cart_item.cart_id AS bookmazon_cart_item_cart_id, bookmazon.cart_item.item_id AS bookmazon_cart_item_item_id, bookmazon.cart_item.quantity AS bookmazon_cart_item_quantity, bookmazon.cart_item.update_datetime AS bookmazon_cart_item_update_datetime, bookmazon.cart_item.create_datetime AS bookmazon_cart_item_create_datetime 
+FROM bookmazon.cart_item 
+WHERE bookmazon.cart_item.cart_id = %(cart_id_1)s AND bookmazon.cart_item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.001021s ago] {'cart_id_1': 5, 'item_id_1': 3, 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 INSERT INTO bookmazon.cart_item (cart_id, item_id, quantity, update_datetime, create_datetime) VALUES (%(cart_id)s, %(item_id)s, %(quantity)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon.cart_item.cart_item_id
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [generated in 0.00032s] {'cart_id': 5, 'item_id': 3, 'quantity': 1, 'update_datetime': datetime.datetime(2023, 12, 20, 16, 14, 4, 533603), 'create_datetime': datetime.datetime(2023, 12, 20, 16, 14, 4, 832455)}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:2695 COMMIT
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:2689 BEGIN (implicit)
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.cart.cart_id AS bookmazon_cart_cart_id, bookmazon.cart.user_account AS bookmazon_cart_user_account, bookmazon.cart.update_datetime AS bookmazon_cart_update_datetime, bookmazon.cart.create_datetime AS bookmazon_cart_create_datetime 
+FROM bookmazon.cart 
+WHERE bookmazon.cart.user_account = %(user_account_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.02135s ago] {'user_account_1': 'User0006', 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT sum(bookmazon.cart_item.quantity) AS sum_1 
+FROM bookmazon.cart_item 
+WHERE bookmazon.cart_item.cart_id = %(cart_id_1)s AND bookmazon.cart_item.item_id = %(item_id_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.01878s ago] {'cart_id_1': 5, 'item_id_1': 3}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.cart_item.cart_item_id AS bookmazon_cart_item_cart_item_id, bookmazon.cart_item.cart_id AS bookmazon_cart_item_cart_id, bookmazon.cart_item.item_id AS bookmazon_cart_item_item_id, bookmazon.cart_item.quantity AS bookmazon_cart_item_quantity, bookmazon.cart_item.update_datetime AS bookmazon_cart_item_update_datetime, bookmazon.cart_item.create_datetime AS bookmazon_cart_item_create_datetime 
+FROM bookmazon.cart_item 
+WHERE bookmazon.cart_item.cart_item_id = %(cart_item_id_1)s 
+ LIMIT %(param_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [generated in 0.00015s] {'cart_item_id_1': 3, 'param_1': 1}
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:2692 ROLLBACK
+[31m[1mERROR   [0m C:\Users\user\PycharmProjects\pythonProject\bookmazon\utils\logger.py:CartService.py:193 Database transaction error: Class 'builtins.NoneType' is not mapped

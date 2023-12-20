@@ -1,0 +1,11 @@
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon.password_reset_tokens.id, bookmazon.password_reset_tokens.user_email, bookmazon.password_reset_tokens.token, bookmazon.password_reset_tokens.token_status, bookmazon.password_reset_tokens.update_datetime, bookmazon.password_reset_tokens.create_datetime 
+FROM bookmazon.password_reset_tokens 
+WHERE bookmazon.password_reset_tokens.token = %(token_1)s
+[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.005992s ago] {'token_1': 'NJvyIOjjM2i_yZpjBiNbhHguhaKdtn4gNAGOjeRafXo'}
+[31m[1mERROR   [0m C:\Users\user\PycharmProjects\pythonProject\bookmazon\utils\logger.py:UserService.py:404 Error validating reset token: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT bookmazon.password_reset_tokens.id, bookmazon.password_reset_tokens.user_email, bookmazon.password_reset_tokens.token, bookmazon.password_reset_tokens.token_status, bookmazon.password_reset_tokens.update_datetime, bookmazon.password_reset_tokens.create_datetime 
+FROM bookmazon.password_reset_tokens 
+WHERE bookmazon.password_reset_tokens.token = %(token_1)s]
+[parameters: {'token_1': 'NJvyIOjjM2i_yZpjBiNbhHguhaKdtn4gNAGOjeRafXo'}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
