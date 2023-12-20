@@ -1,8 +1,0 @@
-[32mINFO    [0m sqlalchemy.engine.Engine:base.py:2689 BEGIN (implicit)
-[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 SELECT bookmazon."user".user_account, bookmazon."user".user_password, bookmazon."user".user_name, bookmazon."user".user_gender, bookmazon."user".user_identification, bookmazon."user".user_email, bookmazon."user".user_birthday, bookmazon."user".update_datetime, bookmazon."user".create_datetime 
-FROM bookmazon."user" 
-WHERE bookmazon."user".user_email = %(user_email_1)s
-[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.02897s ago] {'user_email_1': 'Justin@cc.cc'}
-[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 UPDATE bookmazon."user" SET user_name=%(user_name)s, user_email=%(user_email)s, user_birthday=%(user_birthday)s WHERE bookmazon."user".user_account = %(user_account_1)s
-[32mINFO    [0m sqlalchemy.engine.Engine:base.py:1848 [cached since 0.005844s ago] {'user_name': 'test_user_Justin', 'user_email': 'Justin@cc.cc', 'user_birthday': '2002-02-03', 'user_account_1': 'test_user_001_lisa'}
-[32mINFO    [0m sqlalchemy.engine.Engine:base.py:2695 COMMIT

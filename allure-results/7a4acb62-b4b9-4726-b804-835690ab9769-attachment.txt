@@ -1,9 +1,0 @@
-2023-12-20 16:14:05,139 INFO sqlalchemy.engine.Engine SELECT bookmazon.cart.cart_id AS bookmazon_cart_cart_id, bookmazon.cart.user_account AS bookmazon_cart_user_account, bookmazon.cart.update_datetime AS bookmazon_cart_update_datetime, bookmazon.cart.create_datetime AS bookmazon_cart_create_datetime 
-FROM bookmazon.cart 
- LIMIT %(param_1)s
-2023-12-20 16:14:05,140 INFO sqlalchemy.engine.Engine [generated in 0.00030s] {'param_1': 1}
-2023-12-20 16:14:05,140 INFO sqlalchemy.engine.Engine SELECT bookmazon.cart.cart_id AS bookmazon_cart_cart_id, bookmazon.cart.user_account AS bookmazon_cart_user_account, bookmazon.cart.update_datetime AS bookmazon_cart_update_datetime, bookmazon.cart.create_datetime AS bookmazon_cart_create_datetime 
-FROM bookmazon.cart 
-WHERE bookmazon.cart.user_account = %(user_account_1)s 
- LIMIT %(param_1)s
-2023-12-20 16:14:05,141 INFO sqlalchemy.engine.Engine [cached since 0.3247s ago] {'user_account_1': 'User0001', 'param_1': 1}
