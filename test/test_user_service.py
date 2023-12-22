@@ -1,8 +1,6 @@
 import logging
 import random
-import secrets
 import string
-from datetime import datetime
 
 import pytest
 from sqlalchemy import select
@@ -11,12 +9,11 @@ from werkzeug.security import check_password_hash
 from enumeration import TokenStatus
 from enumeration.SystemMessage import UserSystemCode, CommonSystemCode
 from exception.BusinessError import BusinessError
-from model.PasswordResetToken import PasswordResetToken
 from model.User import User
 from model.UserBo import UserBo
 from service.UserService import authenticate_user, add_user_info, check_user_email_validity, update_user_profile, \
     validate_reset_token, change_user_password, check_existing_user, reset_new_password, generate_reset_token, \
-    mark_token, get_user_info, send_reset_password_email, mark_token_used
+    mark_token, get_user_info, mark_token_used
 from utils import logger
 from utils.dbUtil import session
 
