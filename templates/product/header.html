@@ -50,12 +50,72 @@
             <span class="fs-4">Bookmazon</span>
         </a>
 
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+        <form method="POST" action="{{ url_for('productController.search_books') }}" id="searchForm">
+            <div class="ts-input">
+                <input type="text" id="searchInput" name="keyword" placeholder="輸入搜尋內容…">
+            </div>
+
+            <div class="ts-select" id="customDropdown" data-dropdown="select">
+                <div class="content">
+                    <span></span>進階搜尋
+                </div>
+            </div>
+
+            <div class="ts-dropdown" id="dropdownContent">
+                <!-- 第一個下拉選單 -->
+                <div class="dropdown-item">
+                    <label for="searchField">搜尋欄位</label>
+                    <select id="searchField" name="searchField">
+                        <option value="title">全文</option>
+                        <option value="bookName">書名</option>
+                        <option value="author">作者</option>
+                        <option value="publisher">出版商</option>
+                        <option value="provider">提供者</option>
+                        <option value="isbn">ISBN</option>
+                    </select>
+                </div>
+
+                <!-- 第二個下拉選單 -->
+                <div class="dropdown-item">
+                    <label for="bookCategory">分類</label>
+                    <select id="bookCategory" name="bookCategory">
+                        <option value="all">All</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="nonfiction">Non-Fiction</option>
+                        <option value="mystery">Mystery</option>
+                        <option value="science">Science</option>
+                    </select>
+                </div>
+
+                <!-- 第三個下拉選單 -->
+                <div class="dropdown-item">
+                    <label for="priceRange">售價</label>
+                    <span id="priceRange">
+                        <input type="number" name="minPrice" min="0" placeholder="金額"  style="width: 100px;">
+                        <span>至</span>
+                        <input type="number" name="maxPrice" min="0" placeholder="金額"  style="width: 100px;">
+                        <span>元</span>
+                    </span>
+                </div>
+
+<!--                &lt;!&ndash; 第四個下拉選單 &ndash;&gt;-->
+<!--                <div class="dropdown-item">-->
+<!--                    <label for="publishDate">出版日期</label>-->
+<!--                    <select id="publishDate" name="publishDate">-->
+<!--                        <option value="all">All</option>-->
+<!--                        <option value="lastYear">Last Year</option>-->
+<!--                        <option value="last5Years">Last 5 Years</option>-->
+<!--                        <option value="lastDecade">Last Decade</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+
+                <div class="dropdown-row">
+                    <button id="cancelButton" onclick="closeDropdown()">取消</button>
+                </div>
+            </div>
+
+            <button class="btn btn-outline-success ms-2" type="submit">Search</button>
         </form>
-
-
     </div>
 </header>
 <!-- Header-->
