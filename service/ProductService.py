@@ -1,4 +1,7 @@
 import logging
+from datetime import timedelta
+
+from sqlalchemy import func, or_, String
 
 from model.Book import Book
 from model.Item import Item
@@ -26,7 +29,8 @@ def get_book_info():
                 .all()
         )
     except Exception as e:
-        app_logger.error('Failed to fetch product information: %s', e)
+        return ''
+        # app_logger.error('Failed to fetch product information: %s', e)
 
 """
     取得詳細書籍資訊
@@ -48,7 +52,8 @@ def get_detail_book_info(item_id: str):
                 .one()
         )
     except Exception as e:
-        app_logger.error('Failed to fetch product information: %s', e)
+        return ''
+        # app_logger.error('Failed to fetch product information: %s', e)
 
 """
     查詢書籍資訊
@@ -59,11 +64,80 @@ def get_detail_book_info(item_id: str):
     Raises:
 
 """
-# def get_book_info(book_name: str):
-#     # CRUD 只有查詢不需要做 commit、rollback
-#     try:
-#         user_obj = session.scalars(select(Book).where(Book.book_name == book_name)).one()
-#     except Exception as e:
-#         app_logger.error('Failed to query user information: %s', e)
-#         raise e
-#     return user_obj
+def searchProduct(keyword:str):
+    try:
+        query = (session.query(Item.item_id, Item.item_status, Item.book_count, Item.create_datetime, Item.update_datetime,
+                          Item.provider_account, Book.book_id, Book.book_price, Book.book_name, Book.book_author,
+                          Book.book_publisher, Book.book_category, Book.book_image_path)
+                 .join(Book, Item.book_id == Book.book_id))
+
+        query = query.filter(
+            or_(
+                func.lower(Book.book_name).like(func.lower(f"%{keyword}%")),
+                func.lower(Book.book_author).like(func.lower(f"%{keyword}%")),
+                func.lower(Book.book_publisher).like(func.lower(f"%{keyword}%")),
+                func.lower(Book.book_id).like(func.lower(f"%{keyword}%")),
+                func.lower(Item.provider_account).like(func.lower(f"%{keyword}%")),
+                func.lower(Book.book_category).like(func.lower(f"%{keyword}%"))
+            )
+        )
+        return query.all()
+
+    except Exception as e:
+        return ''
+        # app_logger.error('Failed to fetch product information: %s', e)
+
+"""
+    查詢分類書籍資訊
+    Args:
+
+    Returns:
+
+    Raises:
+
+"""
+def searchProductsByCategory(keyword, search_field, min_price, max_price, book_category):
+    try:
+        query = (session.query(Item.item_id, Item.item_status, Item.book_count, Item.create_datetime, Item.update_datetime,
+                          Item.provider_account, Book.book_id, Book.book_price, Book.book_name, Book.book_author,
+                          Book.book_publisher, Book.book_category, Book.book_image_path)
+                 .join(Book, Item.book_id == Book.book_id))
+
+        # 進階搜尋
+        if keyword:
+            if search_field == '全文':
+                query = query.filter(
+                    or_(
+                        func.lower(Book.book_name).like(func.lower(f"%{keyword}%")),
+                        func.lower(Book.book_author).like(func.lower(f"%{keyword}%")),
+                        func.lower(Book.book_publisher).like(func.lower(f"%{keyword}%")),
+                        func.lower(Item.provider_account).like(func.lower(f"%{keyword}%")),
+                        func.lower(Item.book_id).like(func.lower(f"%{keyword}%")),
+                    )
+                )
+            elif search_field == '書名':
+                query = query.filter(func.lower(Book.book_name).like(func.lower(f"%{keyword}%")))
+            elif search_field == '作者':
+                query = query.filter(func.lower(Book.book_author).like(func.lower(f"%{keyword}%")))
+            elif search_field == '出版商':
+                query = query.filter(func.lower(Book.book_publisher).like(func.lower(f"%{keyword}%")))
+            elif search_field == '提供者':
+                query = query.filter(func.lower(Item.provider_account).like(func.lower(f"%{keyword}%")))
+            elif search_field == 'ISBN':
+                query = query.filter(func.lower(Book.book_id).like(func.lower(f"%{keyword}%")))
+
+        # 價格範圍搜尋
+        if min_price is not None and max_price is not None:
+            query = query.filter(Book.book_price.between(min_price, max_price))
+
+        # 分類搜尋
+        if book_category and book_category != 'all':
+            app_logger.info(book_category)
+            query = query.filter(func.lower(Book.book_category) == func.lower(book_category))
+
+        return query.all()
+
+    except Exception as e:
+        return ''
+        # app_logger.error('Failed to fetch product information: %s', e)
+
