@@ -1,7 +1,7 @@
 -- 移除 "password_reset_tokens" 表格
 DROP TABLE bookmazon.password_reset_tokens;
 
-CREATE TABLE bookmazon.password_reset_tokens (
+CREATE TABLE IF NOT EXISTS bookmazon.password_reset_tokens (
     id              SERIAL       NOT NULL,
     user_email      VARCHAR(255) NOT NULL,
     token           VARCHAR(255) NOT NULL,

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- 其他头部資訊 -->
+    <!-- 其他头部信息 -->
 </head>
 <body>
     <div class="container mt-5">
@@ -15,7 +15,7 @@
             <p>User Birthday: {{ user_info.user_birthday }}</p>
             <p>User Update_datetime: {{ user_info.update_datetime }}</p>
             <p>User Create_datetime: {{ user_info.create_datetime }}</p>
-            <!-- 你可以根据需要自定义用户資訊的显示方式 -->
+            <!-- 你可以根据需要自定义用户信息的显示方式 -->
             <br>
             <a href="{{ url_for('indexController.index') }}" class="btn btn-outline-dark">Back to Index</a>
         {% else %}

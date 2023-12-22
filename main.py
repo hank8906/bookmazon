@@ -8,13 +8,13 @@ from flask_login import LoginManager
 from controller.CartController import cartController
 from controller.ProductController import productController
 from controller.UserController import userController
-from controller.OrderController import orderController
 from model.AuthUser import AuthUser
 from model.User import User
 from utils.EmailUutil import init_email
 from utils.config import params
 from utils.dbUtil import session
 
+# from controller.OrderController import orderController
 
 app = Flask(__name__)
 cipher_suite = Fernet(params['PRIVATE_KEY'])
@@ -28,10 +28,10 @@ decrypted_password = cipher_suite.decrypt(params['MAIL_PASSWORD'])
 app.config['MAIL_PASSWORD'] = decrypted_password.decode('utf-8')
 init_email(app)
 # 註冊藍圖
-app.register_blueprint(productController, url_prefix='/')
 app.register_blueprint(userController, url_prefix='/user')
+app.register_blueprint(productController, url_prefix='/')
 app.register_blueprint(cartController, url_prefix='/cart')
-app.register_blueprint(orderController, url_prefix='/order')
+# app.register_blueprint(orderController, url_prefix='/order')
 
 # 初始化 Flask-Login
 login_manager = LoginManager()
