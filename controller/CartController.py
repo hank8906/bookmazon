@@ -7,7 +7,7 @@ from enumeration.SystemMessage import ShoppingCartSystemCode
 from exception.BusinessError import BusinessError
 from model.JsonMessage import JsonMessage
 from service.CartService import calculate_total_price, get_cart_items, get_cart_item_count, add_item_to_cart, \
-    remove_item_from_cart
+    remove_item_from_cart, update_item_quantity
 
 cartController = Blueprint('cartController', __name__)
 
@@ -24,8 +24,10 @@ cartController = Blueprint('cartController', __name__)
 @cartController.route('/view_cart', methods=['GET'])
 @login_required
 def view_cart():
+    # 計算購物車商品總價
     cart_items = get_cart_items(current_user.user.user_account)
-    total_price = calculate_total_price(current_user.user.user_account)  # 計算購物車商品總價
+    # 計算購物車商品總價
+    total_price = calculate_total_price(current_user.user.user_account)
 
     return render_template('cart/cart.html', cart_items=cart_items, total_price=total_price)
 
@@ -88,8 +90,13 @@ def view_cart_item_quantity():
 @cartController.route('/remove_from_cart/<cart_item_id>', methods=['POST'])
 @login_required
 def remove_from_cart(cart_item_id):
-    remove_item_from_cart(cart_item_id)
-    flash('商品已從購物車移除', 'success')
+    try:
+        remove_item_from_cart(cart_item_id)
+    except BusinessError as e:
+        flash(e.message, 'danger')
+
+    message = ShoppingCartSystemCode.ITEM_REMOVED.value.get('message')
+    flash(message, 'success')
     return redirect(url_for('cartController.view_cart'))
 
 """
