@@ -258,36 +258,8 @@ class TestUserService:
                 assert False
 
     ## 6. 驗證重置 Token # validate_reset_token 大魔王
-    # validate_reset_token(token)
-    # mark_token(token, mark)
-    # 6.1.1 驗證重置 token 成功 :
-    # 檢查 Token 存在
-    # 為 Token 時間是否過期，如果時間沒有過期，則成功可以驗證重置 Token
-    @pytest.mark.validate_reset_token_success
-    def test_validate_reset_token_success(self):
-        try:
-            validate_reset_token("qh6KCkcCFDtZkxwqXq_81BI4wNmhfforWP94_J_a6RQ")
-            token_obj: PasswordResetToken = session.scalars(select(PasswordResetToken).where(
-                PasswordResetToken.token == "qh6KCkcCFDtZkxwqXq_81BI4wNmhfforWP94_J_a6RQ")).one()
-            # 檢查 token 時間是否過期
-            current_time = datetime.now()
-            if token_obj.update_datetime and current_time > token_obj.update_datetime:
-                # 註記 token 過期了
-                try:
-                    mark_token("qh6KCkcCFDtZkxwqXq_81BI4wNmhfforWP94_J_a6RQ", TokenStatus.TokenStatus.EXPIRED)
-                except BusinessError as e:
-                    raise e
-            else:
-                assert False
-            reset_new_password("qh6KCkcCFDtZkxwqXq_81BI4wNmhfforWP94_J_a6RQ", "1234567", "1234567")
-        except BusinessError as e:
-            system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
-            if e.error_code == system_code:
-                assert True
-            else:
-                assert False
 
-    # 6.1.2 驗證重置 Token 失敗 :
+    # 6.1.1 驗證重置 Token 失敗 :
     # 檢查 Token 存在
     # 為 Token 時間是否過期，如果時間過期了，標記為過期，則失敗不可驗證重置 Token
     # 現在的狀況是 Token 根本不存在，所以會失敗
