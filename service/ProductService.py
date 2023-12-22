@@ -19,21 +19,18 @@ app_logger = logger.setup_logger(logging.INFO)
     Raises:
 
 """
-
-
 def get_book_info():
     try:
         return (
             session.query(Item.item_id, Book.book_id, Book.book_name, Book.book_author, Book.book_price,
                           Book.book_image_path)
-            .join(Book, Item.book_id == Book.book_id)
-            .order_by(Item.item_id.asc())
-            .all()
+                .join(Book, Item.book_id == Book.book_id)
+                .order_by(Item.item_id.asc())
+                .all()
         )
     except Exception as e:
         return ''
         # app_logger.error('Failed to fetch product information: %s', e)
-
 
 """
     取得詳細書籍資訊
@@ -44,22 +41,19 @@ def get_book_info():
     Raises:
 
 """
-
-
 def get_detail_book_info(item_id: str):
     try:
         return (
             session.query(Item.item_id, Item.item_status, Item.book_count, Item.create_datetime, Item.update_datetime,
                           Book.book_id, Book.book_price, Book.book_name, Book.book_author,
                           Book.book_publisher, Book.book_category, Book.book_image_path)
-            .join(Book, Item.book_id == Book.book_id)
-            .where(Item.item_id == item_id)
-            .one()
+                .join(Book, Item.book_id == Book.book_id)
+                .where(Item.item_id == item_id)
+                .one()
         )
     except Exception as e:
         return ''
         # app_logger.error('Failed to fetch product information: %s', e)
-
 
 """
     查詢書籍資訊
@@ -136,9 +130,10 @@ def searchProductsByCategory(keyword, search_field, min_price, max_price, book_c
         if min_price is not None and max_price is not None:
             query = query.filter(Book.book_price.between(min_price, max_price))
 
+        print(book_category)
         # 分類搜尋
         if book_category and book_category != 'all':
-            app_logger.info(book_category)
+            print(book_category)
             query = query.filter(func.lower(Book.book_category) == func.lower(book_category))
 
         return query.all()

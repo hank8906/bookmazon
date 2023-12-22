@@ -19,10 +19,7 @@
                     <span class="badge bg-dark text-white ms-1 rounded-pill" id="cartItemCount">{{ cart_item_count }}</span> <!-- 您可以修改這裡的數字以反映實際的購物車物品數量 -->
                 </a>
                 <!-- 如果使用者已登入，則導向到查看所有訂單 -->
-                <a href="{{ url_for('orderController.view_order') }}" class="btn btn-outline-dark ms-2">
-                    <i class="bi bi-receipt me-1"></i>
-                        查看訂單
-                </a>
+
             {% else %}
                 <!-- 不顯示按紐 -->
             {% endif %}
@@ -67,23 +64,23 @@
                     <label for="searchField">搜尋欄位</label>
                     <select id="searchField" name="searchField">
                         <option value="title">全文</option>
-                        <option value="title">書名</option>
-                        <option value="title">作者</option>
-                        <option value="title">出版商</option>
-                        <option value="title">提供者</option>
-                        <option value="author">ISBN</option>
+                        <option value="bookName">書名</option>
+                        <option value="author">作者</option>
+                        <option value="publisher">出版商</option>
+                        <option value="provider">提供者</option>
+                        <option value="isbn">ISBN</option>
                     </select>
                 </div>
 
                 <!-- 第二個下拉選單 -->
                 <div class="dropdown-item">
-                    <label for="productType">分類</label>
-                    <select id="productType" name="bookCategory">
+                    <label for="bookCategory">分類</label>
+                    <select id="bookCategory" name="bookCategory">
                         <option value="all">All</option>
                         <option value="fiction">Fiction</option>
-                        <option value="fiction">Non-Fiction</option>
-                        <option value="fiction">Mystery</option>
-                        <option value="nonfiction">Science</option>
+                        <option value="nonfiction">Non-Fiction</option>
+                        <option value="mystery">Mystery</option>
+                        <option value="science">Science</option>
                     </select>
                 </div>
 
