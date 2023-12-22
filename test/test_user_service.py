@@ -2,6 +2,7 @@ import logging
 import random
 import secrets
 import string
+import allure
 from datetime import datetime
 
 import pytest
@@ -155,7 +156,7 @@ class TestUserService:
     @pytest.mark.change_user_password_failed
     def test_change_user_password_failed(self):
         try:
-            change_user_password("Justin", "12", "12")
+            change_user_password("Justin", "1234567", "1234567")
         except BusinessError as e:
             system_code = UserSystemCode.OLD_PASSWORD_NOT_ALLOWED.value.get('system_code')
             if e.error_code == system_code:
@@ -235,6 +236,7 @@ class TestUserService:
 
     # 6.2.1 重置密碼成功
     # reset_new_password(token, new_password, confirm_password)
+    # 這個測試時，要發送信箱，找到最新的 Token，
     @pytest.mark.reset_new_password_success
     def test_reset_new_password_success(self):
         try:
