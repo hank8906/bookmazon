@@ -17,11 +17,17 @@
                 <div class="form-floating mb-3">
                     {{ form.user_account(class="form-control", placeholder="Enter your account") }}
                     <label>使用者帳號</label>
+                    {% for error in form.user_account.errors %}
+                        <span style="color: red;">{{ error }}</span><br>
+                    {% endfor %}
                 </div>
                 <div class="form-floating mb-3">
                     {{ form.user_password(class="form-control", placeholder="Enter your password")
                     }}
                     <label>密碼</label>
+                    {% for error in form.user_password.errors %}
+                        <span style="color: red;">{{ error }}</span><br>
+                    {% endfor %}
                 </div>
                 <div class="form-check mb-3">
                     <input class="form-check-input" id="inputRememberPassword" type="checkbox"
