@@ -53,7 +53,7 @@
                 <p class="lead">更新時間: {{ data.update_datetime }}</p>
                 {% if data.item_status == '1' %}
                 <form method="POST" action="{{ url_for('cartController.add_to_cart') }}">
-                    <input type="hidden" name="item_id" value="{{ data.item_id }}"/>
+                    <input type="hidden" name="item_id" value="{{ data.item_id }}"  min="0" oninput="validateInput()">/>
                     <div class="d-flex">
                         <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" style="max-width: 5rem" />
                         <button class="btn btn-outline-dark flex-shrink-0 add-to-cart-button" type="button">
@@ -136,7 +136,12 @@
         });
     });
 
-
+    function validateInput() {
+        var item_id_input = document.getElementById('item_id_input');
+        if (item_id_input.value < 0) {
+            item_id_input.value = 0; // 如果值為負數，則設定為0
+        }
+    }
 
 
 
