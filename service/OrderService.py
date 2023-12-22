@@ -21,11 +21,6 @@ def add_order(user_account, cart_items, updated_quantities):
 
         # 檢查庫存是否足夠
         shortage_items = []
-        # for cart_item_tuple in cart_items:
-        #     cart_item, item, book = cart_item_tuple
-        #
-        #     if not item or item.book_count < cart_item.quantity:
-        #         shortage_items.append(book)
 
         for cart_item_tuple in cart_items:
             cart_item, item, book = cart_item_tuple
@@ -44,7 +39,7 @@ def add_order(user_account, cart_items, updated_quantities):
         for cart_item_tuple in cart_items:
             cart_item, item, _ = cart_item_tuple
             updated_quantity = updated_quantities.get(cart_item.cart_item_id)
-            item.book_count -= updated_quantity  # 使用更新后的数量
+            item.book_count -= updated_quantity  # 使用更新後的數量
 
         # 創建訂單
         order_total_price = sum(
@@ -150,7 +145,7 @@ def cancel_an_order(order_id):
         if order.user_account != current_user.user.user_account:
             raise PermissionError("您無權取消此訂單")
 
-        # oreder_status!=0就不可以取消訂單
+        # order_status!=0就不可以取消訂單
         if order.order_status != '0':
             raise PermissionError("此訂單無法取消")
 

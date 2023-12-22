@@ -46,12 +46,6 @@
             <tbody>
                 {% for cart_item, item, book in cart_items %}
                 <tr>
-                    <td>
-                        <form action="{{ url_for('cartController.remove_from_cart', cart_item_id=cart_item.cart_item_id) }}"
-                              method="post">
-                            <button type="submit" class="btn-close"></button>
-                        </form>
-                    </td>
                     <td>{{ book.book_name }}</td>
                     <td class="book-price">{{ book.book_price }}</td>
                     <td>
