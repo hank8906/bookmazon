@@ -17,52 +17,74 @@
     <link href="{{ url_for('static', filename='css/book.css') }}" rel="stylesheet"/>
     <style>
         .content-body {
-            min-height: 80vh;
+            min-height: 100vh;
         }
+
     </style>
 </head>
 <body>
 {% include '/product/header.html' %}
-    <div class="container mt-4">
-        <h2>{{ current_user.user.user_account }}的訂單</h2>
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% for category, message in messages %}
-        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                    aria-label="Close"></button>
-        </div>
-        {% endfor %}
-        {% endwith %}
-
-        {% if orders|length > 0 %}
-            <table class="table table-hover mt-4">
-                <thead>
-                    <tr>
-                        <th>訂單編號</th>
-                        <th>訂單總金額</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for order in orders %}
-                        <tr>
-                            <td>{{ order.order_id }}</td>
-                            <td>{{ order.order_total_price }}</td>
-                            <td>
-                                <a href="{{ url_for('orderController.view_order_details', order_id=order.order_id) }}" class="btn btn-primary btn-sm">查看訂單明細</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>沒有訂單!</p>
-        {% endif %}
-
-        <!-- 繼續購物按鈕 -->
-        <a href="{{ url_for('productController.getProducts') }}" class="btn btn-secondary mt-4">繼續購物</a>
+<div class="container content-body mt-4">
+    <h2>{{ current_user.user.user_name }}的訂單</h2>
+    <hr>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
     </div>
+    {% endfor %}
+    {% endwith %}
+
+    {% if orders|length > 0 %}
+    <table class="table table-hover mt-4">
+        <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>收件人姓名</th>
+            <th>訂單狀態</th>
+            <th>付款狀態</th>
+            <th>收件地址</th>
+            <th>訂單建立時間</th>
+            <th>訂單總金額</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.order_id }}</td>
+            <th>{{ order.recipient_name }}</th>
+            <th>
+                {% if order.shipping_status == '0' %}
+                <span class="badge bg-danger">未配送</span>
+                {% else %}
+                <span class="badge bg-success">已配送</span>
+                {% endif %}
+            </th>
+            <th>
+                {% if order.payment_status == '0' %}
+                <span class="badge bg-danger">未付款</span>
+                {% else %}
+                <span class="badge bg-success">已付款</span>
+                {% endif %}
+            </th>
+            <th>{{ order.shipping_address }}</th>
+            <th>{{ order.create_datetime }}</th>
+            <td>{{ order.order_total_price }}</td>
+            <td>
+                <a href="{{ url_for('orderController.view_order_details', order_id=order.order_id) }}"
+                   class="btn btn-primary btn-sm">查看明細</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>沒有訂單!</p>
+    {% endif %}
+</div>
+{% include '/common/footer.html' %}
 </body>
 </html>
