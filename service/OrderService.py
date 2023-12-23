@@ -1,10 +1,14 @@
 import logging
+from datetime import datetime
 
 from flask import flash
 from flask_login import current_user
 from sqlalchemy.exc import SQLAlchemyError
 
+from enumeration.SystemMessage import OrderSystemCode, CommonSystemCode
+from exception.BusinessError import BusinessError
 from model.Book import Book
+from model.CheckoutBo import CheckoutBo
 from model.Item import Item
 from model.Order import Order
 from model.OrderItem import OrderItem
@@ -14,59 +18,61 @@ from utils.dbUtil import session
 
 app_logger = logger.setup_logger(logging.INFO)
 
+def add_order(checkout_bo: CheckoutBo):
+    # 檢查庫存是否足夠
+    for cart_item_tuple in checkout_bo.cart_items:
+        cart_item, item, book = cart_item_tuple
+        if item.book_count < cart_item.quantity:
+            # 如果庫存數不足，不得下單
+            error_code = OrderSystemCode.PLACE_ORDER_FAILED.value.get('system_code')
+            message = OrderSystemCode.PLACE_ORDER_FAILED.value.get('message')
+            raise BusinessError(message=message, error_code=error_code)
 
-def add_order(user_account, cart_items, updated_quantities):
+    # 庫存足夠，現有庫存數扣除會員購買的數量
+    for cart_item_tuple in checkout_bo.cart_items:
+        cart_item, item, _ = cart_item_tuple
+        item.book_count -= cart_item.quantity
+
     try:
-        # session.begin()
-
-        # 檢查庫存是否足夠
-        shortage_items = []
-
-        for cart_item_tuple in cart_items:
-            cart_item, item, book = cart_item_tuple
-            updated_quantity = updated_quantities.get(cart_item.cart_item_id)
-
-            if not item or item.book_count < updated_quantity:
-                shortage_items.append(book)
-
-        # 如果庫存不足，不進行後續操作
-        if shortage_items:
-            for book in shortage_items:
-                flash(f"庫存不足: {book.book_name}")
-            return None
-
-        # 庫存足夠，進行庫存減少和訂單創建
-        for cart_item_tuple in cart_items:
-            cart_item, item, _ = cart_item_tuple
-            updated_quantity = updated_quantities.get(cart_item.cart_item_id)
-            item.book_count -= updated_quantity  # 使用更新後的數量
-
-        # 創建訂單
+        # 建立訂單
         order_total_price = sum(
-            updated_quantities[cart_item.cart_item_id] * book.book_price for cart_item, item, book in
-            cart_items)
-        order = Order(user_account=user_account, order_total_price=order_total_price, order_status=0)
+            cart_item.quantity * book.book_price for cart_item, item, book in
+            checkout_bo.cart_items)
+        order = Order(user_account=checkout_bo.user_account,
+                      recipient_name=checkout_bo.recipient_name,
+                      order_total_price=order_total_price,
+                      order_status='0',
+                      payment_status='0',
+                      shipping_status='0',
+                      shipping_address=f'{checkout_bo.recipient_city}{checkout_bo.recipient_district}{checkout_bo.recipient_address}',
+                      update_datetime=datetime.now(),
+                      create_datetime=datetime.now()
+                      )
         session.add(order)
         session.flush()
-
-        for cart_item, item, book in cart_items:
-            updated_quantity = updated_quantities.get(cart_item.cart_item_id)
+        for cart_item, item, book in checkout_bo.cart_items:
             order_item = OrderItem(order_id=order.order_id, item_id=cart_item.item_id,
-                                   quantity=updated_quantity)
+                                   quantity=cart_item.quantity, update_datetime=datetime.now(),
+                                   create_datetime=datetime.now())
             session.add(order_item)
 
         # 刪除購物車中的商品
-        for cart_item, _, _ in cart_items:
+        for cart_item, _, _ in checkout_bo.cart_items:
             session.delete(cart_item)
 
         session.commit()
         return order.order_id
-
     except SQLAlchemyError as e:
         session.rollback()
         app_logger.error("Create order error: %s", e)
-        raise
-
+        error_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
+        message = CommonSystemCode.DATABASE_FAILED.value.get('message')
+        raise BusinessError(message=message, error_code=error_code)
+    except Exception as e:
+        app_logger.error("Create order error: %s", e)
+        error_code = CommonSystemCode.SYSTEM_FAILED.value.get('system_code')
+        message = CommonSystemCode.SYSTEM_FAILED.value.get('message')
+        raise BusinessError(message=message, error_code=error_code)
 
 def get_user_orders(user_account):
     try:
@@ -77,7 +83,6 @@ def get_user_orders(user_account):
         flash(f"無法獲取訂單資訊，請稍後再試。錯誤訊息：{str(e)}")
         return []
 
-
 def get_order_by_id(order_id):
     try:
         order = session.query(Order).filter(Order.order_id == order_id).first()
@@ -86,7 +91,6 @@ def get_order_by_id(order_id):
         app_logger.error("Get order error %s", e)
         flash("無法獲取訂單資訊，請稍後再試。")
         return None
-
 
 def get_order_items(order_id):
     try:
@@ -100,7 +104,6 @@ def get_order_items(order_id):
         app_logger.error("Get order items error：%s", e)
         flash("無法獲取訂單項目資訊，請稍後再試。")
         return []
-
 
 def update_order(order_id, new_order_data):
     try:
@@ -131,7 +134,6 @@ def update_order(order_id, new_order_data):
         app_logger.error(f"訂單修改失敗，請稍後再試。錯誤資訊：{str(e)}")
         return None
 
-
 def cancel_an_order(order_id):
     try:
         # 查詢要取消的訂單
@@ -151,7 +153,7 @@ def cancel_an_order(order_id):
 
         # 在這裡處理取消訂單的邏輯
         order.status = "Cancelled"
-        order.order_status = '2' # 訂單狀態改成 2: 取消
+        order.order_status = '2'  # 訂單狀態改成 2: 取消
 
         session.commit()
 

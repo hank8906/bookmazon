@@ -9,13 +9,8 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
     <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.5/tocas.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.5/tocas.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <!-- Core theme CSS (includes Bootstrap)-->
-    <!-- <link href="css/styles.css" rel="stylesheet" />-->
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='css/slide.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='css/book.css') }}" rel="stylesheet"/>
@@ -32,6 +27,10 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis; /* 顯示省略號 */
+    }
+
+    .navbar {
+        margin-bottom: 50px;
     }
     </style>
 
@@ -70,7 +69,7 @@
     </ul>
 </div>
 
-<div class="px-4 pt-3 my-5 text-center border-bottom">
+<div class="px-4 pt-3 my-5 text-center">
     <h1 class="display-4 fw-bold text-body-emphasis">平台初衷</h1>
     <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">主要是讓每位學長姊可以藉由平台販賣二手書，讓二手教科書得以重複利用，也讓學生每學期購書的負擔降低，同時減少資源浪費，落實地球永續</p>
@@ -80,22 +79,15 @@
             </button>
         </div>
     </div>
-    <div class="overflow-hidden" style="max-height: 30vh;">
-        <div class="container px-5">
-            <img src="{{ url_for('static', filename='assets/img/bookstore_6.jpg') }}"
-                 class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500"
-                 loading="lazy">
-        </div>
-    </div>
 </div>
 
 <div class="container px-4 py-5" id="custom-cards">
-    <h2 class="pb-2 border-bottom">Custom cards</h2>
+    <h2 class="pb-2 border-bottom">最新資訊</h2>
 
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
         <div class="col">
             <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                 style="background-image: url('unsplash-photo-1.jpg');">
+                 style="background-image: url({{url_for('static', filename='assets/img/discount.png')}}); background-position: center;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                     <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">今日優惠</h3>
                     <ul class="d-flex list-unstyled mt-auto">
@@ -107,7 +99,7 @@
                             <svg class="bi me-2" width="1em" height="1em">
                                 <use xlink:href="#geo-fill"></use>
                             </svg>
-                            <small>Earth</small>
+                            <small>閃亮聖誕，書中有禮！探索書海，送您聖誕驚喜，精選好書全面五折！</small>
                         </li>
                         <li class="d-flex align-items-center">
                             <svg class="bi me-2" width="1em" height="1em">
@@ -122,7 +114,9 @@
 
         <div class="col">
             <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                 style="background-image: url('unsplash-photo-2.jpg');">
+                 style="background-image: url({{url_for('static', filename='assets/img/book-on-sale.png')}});
+            background-size: cover;
+            background-repeat: no-repeat;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                     <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">暢銷排行</h3>
                     <ul class="d-flex list-unstyled mt-auto">
@@ -134,13 +128,13 @@
                             <svg class="bi me-2" width="1em" height="1em">
                                 <use xlink:href="#geo-fill"></use>
                             </svg>
-                            <small>Pakistan</small>
+                            <small>學生二手書狂歡節！省錢又環保，挑選您所需的學科教材，打造輕鬆學習新旅程！</small>
                         </li>
                         <li class="d-flex align-items-center">
                             <svg class="bi me-2" width="1em" height="1em">
                                 <use xlink:href="#calendar3"></use>
                             </svg>
-                            <small>4d</small>
+                            <small>1d</small>
                         </li>
                     </ul>
                 </div>
@@ -149,7 +143,9 @@
 
         <div class="col">
             <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                 style="background-image: url('unsplash-photo-3.jpg');">
+                 style="background-image: url({{url_for('static', filename='assets/img/book-club2.png')}});
+            background-size: cover;
+            background-repeat: no-repeat;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
                     <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">社群</h3>
                     <ul class="d-flex list-unstyled mt-auto">
@@ -161,7 +157,7 @@
                             <svg class="bi me-2" width="1em" height="1em">
                                 <use xlink:href="#geo-fill"></use>
                             </svg>
-                            <small>California</small>
+                            <small>學海漫遊書匯：共建學生二手書社群，尋找知識寶藏，交流學習心得，共創學業輝煌之旅！</small>
                         </li>
                         <li class="d-flex align-items-center">
                             <svg class="bi me-2" width="1em" height="1em">
@@ -176,24 +172,21 @@
     </div>
 </div>
 
-<div class="new-books-section">
-    <h2 class="pb-2 border-bottom">新書上架</h2>
+<div class="container px-4 py-5">
+    <h2 class="pb-2 border-bottom">最新書籍</h2>
     <div class="new-books-container" id="newBooksContainer"></div>
-    <button id="prevButton">上一頁</button>
-    <button id="nextButton">下一頁</button>
+    <div class=" mt-3">
+        <button id="prevButton" class="btn btn-secondary">上一頁</button>
+        <button id="nextButton" class="btn btn-secondary">下一頁</button>
+    </div>
 </div>
-
-<div class="recommend-books-section">
-    <h2 class="pb-2 border-bottom">精選推薦</h2>
-    <div class="recommend-books-container" id="recommendBooksContainer"></div>
-</div>
-
 
 {% include './common/footer.html' %}
+
+</body>
 <script src="{{ url_for('static', filename='js/slide.js') }}"></script>
 <script src="{{ url_for('static', filename='js/search.js') }}"></script>
-</body>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         let currentPage = 1;
@@ -276,23 +269,31 @@
             const BookElement = document.createElement("div");
             BookElement.classList.add("book");
 
+            const imageLinkElement = document.createElement("a");
+            imageLinkElement.dataset.bookId = book.id;
+            imageLinkElement.href = `/getProduct/${book.id}`;
+
             const imageElement = document.createElement("img");
-            imageElement.src = '../static/'+book.image;
+            imageElement.src = '../static/' + book.image;
             imageElement.alt = book.title;
+
+            imageLinkElement.appendChild(imageElement);
 
             const titleLinkElement = document.createElement("a");
             // 將book.id嵌入到data屬性中
-            titleLinkElement.dataset.bookId = book.id;
-            titleLinkElement.href = `/getProduct/${book.id}`;
             titleLinkElement.textContent = book.title;
+            titleLinkElement.style.color = "blue"; // 標題文字顏色
+            titleLinkElement.style.fontWeight = "bold"; // 標題文字粗細
 
             const authorElement = document.createElement("p");
             authorElement.textContent = `作者: ${book.author}`;
 
             const priceElement = document.createElement("p");
             priceElement.textContent = `價格: ${book.price}`;
+            priceElement.style.color = "green"; // 價格文字顏色
+            priceElement.style.fontStyle = "italic"; // 價格文字斜體
 
-            BookElement.appendChild(imageElement);
+            BookElement.appendChild(imageLinkElement);
             BookElement.appendChild(titleLinkElement);
             BookElement.appendChild(authorElement);
             BookElement.appendChild(priceElement);
@@ -350,5 +351,9 @@
         // 顯示最近搜尋的區塊
         recentSearches.style.display = searches.length > 0 ? 'block' : 'none';
     }
+
+
+
+
 </script>
 </html>

@@ -16,7 +16,7 @@
     <link href="{{ url_for('static', filename='css/book.css') }}" rel="stylesheet"/>
     <style>
         .content-body {
-            min-height: 80vh;
+            min-height: 100vh;
         }
         .quantity-input {
             width: 80px;
@@ -114,7 +114,7 @@
     {% endif %}
 </div>
 {% include 'common/footer.html' %}
-
+{% include 'common/modal.html' %}
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
@@ -201,20 +201,23 @@ document.addEventListener("DOMContentLoaded", function() {
             body: JSON.stringify({cartItems: cartItems})
         }).then(response => response.json())
         .then(data => {
-            if(data.success) {
-                // Handle success - maybe update UI or alert the user
-                console.log("Update was successful", data);
-                // Optionally, you could navigate away or refresh the page here
-
-            } else {
-                // Handle failure - alert the user, possibly retry
-                console.error("Update failed", data);
-                alert("Failed to update cart. Please try again!");
+            if(!data.success){
+                if (error) {
+                    document.getElementById('messageContent').innerText = '目前資訊庫異常，請稍候操作。';
+                    messageModal.show();
+                    setTimeout(()=> {
+                        messageModal.hide();
+                    }, 850);
+                }
             }
         }).catch(error => {
-            // Handle network errors or other fetch issues
-            console.error("Network or other error", error);
-            alert("An error occurred. Please try again!");
+            if (error) {
+                document.getElementById('messageContent').innerText = '目前資訊庫異常，請稍候操作。';
+                messageModal.show();
+                setTimeout(()=> {
+                    messageModal.hide();
+                }, 850);
+            }
         });
     }
 
