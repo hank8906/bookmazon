@@ -46,14 +46,16 @@
             <tbody>
                 {% for cart_item, item, book in cart_items %}
                 <tr>
+                    <td><img
+                        class="card-img-top mb-5 mb-md-0" src="{{ url_for('static', filename=book.book_image_path) }}"
+                        alt="{{ book.book_name }}" style="max-width: 30%; height: 30%;"></a></td>
                     <td>{{ book.book_name }}</td>
                     <td class="book-price">{{ book.book_price }}</td>
                     <td>
-                        <button type="button" class="quantity-decrease btn btn-light">-</button>
-                        <input type="number" name="quantity-{{ cart_item.cart_item_id }}"
-                               min="1" value="{{ cart_item.quantity }}" class="quantity-number-input">
-                        <button type="button" class="quantity-increase btn btn-light">+</button>
-                        <input type="hidden" name="cart_item_id" value="{{ cart_item.cart_item_id }}" class="quantity-input">
+<!--                        <input type="number" name="quantity-{{ cart_item.cart_item_id }}"-->
+<!--                               value="{{ cart_item.quantity }}" class="quantity-number-input">-->
+<!--                        <input type="hidden" name="cart_item_id" value="{{ cart_item.cart_item_id }}" class="quantity-input">-->
+                        {{ cart_item.quantity }}
                     </td>
                 </tr>
                 {% endfor %}
@@ -76,45 +78,57 @@
     </div>
 </body>
 <script>
-    // 當頁面加載完成後執行
-    document.addEventListener('DOMContentLoaded', function () {
-        // 為每個數量輸入框添加事件監聽器
-        document.querySelectorAll('.quantity-number-input').forEach(function(input) {
-            input.addEventListener('change', function() {
-                updateTotalPrice();
-            });
-        });
-        document.querySelectorAll('.quantity-increase').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var input = button.previousElementSibling;
-                input.value = parseInt(input.value, 10) + 1;
-                updateTotalPrice();
-            });
-        });
+    // When the page loads
+    window.onload = function() {
+      // Check if the page has been reloaded before
+      if (sessionStorage.getItem("reloaded") === null) {
+        // Set the flag and reload the page
+        sessionStorage.setItem("reloaded", "true");
+        window.location.reload();
+      } else {
+        // Remove the item so it doesn't reload on next visit
+        sessionStorage.removeItem("reloaded");
+      }
+    };
+<!--    // 當頁面加載完成後執行-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        // 為每個數量輸入框添加事件監聽器-->
+<!--        document.querySelectorAll('.quantity-number-input').forEach(function(input) {-->
+<!--            input.addEventListener('change', function() {-->
+<!--                updateTotalPrice();-->
+<!--            });-->
+<!--        });-->
+<!--        document.querySelectorAll('.quantity-increase').forEach(function(button) {-->
+<!--            button.addEventListener('click', function() {-->
+<!--                var input = button.previousElementSibling;-->
+<!--                input.value = parseInt(input.value, 10) + 1;-->
+<!--                updateTotalPrice();-->
+<!--            });-->
+<!--        });-->
 
-        document.querySelectorAll('.quantity-decrease').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var input = button.nextElementSibling;
-                if (parseInt(input.value, 10) > 1) {
-                    input.value = parseInt(input.value, 10) - 1;
-                }
-                updateTotalPrice();
-            });
-        });
-        // 初始時也計算一次總計
-        updateTotalPrice();
-    });
+<!--        document.querySelectorAll('.quantity-decrease').forEach(function(button) {-->
+<!--            button.addEventListener('click', function() {-->
+<!--                var input = button.nextElementSibling;-->
+<!--                if (parseInt(input.value, 10) > 1) {-->
+<!--                    input.value = parseInt(input.value, 10) - 1;-->
+<!--                }-->
+<!--                updateTotalPrice();-->
+<!--            });-->
+<!--        });-->
+<!--        // 初始時也計算一次總計-->
+<!--        updateTotalPrice();-->
+<!--    });-->
 
-    function updateTotalPrice() {
-        var total = 0;
-        // 遍歷每個數量輸入框
-        document.querySelectorAll('.quantity-number-input').forEach(function(input) {
-            var quantity = parseInt(input.value, 10); // 將數量轉換為整數
-            var price = parseFloat(input.closest('tr').querySelector('.book-price').textContent); // 將價格轉換為浮點數
-            total += quantity * price;
-        });
-        // 更新總價格
-        document.getElementById('total-price').textContent = total.toFixed(2); // 固定到兩位小數
-    }
+<!--    function updateTotalPrice() {-->
+<!--        var total = 0;-->
+<!--        // 遍歷每個數量輸入框-->
+<!--        document.querySelectorAll('.quantity-number-input').forEach(function(input) {-->
+<!--            var quantity = parseInt(input.value, 10); // 將數量轉換為整數-->
+<!--            var price = parseFloat(input.closest('tr').querySelector('.book-price').textContent); // 將價格轉換為浮點數-->
+<!--            total += quantity * price;-->
+<!--        });-->
+<!--        // 更新總價格-->
+<!--        document.getElementById('total-price').textContent = total.toFixed(2); // 固定到兩位小數-->
+<!--    }-->
 </script>
 </html>

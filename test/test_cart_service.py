@@ -311,7 +311,7 @@ class TestCartService:
     @pytest.mark.get_cart_items_failed
     def test_get_cart_items_failed(self):
         try:
-            get_cart_items(invalid_user)
+            assert get_cart_items(invalid_user) == []
             # assert False
         except BusinessError:
             assert True

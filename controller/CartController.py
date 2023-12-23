@@ -116,3 +116,20 @@ def checkout():
     total_price = calculate_total_price(current_user.user.user_account)
 
     return render_template('order/addOrder.html', cart_items=cart_items, total_price=total_price)
+
+@cartController.route('/update_cart', methods=['POST'])
+@login_required
+def update_cart():
+    data = request.json
+    json_message = JsonMessage()
+    try:
+        update_item_quantity(data['cartItems'])
+
+        json_message.system_code = ShoppingCartSystemCode.ADD_ITEM_SUCCESS.value.get('system_code')
+        json_message.system_message = ShoppingCartSystemCode.ADD_ITEM_SUCCESS.value.get('message')
+    except BusinessError as e:
+        json_message.success = False
+        json_message.system_code = e.error_code
+        json_message.system_message = e.message
+
+    return json.dumps(json_message.__dict__)

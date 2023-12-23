@@ -235,3 +235,25 @@ def get_cart_item_count(user_account):
     except SQLAlchemyError as e:
         app_logger.error('Error during count: %s', e)
         return 0
+
+"""
+    更新購物車品項數量
+    Args:
+        cart_items 購物車品項
+    Returns:
+        
+    Raises:
+"""
+def update_item_quantity(cart_items):
+    try:
+        for cart_item in cart_items:
+            cart_item_record = session.query(CartItem).filter_by(cart_item_id=cart_item['cart_item_id']).first()
+            if cart_item_record:
+                cart_item_record.quantity = cart_item['quantity']
+        session.commit()
+    except SQLAlchemyError as e:
+        session.rollback()
+        app_logger.error('Database transaction error: %s', e)
+        error_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
+        message = CommonSystemCode.DATABASE_FAILED.value.get('message')
+        raise BusinessError(message=message, error_code=error_code)
