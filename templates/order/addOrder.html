@@ -18,117 +18,116 @@
     <link href="{{ url_for('static', filename='css/book.css') }}" rel="stylesheet"/>
     <style>
         .content-body {
-            min-height: 80vh;
+            min-height: 100vh;
+            margin-top: 20px;
         }
-        .quantity-number-input {
+        .quantity-input {
             width: 80px;
         }
+        .quantity-number-input {
+            text-align: center;
+        }
+        td, th {
+            vertical-align: middle;
+        }
+
+        .cart-table-container {
+            max-height: 700px;
+            overflow-y: auto;
+        }
+        .overflow-hidden {
+            overflow: hidden;
+        }
+
 
 
     </style>
 </head>
 <body>
-    {% include '/product/header.html' %}
-    <div class="container">
-        <h2>結帳</h2>
-        <hr>
-        <h3>商品明細</h3>
-        <form action="{{ url_for('orderController.checkout') }}" method="post">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>書名</th>
-                    <th>價格</th>
-                    <th>數量</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for cart_item, item, book in cart_items %}
-                <tr>
-                    <td><img
-                        class="card-img-top mb-5 mb-md-0" src="{{ url_for('static', filename=book.book_image_path) }}"
-                        alt="{{ book.book_name }}" style="max-width: 30%; height: 30%;"></a></td>
-                    <td>{{ book.book_name }}</td>
-                    <td class="book-price">{{ book.book_price }}</td>
-                    <td>
-<!--                        <input type="number" name="quantity-{{ cart_item.cart_item_id }}"-->
-<!--                               value="{{ cart_item.quantity }}" class="quantity-number-input">-->
-<!--                        <input type="hidden" name="cart_item_id" value="{{ cart_item.cart_item_id }}" class="quantity-input">-->
-                        {{ cart_item.quantity }}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div class="d-flex justify-content-end">
-            <h4 class="me-2">總計：</h4>
-            <h4 id="total-price">{{ total_price }}</h4>
-        </div>
-        <h3>收件人資訊</h3>
-        <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">收件人姓名</label>
-            <input type="text" class="form-control" id="recipient-name" name="recipient-name" value="{{current_user.user.user_account}}">
-        </div>
-        <div class="d-flex justify-content-between mt-3">
-            <a href="{{ url_for('productController.getProducts') }}" class="btn btn-secondary btn-lg">返回商店</a>
-            <button type="submit" class="btn btn-danger btn-lg">提交訂單</button>
-        </div>
-        </form>
+{% include '/product/header.html' %}
+<div class="container content-body">
+
+    <h2>結帳</h2>
+    <hr>
+    <h3>商品明細</h3>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="col-1"></th>
+            <th class="col-7">書名</th>
+            <th class="col-2">單價</th>
+            <th class="col-1">數量</th>
+            <th class="col-1">小計</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cart_item, item, book in cart_items %}
+        <tr>
+            <td><a href="{{ url_for('productController.getDetailProductInfo', item_id=item.item_id) }}"><img
+                    class="card-img-top mb-5 mb-md-0" src="{{ url_for('static', filename=book.book_image_path) }}"
+                    alt="{{ book.book_name }}" style="max-width: 70%; height: 70%;"></a></td>
+            <td>{{ book.book_name }}</td>
+            <td id="book-price">{{ book.book_price }}</td>
+            <td>
+                {{ cart_item.quantity }}
+            </td>
+            <td id="subTotal-price" data-book-price="{{ book.book_price }}">{{ cart_item.quantity * book.book_price
+                }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <h4 class="me-2">總計：</h4>
+        <h4 id="total-price">{{ total_price }}</h4>
     </div>
+    <hr>
+    <h2>收件人資訊</h2>
+    <form action="{{ url_for('orderController.checkout') }}" method="post">
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">收件人真實姓名</label>
+            <input type="text" class="form-control" id="recipient-name" name="recipient-name"
+                   value="{{current_user.user.user_name}}">
+        </div>
+
+        <div class="mb-3">
+            <label class="col-form-label">運送地址</label>
+            <div class="twzipcode">
+                <select data-role="county" class="form-select" name="recipient-city"></select>
+                <select data-role="district" class="form-select" name="recipient-district"></select>
+                <input type="hidden" data-role="zipcode"/>
+                <input type="text" class="form-control" id="recipient-address" name="recipient-address">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="payment-method" class="col-form-label">付款方式</label>
+            <select class="form-select" id="payment-method" name="payment-method">
+                <option selected disabled>選擇付款方式</option>
+                <option value="1">貨到付款</option>
+                <option value="2">信用卡付款</option>
+                <option value="3">銀行轉帳</option>
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+            <a href="{{ url_for('cartController.view_cart') }}" class="btn btn-secondary" id="checkout-button">返回購物車</a>
+            <button type="submit" class="btn btn-secondary">送出訂單</button>
+        </div>
+    </form>
+</div>
+{% include 'common/footer.html' %}
 </body>
+<script src="https://code.essoduke.org/js/twzipcode/twzipcode.latest.js"></script>
 <script>
-    // When the page loads
-    window.onload = function() {
-      // Check if the page has been reloaded before
-      if (sessionStorage.getItem("reloaded") === null) {
-        // Set the flag and reload the page
-        sessionStorage.setItem("reloaded", "true");
-        window.location.reload();
-      } else {
-        // Remove the item so it doesn't reload on next visit
-        sessionStorage.removeItem("reloaded");
-      }
-    };
-<!--    // 當頁面加載完成後執行-->
-<!--    document.addEventListener('DOMContentLoaded', function () {-->
-<!--        // 為每個數量輸入框添加事件監聽器-->
-<!--        document.querySelectorAll('.quantity-number-input').forEach(function(input) {-->
-<!--            input.addEventListener('change', function() {-->
-<!--                updateTotalPrice();-->
-<!--            });-->
-<!--        });-->
-<!--        document.querySelectorAll('.quantity-increase').forEach(function(button) {-->
-<!--            button.addEventListener('click', function() {-->
-<!--                var input = button.previousElementSibling;-->
-<!--                input.value = parseInt(input.value, 10) + 1;-->
-<!--                updateTotalPrice();-->
-<!--            });-->
-<!--        });-->
-
-<!--        document.querySelectorAll('.quantity-decrease').forEach(function(button) {-->
-<!--            button.addEventListener('click', function() {-->
-<!--                var input = button.nextElementSibling;-->
-<!--                if (parseInt(input.value, 10) > 1) {-->
-<!--                    input.value = parseInt(input.value, 10) - 1;-->
-<!--                }-->
-<!--                updateTotalPrice();-->
-<!--            });-->
-<!--        });-->
-<!--        // 初始時也計算一次總計-->
-<!--        updateTotalPrice();-->
-<!--    });-->
-
-<!--    function updateTotalPrice() {-->
-<!--        var total = 0;-->
-<!--        // 遍歷每個數量輸入框-->
-<!--        document.querySelectorAll('.quantity-number-input').forEach(function(input) {-->
-<!--            var quantity = parseInt(input.value, 10); // 將數量轉換為整數-->
-<!--            var price = parseFloat(input.closest('tr').querySelector('.book-price').textContent); // 將價格轉換為浮點數-->
-<!--            total += quantity * price;-->
-<!--        });-->
-<!--        // 更新總價格-->
-<!--        document.getElementById('total-price').textContent = total.toFixed(2); // 固定到兩位小數-->
-<!--    }-->
+let twzipcode = new TWzipcode({
+    "district": {
+        onChange: function (id) {
+            console.log(this.nth(id).get());
+        }
+    }
+});
 </script>
 </html>

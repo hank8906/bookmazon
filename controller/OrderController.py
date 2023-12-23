@@ -1,4 +1,8 @@
 from flask import Blueprint, request, redirect, url_for, flash, render_template
+
+from enumeration.SystemMessage import OrderSystemCode
+from exception.BusinessError import BusinessError
+from model.CheckoutBo import CheckoutBo
 from service.OrderService import add_order, get_order_by_id, get_order_items, get_user_orders, update_order, \
     cancel_an_order
 from flask_login import login_required, current_user
@@ -19,40 +23,27 @@ orderController = Blueprint('orderController', __name__)
 @orderController.route('/checkout', methods=['POST'])
 @login_required
 def checkout():
-    # 獲取目前使用者的購物車項目
+    # 拿到目前使用者的購物車商品
     cart_items = get_cart_items(current_user.user.user_account)
 
-    # 初始化用於儲存更新後數量的字典
-    updated_quantities = {}
+    checkout_bo = CheckoutBo(
+        user_account=current_user.user.user_account,
+        cart_items=cart_items,
+        recipient_name=request.form.get('recipient-name'),
+        recipient_city=request.form.get('recipient-city'),
+        recipient_district=request.form.get('recipient-district'),
+        recipient_address=request.form.get('recipient-address'),
+        payment_method=request.form.get('payment_method')
+    )
 
-    # 迭代購物車項目
-    for cart_item_tuple in cart_items:
-        # 元組拆包
-        # 元组拆包，將 cart_item_tuple 中的值分配给相應的變數
-        # cart_item 用於 save 元組的第一個值，可能表示購物車中的一個項
-        # 第二個下劃線 _ 表示忽略元組的第二個值
-        # 第三個下劃線 _ 表示同樣不關心元组的第三個值
-        cart_item, _, _ = cart_item_tuple
-        # 取得訂單數量的表單欄位名稱
-        input_name = f'quantity-{cart_item.cart_item_id}'
-        # 從表單中獲取更新後的數量
-        updated_quantity = request.form.get(input_name, type=int)
-
-        # 檢查是否有更新，若無則使用原本的數量
-        if updated_quantity is not None:
-            updated_quantities[cart_item.cart_item_id] = updated_quantity
-        else:
-            updated_quantities[cart_item.cart_item_id] = cart_item.quantity
-
-    # 使用 add_order 函式創建訂單
-    order_id = add_order(current_user.user.user_account, cart_items, updated_quantities)
-
-    # 檢查是否成功創建訂單，並顯示相應的 Flash 訊息
-    if order_id:
-        flash(f"訂單已成功創建", "success")
+    # 建立訂單
+    try:
+        order_id = add_order(checkout_bo)
+        message = OrderSystemCode.PLACE_ORDER_SUCCESS.value.get('message')
+        flash(message, "success")
         return redirect(url_for('orderController.view_order_details', order_id=order_id))
-    else:
-        flash("結帳失敗", "error")
+    except BusinessError as e:
+        flash(e.message, "danger")
         return redirect(url_for('cartController.view_cart'))
 
 """
