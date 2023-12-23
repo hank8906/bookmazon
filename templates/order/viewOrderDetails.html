@@ -17,79 +17,113 @@
     <link href="{{ url_for('static', filename='css/book.css') }}" rel="stylesheet"/>
     <style>
         .content-body {
-            min-height: 80vh;
+            min-height: 100vh;
         }
+        .quantity-input {
+            width: 80px;
+        }
+        .quantity-number-input {
+            text-align: center;
+        }
+        td, th {
+            vertical-align: middle;
+        }
+
+        .cart-table-container {
+            max-height: 700px;
+            overflow-y: auto;
+        }
+        .overflow-hidden {
+            overflow: hidden;
+        }
+
+
+
+
+
     </style>
 </head>
 <body>
 {% include '/product/header.html' %}
-    <div class="container mt-5">
-        <h2>訂單明細 - 訂單編號: {{ order.order_id }}</h2>
-        <p>訂單成立時間: {{ order.create_datetime }}</p>
-        <div class="mb-2">
-            訂單狀態 :
-            {% if order.order_status == '0' %}
-            <span class="badge bg-danger">未完成</span>
-            {% elif order.order_status == '1' %}
-            <span class="badge bg-success">完成</span>
-            {% elif order.order_status == '2' %}
-            <span class="badge bg-danger">取消中</span>
-            {% endif %}
-        </div>
-        <h3>商品列表</h3>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th>商品名稱</th>
-                    <th>數量</th>
-                    <th>單價</th>
-                    <th>小計</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for order_item, book_name, book_price in order_items %}
-                <tr>
-                    <td>{{ book_name }}</td>
-                    <td>{{ order_item.quantity }}</td>
-                    <td>{{ book_price }}</td>
-                    <td>{{ order_item.quantity * book_price }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div class="d-flex justify-content-between mt-3">
-            <a href="{{ url_for('productController.getProducts') }}" class="btn btn-primary">返回首頁</a>
-            <h4>訂單總價: {{ order.order_total_price }}</h4>
+<div class="container mt-5 content-body">
+    <h2>訂單明細 - 訂單編號: {{ order.order_id }}</h2>
+    <p>訂單成立時間: {{ order.create_datetime }}</p>
+    <div class="mb-2">
+        訂單狀態 :
+        {% if order.shipping_status == '0' %}
+        <span class="badge bg-danger">未完成</span>
+        {% elif order.shipping_status == '1' %}
+        <span class="badge bg-success">完成</span>
+        {% elif order.shipping_status == '2' %}
+        <span class="badge bg-danger">取消中</span>
+        {% endif %}
+    </div>
+    <h3>購買商品</h3>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>商品名稱</th>
+            <th>數量</th>
+            <th>單價</th>
+            <th>小計</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order_item, item, book in order_items %}
+        <tr>
+            <td><a href="{{ url_for('productController.getDetailProductInfo', item_id=item.item_id) }}"><img
+                    class="card-img-top mb-5 mb-md-0" src="{{ url_for('static', filename=book.book_image_path) }}"
+                    alt="{{ book.book_name }}" style="max-width: 70%; height: 70%;"></a></td>
+            <td>{{ book.book_name }}</td>
+            <td id="book-price">{{ book.book_price }}</td>
+            <td>
+                {{ order_item.quantity }}
+            </td>
+            <td id="subTotal-price" data-book-price="{{ book.book_price }}">{{ order_item.quantity * book.book_price
+                }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <h4>訂單總價: {{ order.order_total_price }}</h4>
+    </div>
+    <div class="d-flex justify-content-between mt-3">
+        <a href="{{ url_for('orderController.view_order') }}" class="btn btn-primary">返回個人訂單</a>
 
-            <!-- Cancel Order Button to trigger modal -->
-            {% if order.order_status == '0' %}
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelOrderModal">
-                    取消訂單
-                </button>
-            {% endif %}
-            <!-- Bootstrap Modal -->
-            <div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="cancelOrderModalLabel">Confirm Cancellation</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Do you really want to cancel the order?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">否</button>
-                            <form action="{{ url_for('orderController.cancel_order', order_id=order.order_id) }}" method="post">
-                                <button type="submit" class="btn btn-danger">是，取消訂單</button>
-                            </form>
-                        </div>
+
+        <!-- Cancel Order Button to trigger modal -->
+        {% if order.order_status == '0' %}
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelOrderModal">
+            取消訂單
+        </button>
+        {% endif %}
+        <!-- Bootstrap Modal -->
+        <div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cancelOrderModalLabel">取消訂單</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        您真的要取消訂單嗎？
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">否</button>
+                        <form action="{{ url_for('orderController.cancel_order', order_id=order.order_id) }}"
+                              method="post">
+                            <button type="submit" class="btn btn-danger">是，取消訂單</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
+</div>
+{% include '/common/footer.html' %}
 </body>
 </html>

@@ -3,7 +3,7 @@ from flask import Blueprint, request, redirect, url_for, flash, render_template
 from enumeration.SystemMessage import OrderSystemCode
 from exception.BusinessError import BusinessError
 from model.CheckoutBo import CheckoutBo
-from service.OrderService import add_order, get_order_by_id, get_order_items, get_user_orders, update_order, \
+from service.OrderService import add_order, get_order_by_id, get_order_items, get_user_orders, \
     cancel_an_order
 from flask_login import login_required, current_user
 from service.CartService import get_cart_items
@@ -59,21 +59,26 @@ def checkout():
 @orderController.route('/view_order_details/<int:order_id>', methods=['GET'])
 @login_required
 def view_order_details(order_id):
-    # 使用 get_order_by_id 函式獲取指定訂單
-    order = get_order_by_id(order_id)
-
-    # 檢查訂單是否存在
-    if not order:
-        flash("訂單不存在", "warning")
+    # 勞取指定訂單
+    try:
+        order = get_order_by_id(order_id)
+    except BusinessError as e:
+        # 訂單不存在
+        flash(e.message, "warning")
         return redirect(url_for('productController.getProducts'))
 
     # 檢查當前使用者是否有權訪問此訂單
     if order.user_account != current_user.user.user_account:
-        flash("您無權訪問此訂單", "warning")
+        message = OrderSystemCode.NOT_ORDER_OWNER.value.get('message')
+        flash(message, "warning")
         return redirect(url_for('productController.getProducts'))
 
     # 使用 get_order_items 函式獲取訂單項目
-    order_items = get_order_items(order_id)
+    order_items = []
+    try:
+        order_items = get_order_items(order_id)
+    except BusinessError as e:
+        flash(e.message, "warning")
 
     # 將訂單和訂單項目傳遞給模板，並呈現訂單詳細資訊的頁面
     return render_template('order/viewOrderDetails.html', order=order, order_items=order_items)
@@ -95,55 +100,14 @@ def view_order():
     user_account = current_user.user.user_account
 
     # 使用 get_user_orders 函式獲取該使用者的所有訂單
-    orders = get_user_orders(user_account)
+    orders = []
+    try:
+        orders = get_user_orders(user_account)
+    except BusinessError as e:
+        flash(e.message, "warning")
 
     # 將訂單列表傳遞給模板，並呈現訂單總覽的頁面
     return render_template('order/viewOrder.html', orders=orders)
-
-# 修改訂單
-@orderController.route('/modify_order/<int:order_id>', methods=['GET', 'POST'])
-@login_required
-def modify_order(order_id):
-    # 獲取要修改的訂單
-    order = get_order_by_id(order_id)
-
-    # 檢查訂單是否存在
-    if not order:
-        flash("訂單不存在", "warning")
-        return redirect(url_for('productController.getProducts'))
-
-    # 檢查是否有權修改此訂單
-    if order.user_account != current_user.user.user_account:
-        flash("您無權修改此訂單", "warning")
-        return redirect(url_for('productController.getProducts'))
-
-    # 處理修改訂單的 POST 請求
-    if request.method == 'POST':
-        try:
-            # 在這裡處理修改訂單的邏輯
-            updated_quantity = request.form.get('quantity', type=int)
-
-            # 準備要更新的訂單資料，這裡要更新的數量
-            new_order_data = {'quantity': updated_quantity}
-
-            # 使用 OrderService 更新訂單
-            result = update_order(order_id, new_order_data)
-
-            if result:
-                flash("訂單已修改", "success")
-                return redirect(url_for('orderController.view_order_details', order_id=order_id))
-            else:
-                # 若更新失敗，導向一個適當的頁面
-                flash("訂單修改失敗", "error")
-                return redirect(url_for('productController.getProducts'))
-
-        except Exception as e:
-            # 處理其他可能的錯誤
-            flash(f"發生錯誤: {str(e)}", "error")
-            return redirect(url_for('productController.getProducts'))
-
-    # 渲染修改訂單的模板
-    return render_template('order/modifyOrder.html', order=order)
 
 # 取消訂單
 @orderController.route('/cancel_order/<int:order_id>', methods=['POST'])

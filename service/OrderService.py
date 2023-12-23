@@ -1,7 +1,6 @@
 import logging
 from datetime import datetime
 
-from flask import flash
 from flask_login import current_user
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -18,6 +17,15 @@ from utils.dbUtil import session
 
 app_logger = logger.setup_logger(logging.INFO)
 
+"""
+    建立會員的訂單
+    Args:
+        checkout_bo 結帳 Bo
+    Returns:
+        order_id 訂單編號
+    Raises:
+        BusinessError
+"""
 def add_order(checkout_bo: CheckoutBo):
     # 檢查庫存是否足夠
     for cart_item_tuple in checkout_bo.cart_items:
@@ -74,65 +82,65 @@ def add_order(checkout_bo: CheckoutBo):
         message = CommonSystemCode.SYSTEM_FAILED.value.get('message')
         raise BusinessError(message=message, error_code=error_code)
 
+"""
+    取得會員的所有訂單
+    Args:
+        user_account 會員帳號
+    Returns:
+        Order 訂單
+    Raises:
+        BusinessError
+"""
 def get_user_orders(user_account):
     try:
         orders = session.query(Order).filter(Order.user_account == user_account).all()
         return orders
     except SQLAlchemyError as e:
         app_logger.error(f"Get user order error：{str(e)}")
-        flash(f"無法獲取訂單資訊，請稍後再試。錯誤訊息：{str(e)}")
-        return []
+        error_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
+        message = CommonSystemCode.DATABASE_FAILED.value.get('message')
+        raise BusinessError(message=message, error_code=error_code)
 
+"""
+    建立會員的訂單
+    Args:
+        checkout_bo 結帳 Bo
+    Returns:
+        order_id 訂單編號
+    Raises:
+        BusinessError
+"""
 def get_order_by_id(order_id):
     try:
         order = session.query(Order).filter(Order.order_id == order_id).first()
         return order
     except SQLAlchemyError as e:
         app_logger.error("Get order error %s", e)
-        flash("無法獲取訂單資訊，請稍後再試。")
-        return None
+        error_code = OrderSystemCode.ORDER_NOT_EXIST.value.get('system_code')
+        message = OrderSystemCode.ORDER_NOT_EXIST.value.get('message')
+        raise BusinessError(message=message, error_code=error_code)
 
+"""
+    取得訂單詳細內容
+    Args:
+        order_id 訂單編號
+    Returns:
+        order_items 訂單詳細內容
+    Raises:
+        BusinessError
+"""
 def get_order_items(order_id):
     try:
-        order_items = session.query(OrderItem).filter(OrderItem.order_id == order_id) \
-            .join(Item, OrderItem.item_id == Item.item_id) \
-            .join(Book, Item.book_id == Book.book_id) \
-            .add_columns(Book.book_name, Book.book_price) \
-            .all()
+        order_items = session.query(OrderItem, Item, Book).join(
+            Item, OrderItem.item_id == Item.item_id).join(
+            Book, Item.book_id == Book.book_id).where(
+            OrderItem.order_id == order_id).all()
         return order_items
     except SQLAlchemyError as e:
         app_logger.error("Get order items error：%s", e)
-        flash("無法獲取訂單項目資訊，請稍後再試。")
-        return []
-
-def update_order(order_id, new_order_data):
-    try:
-        # 查詢指定訂單
-        order = session.query(Order).filter(Order.order_id == order_id).first()
-
-        # 檢查訂單是否存在
-        if not order:
-            app_logger.error("訂單不存在", "warning")
-            return None
-
-        # 檢查是否有權修改此訂單
-        if order.user_account != current_user.user.user_account:
-            app_logger.error("您無權修改此訂單", "warning")
-            return None
-
-        # 更新訂單的相應內容
-        for field, value in new_order_data.items():
-            setattr(order, field, value)
-
-        # 提交事務
-        session.commit()
-        return order_id
-
-    except SQLAlchemyError as e:
-        # 更新失敗時回滾事務並顯示錯誤 Flash 訊息
-        session.rollback()
-        app_logger.error(f"訂單修改失敗，請稍後再試。錯誤資訊：{str(e)}")
-        return None
+        error_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
+        message = CommonSystemCode.DATABASE_FAILED.value.get('message')
+        raise BusinessError(message=message, error_code=error_code)
 
 def cancel_an_order(order_id):
     try:
