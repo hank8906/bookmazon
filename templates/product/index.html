@@ -34,7 +34,7 @@
             <div class="col-md-6">
                 <div class="mb-2">
                     <span class="badge bg-primary">{{ data.book_category }}</span>
-                    {% if data.item_status == '0' %}
+                    {% if data.item_status == '0' or data.book_count < 1 %}
                     <span class="badge bg-danger">不開放販售</span>
                     {% elif data.item_status == '1' %}
                     <span class="badge bg-success">開放販售</span>
@@ -49,9 +49,10 @@
                 <p class="lead">出版社: {{ data.book_publisher }}</p>
                 <p class="lead">ISBN: {{ data.book_id }}</p>
                 <p class="lead">庫存: {{ data.book_count }}</p>
+                <p class="lead">提供者: {{ data.provider_account }}</p>
                 <p class="lead">上架時間: {{ data.create_datetime }}</p>
                 <p class="lead">更新時間: {{ data.update_datetime }}</p>
-                {% if data.item_status == '1' %}
+                {% if data.item_status == '1' and data.book_count > 1 %}
                 <form method="POST" action="{{ url_for('cartController.add_to_cart') }}">
                     <input type="hidden" name="item_id" value="{{ data.item_id }}"  min="0" oninput="validateInput()">
                     <div class="d-flex">

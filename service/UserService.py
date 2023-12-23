@@ -312,11 +312,7 @@ def send_reset_password_email(token: str, user_email: str):
         message = CommonSystemCode.DATABASE_FAILED.value.get('message')
         system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
-
-    user_name = ''
-
-    if result is not None:
-        user_name = result[0]
+    user_name = result[0]
 
     link = f"http://{params['APP_SEVER_HOST_NAME']}:{params['LISTENING_PORT']}/user/reset_password/{token}"
     send_htm_email(EmailTemplateEnum.FORGOT_PASSWORD, [user_email], user_name=user_name, link=link)
@@ -406,13 +402,6 @@ def validate_reset_token(token: str):
         system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
 
-    # 檢查 token 是否存在
-    if token_obj is None:
-        app_logger.warning('Reset token not found: %s', token)
-        message = UserSystemCode.TOKEN_NOT_EXISTED.value.get('message')
-        system_code = UserSystemCode.TOKEN_NOT_EXISTED.value.get('system_code')
-        raise BusinessError(error_code=system_code, message=message)
-
     message = UserSystemCode.EXPIRED_TOKEN.value.get('message')
     system_code = UserSystemCode.EXPIRED_TOKEN.value.get('system_code')
 
@@ -490,17 +479,10 @@ def reset_new_password(token: str, new_password: str, confirm_password: str):
 
 def mark_token_used(token: str):
     # 查询資料庫，查找與 token 匹配的紀錄
-    token_obj = session.scalars(select(PasswordResetToken).where(PasswordResetToken.token == token)).one()
-
-    # 檢查 token 是否存在
-    if token_obj is None:
-        app_logger.warning('Token not found: %s', token)
-        message = UserSystemCode.TOKEN_NOT_EXISTED.value.get('message')
-        system_code = UserSystemCode.TOKEN_NOT_EXISTED.value.get('system_code')
-        raise BusinessError(error_code=system_code, message=message)
-
     # 註記 token 已經使用過了
     try:
+        token_obj = session.scalars(select(PasswordResetToken).where(PasswordResetToken.token == token)).one()
+        app_logger.warning('Token not found: %s', token)
         mark_token(token=token, mark=TokenStatus.USED)
     except BusinessError as e:
         raise e

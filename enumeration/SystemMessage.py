@@ -33,3 +33,9 @@ class ShoppingCartSystemCode(Enum):
     QUANTITY_EXCEEDS_STOCK = {'system_code': '6005', 'message': '購物車中的商品數量超出庫存，無法再添加'}
     EXCEEDS_MAX_STOCK = {'system_code': '6006', 'message': '選購的商品數量超出庫存'}
     ITEM_REMOVED = {'system_code': '6007', 'message': '商品已從購物車移除'}
+
+class OrderSystemCode(Enum):
+    PLACE_ORDER_SUCCESS = {'system_code': '7000', 'message': '訂單已建立成功，請等候數個工作天收貨'}
+    PLACE_ORDER_FAILED = {'system_code': '7001', 'message': '下單失敗，請稍候嘗試'}
+    ORDER_NOT_EXIST = {'system_code': '7002', 'message': '訂單不存在'}
+    NOT_ORDER_OWNER = {'system_code': '7003', 'message': '您無權訪問此訂單'}

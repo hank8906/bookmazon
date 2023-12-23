@@ -71,14 +71,12 @@
         <!-- 左邊卡片 -->
         <div class="col-md-4">
             <div class="card left-card">
-                <img src="../static/assets/img/avatar.png" class="card-img-top user-avatar" alt="User Avatar">
-                <div class="card-body">
-                    <h5 class="card-title user-name">{{ current_user.user.user_name }}</h5>
-                </div>
-                <div class="blue-card">
-                    <!-- 藍色卡片內容 -->
-                    <p></p>
-                </div>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <img src="../static/assets/img/avatar.png" class="card-img-top user-avatar" alt="User Avatar">
+                    <div class="card-body">
+                        <h5 class="card-title user-name">{{ current_user.user.user_name }}</h5>
+                    </div>
+                </form>
             </div>
         </div>
         <!-- 右邊卡片 -->
@@ -108,7 +106,7 @@
                             {% endfor %}
                         </div>
 
-                        <div class="mb-3">
+                        <div class="form-floating mb-3">
                             {{ form.user_birthday(class="form-control", placeholder="Select your birthday") }}
                             <label>出生日期</label>
                             {% for error in form.user_birthday.errors %}
