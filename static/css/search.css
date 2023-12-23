@@ -56,11 +56,40 @@
     margin-left: 20px;
 }
 
-#page_not_found {
-    max-width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.card-img-top mb-5 mb-md-0{
+    max-height: 300px; /* 設定書名容器的最大高度，可以根據需要調整 */
+    overflow: hidden;
 }
+
+.lead{
+    font-family: "Helvetica Neue", Helvetica, Arial, 微軟正黑體, 微软雅黑, メイリオ, "맑은 고딕", sans-serif;
+    color: rgb(68, 68, 68);
+    font-size: 18px;
+}
+
+.overflow-hidden shadow-lg img{
+    weight: 300px;
+    height: auto;
+}
+
+.search_not_found{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.search_not_found img{
+    max-width: 30%; /* 限制圖片寬度不超過容器寬度 */
+    max-height: 30%; /* 保持圖片高度自動調整 */
+    margin-bottom: 20px;
+}
+
+.search_not_found h3{
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+

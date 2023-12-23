@@ -14,16 +14,9 @@ dropdownContent.addEventListener("click", function (event) {
     event.stopPropagation();
 });
 
+// 關閉下拉選單
 function closeDropdown() {
-    // 關閉下拉選單
     dropdownContent.classList.remove("active");
-}
-
-function performSearch() {
-    // 在這裡添加執行搜索的邏輯
-    // ...
-    // 關閉下拉選單
-    closeDropdown();
 }
 
 // 點擊文檔時隱藏下拉選單

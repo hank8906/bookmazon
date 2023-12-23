@@ -53,7 +53,7 @@
                 <p class="lead">更新時間: {{ data.update_datetime }}</p>
                 {% if data.item_status == '1' %}
                 <form method="POST" action="{{ url_for('cartController.add_to_cart') }}">
-                    <input type="hidden" name="item_id" value="{{ data.item_id }}"  min="0" oninput="validateInput()">/>
+                    <input type="hidden" name="item_id" value="{{ data.item_id }}"  min="0" oninput="validateInput()">
                     <div class="d-flex">
                         <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" style="max-width: 5rem" />
                         <button class="btn btn-outline-dark flex-shrink-0 add-to-cart-button" type="button">

@@ -19,62 +19,27 @@
     <link href="{{ url_for('static', filename='css/slide.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='css/book.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='css/search.css') }}" rel="stylesheet"/>
-    <style>
-        .card-img-top mb-5 mb-md-0{
-            max-height: 300px; /* 設定書名容器的最大高度，可以根據需要調整 */
-            overflow: hidden;
-        }
-
-        .lead{
-            font-family: "Helvetica Neue", Helvetica, Arial, 微軟正黑體, 微软雅黑, メイリオ, "맑은 고딕", sans-serif;
-            color: rgb(68, 68, 68);
-            font-size: 18px;
-        }
-
-        .overflow-hidden shadow-lg img{
-            weight: 300px;
-            height: auto;
-        }
-
-    </style>
 </head>
 
 <body>
 {% include '/product/header.html' %}
     {% if data %}
-        <div class="container">
+        <div class="search_container">
             <div class="row">
-                <div class="col-lg-3" style="width: 300px;">
-                    <div class="bg-body-tertiary p-5 rounded" style="width: 100%;">
-                        <div class="dropdown-menu d-block position-static pt-0 mx-0 rounded-3 shadow overflow-hidden w-280px" data-bs-theme="light">
-                            <h4>最近搜尋</h4>
-                            <form class="p-2 mb-2 bg-body-tertiary border-bottom">
-                              <input type="search" class="form-control" autocomplete="false" placeholder="Type to filter...">
-                            </form>
+                <div class="col-lg-3" style="width: 300px; margin: 50px 50px 0 100px ">
+                    <div class="dropdown-menu d-block position-static pt-0 mx-0 rounded-3 shadow overflow-hidden w-280px" data-bs-theme="light" id="recentSearches">
 
-                            <ul class="list-unstyled mb-0" id="searchList">
-                              <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                                <span class="d-inline-block bg-success rounded-circle p-1"></span>
-                                Action
-                              </a></li>
-                              <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                                <span class="d-inline-block bg-primary rounded-circle p-1"></span>
-                                Another action
-                              </a></li>
-                              <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                                <span class="d-inline-block bg-danger rounded-circle p-1"></span>
-                                Something else here
-                              </a></li>
-                              <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                                <span class="d-inline-block bg-info rounded-circle p-1"></span>
-                                Separated link
-                              </a></li>
-                            </ul>
-                        </div>
+                        <h4 style="margin: 10px; font-family: Helvetica ">最近搜尋</h4>
+
+                        <form class="p-2 mb-2 bg-body-tertiary border-bottom">
+                          <input type="search" class="form-control" autocomplete="false" placeholder="Type to filter...">
+                        </form>
+
+                        <ul class="list-unstyled mb-0" id="searchList"></ul>
                     </div>
                 </div>
 
-                <div class="col-lg-9" style="width: 800px; margin-left:auto">
+                <div class="col-lg-9" style="width: 800px; margin-top:50px">
                     {% for item in data %}
                     <div class="row p-2 pb-0 pe-lg-0 pt-lg-2 align-items-center rounded-3 border shadow-lg" style="width: 100%;">
 
@@ -116,9 +81,10 @@
             </div>
         </div>
     {% else %}
-        <div style="display: grid; place-items: center; width:50%; max-width: 5%; height: 100vh;">
-            <img src="{{ url_for('static', filename='assets/img/page-not-found.png') }}" alt="No results">
-            <p>No results found.</p>
+        <div class="search_not_found">
+            <img src="{{ url_for('static', filename='assets/img/book_not_found.gif') }}" alt="No results">
+            <h2>查詢不到相符的資料</h2>
+            <h3>建議：請檢查是否有拼字錯誤，嘗試使用不同的查詢詞彙，或考慮使用較為常見的字詞進行搜索</h3>
         </div>
     {% endif %}
 
@@ -126,3 +92,60 @@
 <script src="{{ url_for('static', filename='js/slide.js') }}"></script>
 <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 </body>
+<script>
+    // 獲取最近搜尋的區塊及列表元素
+    const recentSearches = document.getElementById('recentSearches');
+    const searchList = document.getElementById('searchList');
+
+    // 將搜尋內容送到後端處理
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // 阻止表單的默認提交行為
+
+        var keyword = document.getElementById('searchInput').value;
+
+        // 更新最近搜尋的紀錄
+        updateRecentSearches(keyword);
+
+        // 使用 JavaScript 進行重定向
+<!--        window.location.href = '/searchProduct/' + keyword;-->
+
+
+    });
+
+    // 更新最近搜尋的紀錄
+    function updateRecentSearches(keyword) {
+        // 獲取目前的最近搜尋紀錄
+        const recentSearchesData = JSON.parse(localStorage.getItem('recentSearches')) || [];
+
+        // 將新搜尋的 keyword 加到最前面
+        recentSearchesData.unshift(keyword);
+
+        // 去重複
+        const uniqueSearches = [...new Set(recentSearchesData)];
+
+        // 限制最多顯示 5 筆搜尋
+        const limitedSearches = uniqueSearches.slice(0, 5);
+
+        // 更新本地存儲
+        localStorage.setItem('recentSearches', JSON.stringify(limitedSearches));
+
+        // 更新最近搜尋的列表顯示
+        updateRecentSearchesUI(limitedSearches);
+    }
+
+    // 更新最近搜尋的列表顯示
+    function updateRecentSearchesUI(searches) {
+        // 清空原有列表
+        searchList.innerHTML = '';
+
+        // 將最近搜尋加到列表中
+        searches.forEach(search => {
+            const listItem = document.createElement('li');
+            listItem.textContent = search;
+            searchList.appendChild(listItem);
+        });
+
+        // 顯示最近搜尋的區塊
+        recentSearches.style.display = searches.length > 0 ? 'block' : 'none';
+    }
+</script>

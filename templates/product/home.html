@@ -38,7 +38,7 @@
 </head>
 
 <body>
-{% include 'product/header.html' %}
+{% include '/product/header.html' %}
 <div class="slider">
     <div class="list">
         <div class="item">
@@ -208,7 +208,7 @@
         const prevButton = document.getElementById("prevButton");
         const nextButton = document.getElementById("nextButton");
 
-        // 獲取最近搜尋的元素
+        // 獲取最近搜尋的區塊及列表元素
         const recentSearches = document.getElementById('recentSearches');
         const searchList = document.getElementById('searchList');
 
@@ -312,6 +312,9 @@
 
         var keyword = document.getElementById('searchInput').value;
         window.location.href = '/searchProduct/' + keyword;
+
+        // 更新最近搜尋的紀錄
+        updateRecentSearches(keyword);
     });
 
     // 更新最近搜尋的紀錄
