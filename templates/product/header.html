@@ -114,3 +114,16 @@
         </div>
     </div>
 </nav>
+<script>
+    fetch('{{ url_for("cartController.view_cart_item_quantity") }}', {
+        method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+        const cartItemCountElement = document.getElementById('cartItemCount');
+        cartItemCountElement.textContent = data.data.cart_item_quantity;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+</script>
