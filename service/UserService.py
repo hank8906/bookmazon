@@ -374,7 +374,7 @@ def send_reset_password_email(token: str, user_email: str):
         raise BusinessError(error_code=system_code, message=message)
     user_name = result[0]
 
-    link = f"http://{params['APP_SEVER_HOST_NAME']}:{params['LISTENING_PORT']}/user/reset_password/{token}"
+    link = f"http://{params['APP_SEVER_HOST']}/user/reset_password/{token}"
     send_htm_email(EmailTemplateEnum.FORGOT_PASSWORD, [user_email], user_name=user_name, link=link)
 
 """
