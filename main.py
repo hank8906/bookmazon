@@ -23,9 +23,9 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=31)
 app.config['MAIL_SERVER'] = params['MAIL_SERVER']
 app.config['MAIL_PORT'] = params['MAIL_PORT']
 app.config['MAIL_USE_SSL'] = eval(params['MAIL_USE_SSL'])
+app.config['MAIL_USE_TLS'] = eval(params['MAIL_USE_TLS'])
 app.config['MAIL_USERNAME'] = params['MAIL_USERNAME']
-decrypted_password = cipher_suite.decrypt(params['MAIL_PASSWORD'])
-app.config['MAIL_PASSWORD'] = decrypted_password.decode('utf-8')
+app.config['MAIL_PASSWORD'] = params['MAIL_PASSWORD']
 init_email(app)
 # 註冊藍圖
 app.register_blueprint(productController, url_prefix='/')
