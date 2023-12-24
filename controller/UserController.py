@@ -1,6 +1,6 @@
 import logging
 
-from flask import Blueprint, redirect, url_for, flash, render_template
+from flask import Blueprint, redirect, url_for, flash, render_template, request
 from flask_login import login_user, logout_user, current_user, login_required
 
 from enumeration.SystemMessage import UserSystemCode
@@ -16,7 +16,7 @@ from model.UserBo import UserBo
 from model.UserIdentity import UserIdentity
 from service.UserService import add_user_info, authenticate_user, get_user_info, change_user_password, \
     check_existing_user, check_user_email_validity, generate_reset_token, validate_reset_token, mark_token_used, \
-    reset_new_password, update_user_profile, send_reset_password_email, check_existing_email
+    reset_new_password, update_user_profile, send_reset_password_email, check_existing_email, update_user_avatar
 from utils import logger
 
 app_logger = logger.setup_logger(logging.INFO)
@@ -137,6 +137,26 @@ def logout():
 @userController.route('/user_profile', methods=['GET'])
 @login_required
 def user_profile():
+    user_info = get_user_info(current_user.user.user_account)
+    return render_template('login/user_profile.html', user_info=user_info)
+
+"""
+    編輯會員大頭貼
+    Args:
+
+    Returns:
+
+    Raises:
+
+"""
+@userController.route('/update_profile_picture', methods=['POST'])
+@login_required
+def update_profile_picture():
+    try:
+        avatar = request.files['avatar']
+        update_user_avatar(current_user.user.user_account, avatar)
+    except BusinessError as e:
+        flash(e.message, 'danger')
     user_info = get_user_info(current_user.user.user_account)
     return render_template('login/user_profile.html', user_info=user_info)
 

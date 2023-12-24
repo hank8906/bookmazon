@@ -54,13 +54,13 @@ def authenticate_user(user_account: str, user_password: str):
 """
     新增使用者資訊
     Args:
-        user: 使用者
+        user_bo: 使用者
 
     Returns:
-    使用者資訊
+        
 
     Raises:
-
+        BusinessError
 """
 
 def add_user_info(user_bo: UserBo):
@@ -105,6 +105,59 @@ def add_user_info(user_bo: UserBo):
     except Exception as e:
         session.rollback()
         app_logger.error('Failed to add user information: %s', e)
+        message = CommonSystemCode.DATABASE_FAILED.value.get('message')
+        system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
+        raise BusinessError(error_code=system_code, message=message)
+
+"""
+    編輯大頭貼
+    Args:
+        user_account 使用者帳號
+        new_avatar 新的大頭貼
+    Returns:
+    使用者資訊
+
+    Raises:
+        BusinessError
+"""
+
+def update_user_avatar(user_account: str, new_avatar):
+    # 查詢使用者
+    user = session.query(User).filter_by(user_account=user_account).first()
+
+    if not user:
+        # 使用者不存在，不更新大頭貼
+        return
+
+    # 如果使用者已經有一張大頭貼，刪除舊的大頭貼
+    if user.user_picture_path and user.user_picture_path not in ['/assets/img/user_profile_pic/avatar.png',
+                                                                 '/assets/img/user_profile_pic/avatar2.png']:
+        old_avatar_path = os.path.join('static', user.user_picture_path.lstrip('/'))
+        if os.path.exists(old_avatar_path):
+            os.remove(old_avatar_path)
+
+    # 構建新的儲存路徑
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    upload_dir = os.path.join(project_root, 'static', 'assets', 'img', 'user_profile_pic')
+    os.makedirs(upload_dir, exist_ok=True)
+
+    # 儲存上傳的新大頭貼
+    # secure_filename 防止怪怪的檔案名稱
+    file_name = secure_filename(new_avatar.filename)
+    file_path = os.path.join(upload_dir, file_name)
+    new_avatar.save(file_path)
+
+    # 更新使用者的大頭貼路徑
+    statement = update(User).where(User.user_account == user_account).values(
+        user_picture_path=f'/assets/img/user_profile_pic/{file_name}',
+        update_datetime=datetime.now()
+    )
+    try:
+        session.execute(statement)
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        app_logger.error('Failed to update user avatar: %s', e)
         message = CommonSystemCode.DATABASE_FAILED.value.get('message')
         system_code = CommonSystemCode.DATABASE_FAILED.value.get('system_code')
         raise BusinessError(error_code=system_code, message=message)
