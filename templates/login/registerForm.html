@@ -15,8 +15,17 @@
             <!-- End Flash Messages Section -->
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ url_for('userController.register') }}">
+            <form method="POST" action="{{ url_for('userController.register') }}" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
+                <div class="row mb-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        {{ form.user_profile_picture(class="form-control", placeholder="上傳圖片") }}
+                        <label>使用者圖片</label>
+                        {% for error in form.user_profile_picture.errors %}
+                        <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
                 <div class="row mb-3">
                     <div class="form-floating mb-3 mb-md-0">
                         {{ form.user_account(class="form-control", placeholder="Enter your account") }}

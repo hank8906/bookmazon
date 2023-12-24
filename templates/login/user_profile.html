@@ -57,6 +57,7 @@
             min-height: 80vh;
         }
 
+
     </style>
 </head>
 <body>
@@ -65,19 +66,22 @@
 
 <div class="container mt-5 content-body">
     <h1 class="text-center mb-4">會員資料表</h1>
-
     <div class="row">
         <!-- 左邊卡片 -->
         <div class="col-md-4">
             <div class="card left-card">
-                <img src="../static/assets/img/avatar.png" class="card-img-top user-avatar" alt="User Avatar">
+                {% if user_info.user_picture_path %}
+                <img src="{{ url_for('static', filename=user_info.user_picture_path) }}"
+                     class="card-img-top user-avatar" alt="User Avatar">
+                {% else %}
+                <img src="{{ url_for('static', filename='/assets/img/user_profile_pic/avatar.png') }}"
+                     class="card-img-top user-avatar" alt="User Avatar">
+                {% endif %}
+
                 <div class="card-body">
                     <h5 class="card-title user-name">{{ user_info.user_name }}</h5>
                 </div>
-                <div class="blue-card">
-                    <!-- 藍色卡片內容 -->
-                    <p></p>
-                </div>
+
             </div>
         </div>
 
@@ -110,8 +114,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('userController.change_password') }}'">更換密碼</button>
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('userController.edit_user_profile') }}'">更換會員資料</button>
+                        <button type="button" class="btn btn-primary"
+                                onclick="window.location.href='{{ url_for('userController.change_password') }}'">更換密碼
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                                onclick="window.location.href='{{ url_for('userController.edit_user_profile') }}'">
+                            更換會員資料
+                        </button>
                     </div>
                 </div>
             </div>

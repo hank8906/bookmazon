@@ -61,7 +61,8 @@ def register():
             user_password=form.user_password.data,
             user_identification=UserIdentity.CUSTOMER,
             user_email=user_email,
-            user_birthday=form.user_birthday.data
+            user_birthday=form.user_birthday.data,
+            user_profile_pic=form.user_profile_picture.data
         )
 
         try:

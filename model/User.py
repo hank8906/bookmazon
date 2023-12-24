@@ -19,6 +19,7 @@ class User(Base):
     user_identification = mapped_column(String(1))
     user_email = mapped_column(String(255))
     user_birthday = mapped_column(String(255))
+    user_picture_path = mapped_column(String)
     update_datetime = mapped_column(DateTime, default=datetime.now())
     create_datetime = mapped_column(DateTime, default=datetime.now())
 

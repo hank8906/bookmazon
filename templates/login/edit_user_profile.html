@@ -58,6 +58,7 @@
         }
 
 
+
     </style>
 </head>
 <body>
@@ -72,7 +73,13 @@
         <div class="col-md-4">
             <div class="card left-card">
                 <form action="/upload" method="post" enctype="multipart/form-data">
-                    <img src="../static/assets/img/avatar.png" class="card-img-top user-avatar" alt="User Avatar">
+                    {% if current_user.user.user_picture_path %}
+                    <img src="{{ url_for('static', filename=current_user.user.user_picture_path) }}"
+                         class="card-img-top user-avatar" alt="User Avatar">
+                    {% else %}
+                    <img src="{{ url_for('static', filename='/assets/img/user_profile_pic/avatar.png') }}"
+                         class="card-img-top user-avatar" alt="User Avatar">
+                    {% endif %}
                     <div class="card-body">
                         <h5 class="card-title user-name">{{ current_user.user.user_name }}</h5>
                     </div>
