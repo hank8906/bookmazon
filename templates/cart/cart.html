@@ -38,6 +38,7 @@
 
 
 
+
     </style>
 </head>
 <body>
@@ -104,7 +105,8 @@
         <a href="{{ url_for('productController.getProducts') }}" class="btn btn-secondary" id="checkout-button">繼續購物</a>
 
         <!-- 商品結帳-->
-        <a href="{{ url_for('cartController.checkout') }}" class="btn btn-secondary" id="continue-shopping-button">前往結帳</a>
+        <a href="{{ url_for('cartController.checkout') }}" class="btn btn-secondary"
+           id="continue-shopping-button">前往結帳</a>
     </div>
     {% else %}
     <div class="alert alert-warning" role="alert">
@@ -221,8 +223,23 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    document.querySelectorAll('.quantity-number-input').forEach(item => {
+        item.addEventListener('input', function () {
+            var value = parseInt(this.value);
+            var maxStock = parseInt(this.dataset.maxStock);
+
+            if (!Number.isInteger(value) || value < 1) {
+                this.value = 1; // 如果輸入非整數或小於1，將值設置為1
+            } else if (value > maxStock) {
+                this.value = maxStock; // 如果輸入大於最大庫存量，將值設置為最大庫存量
+            } else {
+                this.value = value; // 否則，保持使用者輸入的值
+            }
+        });
+    });
 
 });
+
 </script>
 
 </html>
