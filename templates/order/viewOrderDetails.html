@@ -50,18 +50,19 @@
     <p>訂單成立時間: {{ order.create_datetime }}</p>
     <div class="mb-2">
         訂單狀態 :
-        {% if order.shipping_status == '0' %}
+        {% if order.order_status == '0' %}
         <span class="badge bg-danger">未完成</span>
-        {% elif order.shipping_status == '1' %}
+        {% elif order.order_status == '1' %}
         <span class="badge bg-success">完成</span>
-        {% elif order.shipping_status == '2' %}
-        <span class="badge bg-danger">取消中</span>
+        {% elif order.order_status == '2' %}
+        <span class="badge bg-warning">取消中</span>
         {% endif %}
     </div>
     <h3>購買商品</h3>
     <table class="table">
         <thead class="thead-dark">
         <tr>
+            <th></th>
             <th>商品名稱</th>
             <th>數量</th>
             <th>單價</th>

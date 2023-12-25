@@ -26,6 +26,7 @@
         }
 
 
+
     </style>
 </head>
 <body>
@@ -49,8 +50,9 @@
         <tr>
             <th>訂單編號</th>
             <th>收件人姓名</th>
-            <th>訂單狀態</th>
+            <th>配送狀態</th>
             <th>付款狀態</th>
+            <th>訂單狀態</th>
             <th>收件地址</th>
             <th>訂單建立時間</th>
             <th>訂單總金額</th>
@@ -74,6 +76,15 @@
                 <span class="badge bg-danger">未付款</span>
                 {% else %}
                 <span class="badge bg-success">已付款</span>
+                {% endif %}
+            </th>
+            <th>
+                {% if order.order_status == '0' %}
+                <span class="badge bg-danger">未完成</span>
+                {% elif order.order_status == '1' %}
+                <span class="badge bg-success">完成</span>
+                {% elif order.order_status == '2' %}
+                <span class="badge bg-warning">取消中</span>
                 {% endif %}
             </th>
             <th>{{ order.shipping_address }}</th>
