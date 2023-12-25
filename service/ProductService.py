@@ -103,13 +103,9 @@ def searchProductsByCategory(keyword:str, search_field:str, min_price, max_price
                           Book.book_publisher, Book.book_category, Book.book_image_path)
                  .join(Book, Item.book_id == Book.book_id))
 
-        # 價格範圍搜尋
-        if min_price is not None and max_price is not None:
-            query = query.filter(Book.book_price.between(min_price, max_price))
-
         # 進階搜尋
         if keyword:
-            if search_field == '全文':
+            if search_field == 'title':
                 query = query.filter(
                     or_(
                         func.lower(Book.book_name).like(func.lower(f"%{keyword}%")),
@@ -119,21 +115,24 @@ def searchProductsByCategory(keyword:str, search_field:str, min_price, max_price
                         func.lower(Item.book_id).like(func.lower(f"%{keyword}%")),
                     )
                 )
-            elif search_field == '書名':
+            elif search_field == 'bookName':
                 query = query.filter(func.lower(Book.book_name).like(func.lower(f"%{keyword}%")))
-            elif search_field == '作者':
+            elif search_field == 'author':
                 query = query.filter(func.lower(Book.book_author).like(func.lower(f"%{keyword}%")))
-            elif search_field == '出版商':
+            elif search_field == 'publisher':
                 query = query.filter(func.lower(Book.book_publisher).like(func.lower(f"%{keyword}%")))
-            elif search_field == '提供者':
+            elif search_field == 'provider':
                 query = query.filter(func.lower(Item.provider_account).like(func.lower(f"%{keyword}%")))
-            elif search_field == 'ISBN':
+            elif search_field == 'isbn':
                 query = query.filter(func.lower(Book.book_id).like(func.lower(f"%{keyword}%")))
 
         # 分類搜尋
         if book_category and book_category != 'all':
-            print(book_category)
             query = query.filter(func.lower(Book.book_category) == func.lower(book_category))
+
+        # 價格範圍搜尋
+        if min_price is not None and max_price is not None:
+            query = query.filter(Book.book_price.between(min_price, max_price))
 
         return query.all()
 
