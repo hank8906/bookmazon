@@ -12,8 +12,6 @@
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.5/tocas.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.5/tocas.min.js"></script>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', filename='css/slide.css') }}" rel="stylesheet"/>
@@ -23,157 +21,169 @@
 
 <body>
 {% include '/product/header.html' %}
-    {% if data %}
-        <div class="search_container">
-            <div class="row">
-                <div class="col-lg-3" style="width: 300px; margin: 50px 50px 0 100px ">
-                    <div class="dropdown-menu d-block position-static pt-0 mx-0 rounded-3 shadow overflow-hidden w-280px" data-bs-theme="light" id="recentSearches">
+{% if data %}
+<div class="search_container">
+    <div class="row">
+        <div class="col-lg-3" style="width: 300px; margin: 50px 50px 0 100px ">
+            <div class="dropdown-menu d-block position-static pt-0 mx-0 rounded-3 shadow overflow-hidden w-280px"
+                 data-bs-theme="light" id="recentSearches">
 
-                        <h4 style="margin: 10px; font-family: Helvetica ">最近搜尋</h4>
+                <h4 style="margin: 10px; font-family: Helvetica ">最近搜尋</h4>
 
-                        <form class="p-2 mb-2 bg-body-tertiary border-bottom">
-                          <input type="search" class="form-control" autocomplete="false" placeholder="Type to filter...">
-                        </form>
+                <form class="p-2 mb-2 bg-body-tertiary border-bottom">
+                    <input type="search" class="form-control" autocomplete="false" placeholder="Type to filter...">
+                </form>
 
-                        <ul class="list-unstyled mb-0" id="searchList"></ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-9" style="width: 800px; margin-top:50px">
-                    {% for item in data %}
-                    <div class="row p-2 pb-0 pe-lg-0 pt-lg-2 align-items-center rounded-3 border shadow-lg" style="width: 100%;">
-
-                        <div class="col-lg-4 offset-lg-1 p-0" >
-                            <img class="rounded-lg-3" src="{{ url_for('static', filename=item.book_image_path) }}" alt="{{ data.book_name }}" style="width: 250px; height: 250px; object-fit: contain;">
-                        </div>
-
-    <!--                    <div class="mb-2">-->
-    <!--                        <span class="badge bg-primary">{{ item.book_category }}</span>-->
-    <!--                        {% if item.item_status == '0' %}-->
-    <!--                        <span class="badge bg-danger">不開放販售</span>-->
-    <!--                        {% elif item.item_status == '1' %}-->
-    <!--                        <span class="badge bg-success">開放販售</span>-->
-    <!--                        {% endif %}-->
-    <!--                    </div>-->
-
-                        <div class="col-lg-7 p-3 p-lg-4 pt-lg-3">
-                            <h3 class="lead">書名: {{ item.book_name }}</h3>
-                            <div class="fs-5 mb-4" style="color: #8B0000;">
-                                <span class="text-decoration-line-through">${{ item.book_price + 10 }}</span>
-                                ${{ item.book_price }}
-                            </div>
-                            <h6 class="lead ">作者: {{ item.book_author }}</h6>
-                            <h6 class="lead ">出版社: {{ item.book_publisher }}</h6>
-                            <h6 class="lead">ISBN: {{ item.book_id }}</h6>
-                            <h6 class="lead">提供者: {{ item.provider_account }}</h6>
-                            <h6 class="lead">庫存: {{ item.book_count }}</h6>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                                <form method="POST" action="{{ url_for('productController.getDetailProductInfo', item_id=item.item_id) }}">
-                                    <button type="submit" class="btn btn-primary rounded-pill px-3">二手書交易資訊</button>
-                                </form>
-
-                                <button class="btn btn-secondary rounded-pill px-3" type="submit">加入購物車</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ts-divider"></div>
-                    {% endfor %}
-                </div>
+                <ul class="list-unstyled mb-0" id="searchList"></ul>
             </div>
         </div>
-    {% else %}
-        <div class="search_not_found">
-            <img src="{{ url_for('static', filename='assets/img/book_not_found.gif') }}" alt="No results">
-            <h2>查詢不到相符的資料</h2>
-            <h3>建議：請檢查是否有拼字錯誤，嘗試使用不同的查詢詞彙，或考慮使用較為常見的字詞進行搜索</h3>
-        </div>
-    {% endif %}
 
+        <div class="col-lg-9" style="width: 800px; margin-top:50px">
+            {% for item in data %}
+            <div class="row p-2 pb-0 pe-lg-0 pt-lg-2 align-items-center rounded-3 border shadow-lg"
+                 style="width: 100%;">
+
+                <div class="col-lg-4 offset-lg-1 p-0">
+                    <img class="rounded-lg-3" src="{{ url_for('static', filename=item.book_image_path) }}"
+                         alt="{{ data.book_name }}" style="width: 250px; height: 250px; object-fit: contain;">
+                </div>
+
+                <!--                    <div class="mb-2">-->
+                <!--                        <span class="badge bg-primary">{{ item.book_category }}</span>-->
+                <!--                        {% if item.item_status == '0' %}-->
+                <!--                        <span class="badge bg-danger">不開放販售</span>-->
+                <!--                        {% elif item.item_status == '1' %}-->
+                <!--                        <span class="badge bg-success">開放販售</span>-->
+                <!--                        {% endif %}-->
+                <!--                    </div>-->
+
+                <div class="col-lg-7 p-3 p-lg-4 pt-lg-3">
+                    <h3 class="lead">書名: {{ item.book_name }}</h3>
+                    <div class="fs-5 mb-4" style="color: #8B0000;">
+                        <span class="text-decoration-line-through">${{ item.book_price + 10 }}</span>
+                        ${{ item.book_price }}
+                    </div>
+                    <h6 class="lead ">作者: {{ item.book_author }}</h6>
+                    <h6 class="lead ">出版社: {{ item.book_publisher }}</h6>
+                    <h6 class="lead">ISBN: {{ item.book_id }}</h6>
+                    <h6 class="lead">提供者: {{ item.provider_account }}</h6>
+                    <h6 class="lead">庫存: {{ item.book_count }}</h6>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                        <form method="POST"
+                              action="{{ url_for('productController.getDetailProductInfo', item_id=item.item_id) }}">
+                            <button type="submit" class="btn btn-primary rounded-pill px-3">二手書交易資訊</button>
+                        </form>
+
+                        {% if item.item_status == '1' and item.book_count > 1 %}
+                        <form method="POST" action="{{ url_for('cartController.add_to_cart') }} " class="addToCartForm">
+                            <input type="hidden" name="item_id" value="{{ item.item_id }}">
+                            <input type="hidden" name="quantity" value="1"> <!-- 假設每次加入一個商品 -->
+                            <button type="submit" class="add-to-cart-button btn btn-secondary rounded-pill px-3">加入購物車
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="ts-divider"></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="search_not_found">
+    <img src="{{ url_for('static', filename='assets/img/book_not_found.gif') }}" alt="No results">
+    <h2>查詢不到相符的資料</h2>
+    <h3>建議：請檢查是否有拼字錯誤，嘗試使用不同的查詢詞彙，或考慮使用較為常見的字詞進行搜索</h3>
+</div>
+{% endif %}
+{% include 'common/modal.html' %}
 {% include './common/footer.html' %}
 <script src="{{ url_for('static', filename='js/slide.js') }}"></script>
 <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 </body>
-<!--<script>-->
-<!--    // 獲取最近搜尋的區塊及列表元素-->
-<!--    const recentSearches = document.getElementById('recentSearches');-->
-<!--    const searchList = document.getElementById('searchList');-->
+<script>
+    // Select all forms with the class addToCartForm
+    document.querySelectorAll('.addToCartForm').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
 
-<!--    // 將搜尋內容送到後端處理-->
-<!--    document.getElementById('searchForm').addEventListener('submit', function(event) {-->
-<!--        event.preventDefault(); // 阻止表單的默認提交行為-->
+            // Now create FormData from the current form
+            const formData = new FormData(this);
 
-<!--        var keyword = document.getElementById('searchInput').value;-->
+            fetch('{{ url_for("cartController.add_to_cart") }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                // Check response type
+                if (response.status === 401) {
+                    document.getElementById('messageContent').innerText = '請先登入';
+                    messageModal.show();
+                    setTimeout(()=> {
+                        messageModal.hide();
+                        window.location.href = '{{ url_for("userController.login") }}';
+                    }, 850);
+                    return;
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data) {
+                    document.getElementById('messageContent').innerText = data.system_message;
+                    messageModal.show();
+                    setTimeout(()=> {
+                        messageModal.hide();
+                    }, 850);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        });
+    });
 
-<!--        // 使用 JavaScript 進行重定向-->
-<!--        window.location.href = '/searchProduct/' + keyword;-->
+</script><script>
+    // Select all forms with the class addToCartForm
+    document.querySelectorAll('.addToCartForm').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
 
-<!--        // 更新最近搜尋的紀錄-->
-<!--        updateRecentSearches(keyword);-->
+            // Now create FormData from the current form
+            const formData = new FormData(this);
 
+            fetch('{{ url_for("cartController.add_to_cart") }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                // Check response type
+                if (response.status === 401) {
+                    document.getElementById('messageContent').innerText = '請先登入';
+                    messageModal.show();
+                    setTimeout(()=> {
+                        messageModal.hide();
+                        window.location.href = '{{ url_for("userController.login") }}';
+                    }, 850);
+                    return;
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data) {
+                    document.getElementById('messageContent').innerText = data.system_message;
+                    messageModal.show();
+                    setTimeout(()=> {
+                        messageModal.hide();
+                    }, 850);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        });
+    });
 
-<!--    });-->
-
-<!--    // 將搜尋內容送到後端處理-->
-<!--    document.getElementById('searchForm').addEventListener('submit', function(event) {-->
-<!--        event.preventDefault(); // 阻止表單的默認提交行為-->
-
-<!--        var keyword = document.getElementById('searchInput').value;-->
-
-<!--        // 使用 fetch 進行異步請求-->
-<!--        fetch('/searchProduct/' + keyword, {-->
-<!--            method: 'POST', // 或 'GET'，取決於你的後端路由配置-->
-<!--            headers: {-->
-<!--                'Content-Type': 'application/json',-->
-<!--            },-->
-<!--            body: JSON.stringify({ keyword: keyword }), // 將數據轉為 JSON 字符串-->
-<!--        })-->
-<!--        .then(response => response.json())-->
-<!--        .then(data => {-->
-<!--            // 更新最近搜尋的紀錄-->
-<!--            updateRecentSearches(keyword);-->
-
-<!--            // 根據後端返回的數據進行相應處理-->
-<!--            console.log(data);-->
-<!--        })-->
-<!--        .catch(error => {-->
-<!--            console.error('Error:', error);-->
-<!--        });-->
-<!--    });-->
-
-<!--    // 更新最近搜尋的紀錄-->
-<!--    function updateRecentSearches(keyword) {-->
-<!--        // 獲取目前的最近搜尋紀錄-->
-<!--        const recentSearchesData = JSON.parse(localStorage.getItem('recentSearches')) || [];-->
-
-<!--        // 將新搜尋的 keyword 加到最前面-->
-<!--        recentSearchesData.unshift(keyword);-->
-
-<!--        // 去重複-->
-<!--        const uniqueSearches = [...new Set(recentSearchesData)];-->
-
-<!--        // 限制最多顯示 5 筆搜尋-->
-<!--        const limitedSearches = uniqueSearches.slice(0, 5);-->
-
-<!--        // 更新本地存儲-->
-<!--        localStorage.setItem('recentSearches', JSON.stringify(limitedSearches));-->
-
-<!--        // 更新最近搜尋的列表顯示-->
-<!--        updateRecentSearchesUI(limitedSearches);-->
-<!--    }-->
-
-<!--    // 更新最近搜尋的列表顯示-->
-<!--    function updateRecentSearchesUI(searches) {-->
-<!--        // 清空原有列表-->
-<!--        searchList.innerHTML = '';-->
-
-<!--        // 將最近搜尋加到列表中-->
-<!--        searches.forEach(search => {-->
-<!--            const listItem = document.createElement('li');-->
-<!--            listItem.textContent = search;-->
-<!--            searchList.appendChild(listItem);-->
-<!--        });-->
-
-<!--        // 顯示最近搜尋的區塊-->
-<!--        recentSearches.style.display = searches.length > 0 ? 'block' : 'none';-->
-<!--    }-->
-<!--</script>-->
+</script>
