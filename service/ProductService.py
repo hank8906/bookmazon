@@ -96,12 +96,16 @@ def searchProduct(keyword:str):
     Raises:
 
 """
-def searchProductsByCategory(keyword, search_field, min_price, max_price, book_category):
+def searchProductsByCategory(keyword:str, search_field:str, min_price, max_price, book_category:str):
     try:
         query = (session.query(Item.item_id, Item.item_status, Item.book_count, Item.create_datetime, Item.update_datetime,
                           Item.provider_account, Book.book_id, Book.book_price, Book.book_name, Book.book_author,
                           Book.book_publisher, Book.book_category, Book.book_image_path)
                  .join(Book, Item.book_id == Book.book_id))
+
+        # 價格範圍搜尋
+        if min_price is not None and max_price is not None:
+            query = query.filter(Book.book_price.between(min_price, max_price))
 
         # 進階搜尋
         if keyword:
@@ -126,11 +130,6 @@ def searchProductsByCategory(keyword, search_field, min_price, max_price, book_c
             elif search_field == 'ISBN':
                 query = query.filter(func.lower(Book.book_id).like(func.lower(f"%{keyword}%")))
 
-        # 價格範圍搜尋
-        if min_price is not None and max_price is not None:
-            query = query.filter(Book.book_price.between(min_price, max_price))
-
-        print(book_category)
         # 分類搜尋
         if book_category and book_category != 'all':
             print(book_category)

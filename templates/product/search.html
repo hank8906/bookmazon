@@ -76,6 +76,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="ts-divider"></div>
                     {% endfor %}
                 </div>
             </div>
@@ -92,60 +93,87 @@
 <script src="{{ url_for('static', filename='js/slide.js') }}"></script>
 <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 </body>
-<script>
-    // 獲取最近搜尋的區塊及列表元素
-    const recentSearches = document.getElementById('recentSearches');
-    const searchList = document.getElementById('searchList');
+<!--<script>-->
+<!--    // 獲取最近搜尋的區塊及列表元素-->
+<!--    const recentSearches = document.getElementById('recentSearches');-->
+<!--    const searchList = document.getElementById('searchList');-->
 
-    // 將搜尋內容送到後端處理
-    document.getElementById('searchForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // 阻止表單的默認提交行為
+<!--    // 將搜尋內容送到後端處理-->
+<!--    document.getElementById('searchForm').addEventListener('submit', function(event) {-->
+<!--        event.preventDefault(); // 阻止表單的默認提交行為-->
 
-        var keyword = document.getElementById('searchInput').value;
+<!--        var keyword = document.getElementById('searchInput').value;-->
 
-        // 更新最近搜尋的紀錄
-        updateRecentSearches(keyword);
-
-        // 使用 JavaScript 進行重定向
+<!--        // 使用 JavaScript 進行重定向-->
 <!--        window.location.href = '/searchProduct/' + keyword;-->
 
+<!--        // 更新最近搜尋的紀錄-->
+<!--        updateRecentSearches(keyword);-->
 
-    });
 
-    // 更新最近搜尋的紀錄
-    function updateRecentSearches(keyword) {
-        // 獲取目前的最近搜尋紀錄
-        const recentSearchesData = JSON.parse(localStorage.getItem('recentSearches')) || [];
+<!--    });-->
 
-        // 將新搜尋的 keyword 加到最前面
-        recentSearchesData.unshift(keyword);
+<!--    // 將搜尋內容送到後端處理-->
+<!--    document.getElementById('searchForm').addEventListener('submit', function(event) {-->
+<!--        event.preventDefault(); // 阻止表單的默認提交行為-->
 
-        // 去重複
-        const uniqueSearches = [...new Set(recentSearchesData)];
+<!--        var keyword = document.getElementById('searchInput').value;-->
 
-        // 限制最多顯示 5 筆搜尋
-        const limitedSearches = uniqueSearches.slice(0, 5);
+<!--        // 使用 fetch 進行異步請求-->
+<!--        fetch('/searchProduct/' + keyword, {-->
+<!--            method: 'POST', // 或 'GET'，取決於你的後端路由配置-->
+<!--            headers: {-->
+<!--                'Content-Type': 'application/json',-->
+<!--            },-->
+<!--            body: JSON.stringify({ keyword: keyword }), // 將數據轉為 JSON 字符串-->
+<!--        })-->
+<!--        .then(response => response.json())-->
+<!--        .then(data => {-->
+<!--            // 更新最近搜尋的紀錄-->
+<!--            updateRecentSearches(keyword);-->
 
-        // 更新本地存儲
-        localStorage.setItem('recentSearches', JSON.stringify(limitedSearches));
+<!--            // 根據後端返回的數據進行相應處理-->
+<!--            console.log(data);-->
+<!--        })-->
+<!--        .catch(error => {-->
+<!--            console.error('Error:', error);-->
+<!--        });-->
+<!--    });-->
 
-        // 更新最近搜尋的列表顯示
-        updateRecentSearchesUI(limitedSearches);
-    }
+<!--    // 更新最近搜尋的紀錄-->
+<!--    function updateRecentSearches(keyword) {-->
+<!--        // 獲取目前的最近搜尋紀錄-->
+<!--        const recentSearchesData = JSON.parse(localStorage.getItem('recentSearches')) || [];-->
 
-    // 更新最近搜尋的列表顯示
-    function updateRecentSearchesUI(searches) {
-        // 清空原有列表
-        searchList.innerHTML = '';
+<!--        // 將新搜尋的 keyword 加到最前面-->
+<!--        recentSearchesData.unshift(keyword);-->
 
-        // 將最近搜尋加到列表中
-        searches.forEach(search => {
-            const listItem = document.createElement('li');
-            listItem.textContent = search;
-            searchList.appendChild(listItem);
-        });
+<!--        // 去重複-->
+<!--        const uniqueSearches = [...new Set(recentSearchesData)];-->
 
-        // 顯示最近搜尋的區塊
-        recentSearches.style.display = searches.length > 0 ? 'block' : 'none';
-    }
-</script>
+<!--        // 限制最多顯示 5 筆搜尋-->
+<!--        const limitedSearches = uniqueSearches.slice(0, 5);-->
+
+<!--        // 更新本地存儲-->
+<!--        localStorage.setItem('recentSearches', JSON.stringify(limitedSearches));-->
+
+<!--        // 更新最近搜尋的列表顯示-->
+<!--        updateRecentSearchesUI(limitedSearches);-->
+<!--    }-->
+
+<!--    // 更新最近搜尋的列表顯示-->
+<!--    function updateRecentSearchesUI(searches) {-->
+<!--        // 清空原有列表-->
+<!--        searchList.innerHTML = '';-->
+
+<!--        // 將最近搜尋加到列表中-->
+<!--        searches.forEach(search => {-->
+<!--            const listItem = document.createElement('li');-->
+<!--            listItem.textContent = search;-->
+<!--            searchList.appendChild(listItem);-->
+<!--        });-->
+
+<!--        // 顯示最近搜尋的區塊-->
+<!--        recentSearches.style.display = searches.length > 0 ? 'block' : 'none';-->
+<!--    }-->
+<!--</script>-->
