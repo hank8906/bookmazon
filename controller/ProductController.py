@@ -1,3 +1,6 @@
+import decimal
+
+from _decimal import Decimal
 from flask import Blueprint, render_template, request
 
 from service.ProductService import get_book_info, get_detail_book_info, searchProduct, searchProductsByCategory
@@ -56,13 +59,13 @@ def getDetailProductInfo(item_id: str):
     Raises:
 
 """
-@productController.route('/searchProduct', methods=['GET', 'POST'])
-def search_book_info():
-    if request.method == 'POST':
-        keyword = request.form.get('keyword', '')
-        data = searchProduct(keyword)
-        return render_template("product/search.html", data=data)
-    return render_template("product/home.html")
+# @productController.route('/searchProduct', methods=['GET', 'POST'])
+# def search_book_info():
+#     if request.method == 'POST':
+#         keyword = request.form.get('keyword', '')
+#         data = searchProduct(keyword)
+#         return render_template("product/search.html", data=data)
+#     return render_template("product/home.html")
 
 @productController.route('/searchProductsByCategory',methods=['GET','POST'])
 def search_book_filter_info():
@@ -89,8 +92,8 @@ def search_books():
     if request.method == 'POST':
         keyword = request.form.get('keyword', '')
         search_field = request.form.get('searchField', '全文')
-        min_price = request.form.get('minPrice', 0, type=float)
-        max_price = request.form.get('maxPrice', float('inf'), type=float)
+        min_price = Decimal(request.form.get('minPrice')) if request.form.get('minPrice') != '' else Decimal(0)
+        max_price = Decimal(request.form.get('maxPrice')) if request.form.get('maxPrice') != '' else Decimal('Infinity')
         book_category = request.form.get('bookCategory', 'all')
 
         # 檢查是否有選擇條件
