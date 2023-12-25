@@ -119,6 +119,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 <script>
+document.querySelectorAll('.quantity-number-input').forEach(item => {
+    item.addEventListener('input', function () {
+        var value = parseInt(this.value);
+        var maxStock = parseInt(this.dataset.maxStock);
+
+        if (!Number.isInteger(value) || value < 1) {
+            this.value = 1; // 如果輸入非整數或小於1，將值設置為1
+        } else if (value > maxStock) {
+            this.value = maxStock; // 如果輸入大於最大庫存量，將值設置為最大庫存量
+        } else {
+            this.value = value; // 否則，保持使用者輸入的值
+        }
+    });
+});
 document.addEventListener("DOMContentLoaded", function() {
 
     const quantityDecreaseButtons = document.querySelectorAll(".quantity-decrease");

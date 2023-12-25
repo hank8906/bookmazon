@@ -334,3 +334,213 @@ WHERE bookmazon."order".user_account = %(user_account_1)s]
 [SQL: INSERT INTO bookmazon."order" (user_account, recipient_name, order_total_price, order_status, payment_status, shipping_status, shipping_address, update_datetime, create_datetime) VALUES (%(user_account)s, %(recipient_name)s, %(order_total_price)s, %(order_status)s, %(payment_status)s, %(shipping_status)s, %(shipping_address)s, %(update_datetime)s, %(create_datetime)s) RETURNING bookmazon."order".order_id]
 [parameters: {'user_account': 'User0001', 'recipient_name': 'User0001', 'order_total_price': Decimal('1396.99'), 'order_status': '0', 'payment_status': '0', 'shipping_status': '0', 'shipping_address': '基隆市信義區123123123', 'update_datetime': datetime.datetime(2023, 12, 24, 14, 1, 27, 738895), 'create_datetime': datetime.datetime(2023, 12, 24, 14, 1, 27, 738895)}]
 (Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:12:24] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:12:24] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:12:24] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:12:24] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:12:24] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:34] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:34] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:34] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:34] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:34] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:46] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:46] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:46] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:46] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:46] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:52] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:52] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:52] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:52] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:13:52] {CartService.py:267} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:16:27] {CartService.py:272} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:16:27] {CartService.py:272} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:16:27] {CartService.py:272} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:16:27] {CartService.py:272} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:16:27] {CartService.py:272} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:16:33] {CartService.py:272} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:16:33] {CartService.py:272} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:16:33] {CartService.py:272} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:16:33] {CartService.py:272} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2023-12-25 20:16:33] {CartService.py:272} ERROR - Database transaction error: (psycopg2.ProgrammingError) can't adapt type 'Row'
+[SQL: SELECT bookmazon.item.book_count AS bookmazon_item_book_count 
+FROM bookmazon.item 
+WHERE bookmazon.item.item_id = %(item_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'item_id_1': (7,), 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
