@@ -123,7 +123,7 @@ def searchProductsByCategory(keyword:str, search_field:str, min_price, max_price
                 query = query.filter(func.lower(Book.book_publisher).like(func.lower(f"%{keyword}%")))
             elif search_field == 'provider':
                 query = query.filter(func.lower(Item.provider_account).like(func.lower(f"%{keyword}%")))
-            elif search_field == 'isbn">':
+            elif search_field == 'isbn':
                 query = query.filter(func.lower(Book.book_id).like(func.lower(f"%{keyword}%")))
 
         # 分類搜尋
