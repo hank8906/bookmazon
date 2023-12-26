@@ -9,4 +9,5 @@ docs/_build/
 dist/
 venv/
 /allure-results/
-log/
+log
+static/assets/img/user_profile_pic
