@@ -40,23 +40,13 @@
 
         <div class="col-lg-9" style="width: 800px; margin-top:50px">
             {% for item in data %}
-            <div class="row p-2 pb-0 pe-lg-0 pt-lg-2 align-items-center rounded-3 border shadow-lg"
+            <div class="row p-2 pb-0 pe-lg-0 pt-lg-2 align-items-center rounded-3 border-bottom"
                  style="width: 100%;">
 
                 <div class="col-lg-4 offset-lg-1 p-0">
                     <img class="rounded-lg-3" src="{{ url_for('static', filename=item.book_image_path) }}"
                          alt="{{ data.book_name }}" style="width: 250px; height: 250px; object-fit: contain;">
                 </div>
-
-                <!--                    <div class="mb-2">-->
-                <!--                        <span class="badge bg-primary">{{ item.book_category }}</span>-->
-                <!--                        {% if item.item_status == '0' %}-->
-                <!--                        <span class="badge bg-danger">不開放販售</span>-->
-                <!--                        {% elif item.item_status == '1' %}-->
-                <!--                        <span class="badge bg-success">開放販售</span>-->
-                <!--                        {% endif %}-->
-                <!--                    </div>-->
-
                 <div class="col-lg-7 p-3 p-lg-4 pt-lg-3">
                     <h3 class="lead">書名: {{ item.book_name }}</h3>
                     <div class="fs-5 mb-4" style="color: #8B0000;">
@@ -98,7 +88,6 @@
 </div>
 {% endif %}
 {% include 'common/modal.html' %}
-{% include './common/footer.html' %}
 <script src="{{ url_for('static', filename='js/slide.js') }}"></script>
 <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 </body>
@@ -144,7 +133,8 @@
         });
     });
 
-</script><script>
+</script>
+<script>
     // Select all forms with the class addToCartForm
     document.querySelectorAll('.addToCartForm').forEach(form => {
         form.addEventListener('submit', function(event) {
