@@ -15,7 +15,6 @@ from utils.EmailUutil import init_email
 from utils.config import params
 from utils.dbUtil import session
 
-
 app = Flask(__name__)
 cipher_suite = Fernet(params['PRIVATE_KEY'])
 app.config['SECRET_KEY'] = os.urandom(24)
@@ -26,6 +25,7 @@ app.config['MAIL_USE_SSL'] = eval(params['MAIL_USE_SSL'])
 app.config['MAIL_USE_TLS'] = eval(params['MAIL_USE_TLS'])
 app.config['MAIL_USERNAME'] = params['MAIL_USERNAME']
 app.config['MAIL_PASSWORD'] = params['MAIL_PASSWORD']
+app.config['WTF_CSRF_ENABLED'] = eval(params['WTF_CSRF_ENABLED'])
 init_email(app)
 # 註冊藍圖
 app.register_blueprint(productController, url_prefix='/')
@@ -37,7 +37,6 @@ app.register_blueprint(orderController, url_prefix='/order')
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
 # login_manager.login_view = 'userController.login'
 # 用戶加載函數
 @login_manager.user_loader
@@ -47,7 +46,6 @@ def load_user(user_account):
         return
     auth_user = AuthUser(user=user)
     return auth_user
-
 
 # 啟動 Web Server
 if __name__ == '__main__':
